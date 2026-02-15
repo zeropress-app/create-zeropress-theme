@@ -1,6 +1,12 @@
 # create-zeropress-theme
 
+![npm](https://img.shields.io/npm/v/create-zeropress-theme)
+![license](https://img.shields.io/npm/l/create-zeropress-theme)
+![node](https://img.shields.io/node/v/create-zeropress-theme)
+
 Scaffolding CLI for ZeroPress theme projects.
+
+---
 
 ## Quick Start
 
@@ -8,7 +14,10 @@ Scaffolding CLI for ZeroPress theme projects.
 npx create-zeropress-theme my-theme
 ```
 
-## Usage
+* * *
+
+Usage
+-----
 
 ```bash
 npx create-zeropress-theme <name> [options]
@@ -17,26 +26,25 @@ npx create-zeropress-theme <name> [options]
 ### Options
 
 | Option | Description | Default |
-|--------|-------------|---------|
+| --- | --- | --- |
 | `--template <name>` | Template variant (`minimal`, `blog`, `magazine`) | `minimal` |
-| `--with-devtools` | Include a convenience `package.json` with dev scripts | - |
+| `--with-devtools` | Include convenience dev scripts | — |
 
-### Examples
+Examples:
 
 ```bash
-# Default theme
 npx create-zeropress-theme my-theme
-
-# Specify a template
 npx create-zeropress-theme my-theme --template blog
-
-# Include devtools
+npx create-zeropress-theme my-theme --template magazine
 npx create-zeropress-theme my-theme --with-devtools
 ```
 
-> In v0.1 all templates generate the same starter structure. Template differentiation is planned for a future release.
+> In v0.1 all templates generate the same starter structure.
 
-## Generated Structure
+* * *
+
+Starter Output (v0.1)
+---------------------
 
 ```
 my-theme/
@@ -56,30 +64,58 @@ my-theme/
     style.css
 ```
 
-## --with-devtools
+Runtime contract note:
 
-When `--with-devtools` is passed, a `package.json` is added to the theme folder with convenience scripts:
+- Required minimum for runtime compatibility: `theme.json`, `layout.html`, `index.html`, `post.html`, `page.html`, `assets/style.css`
+- Common optional files in the starter: `archive.html`, `category.html`, `tag.html`, `404.html`, `partials/*.html`
+
+* * *
+
+### --with-devtools
+
+Adds a `package.json` with convenience scripts:
 
 ```bash
-npx create-zeropress-theme my-theme --with-devtools
 cd my-theme
-npm run dev       # Preview server
-npm run validate  # Theme validation
-npm run pack      # Zip packaging
+npm run dev
+npm run validate
+npm run pack
 ```
 
-These scripts are thin wrappers around the `zeropress-theme` CLI. No dependencies or lockfiles are generated. The devtools layer does not alter the theme runtime spec — uploaded packages are still validated against pure theme files only.
+These scripts are thin wrappers around `npx zeropress-theme` (no global install required).  
+No dependencies or lockfiles are generated.  
+The runtime contract remains unchanged.
 
-## Requirements
+* * *
 
-- Node.js >= 18.18.0
-- ESM only
+Requirements
+------------
 
-## Related
+*   Node.js >= 18.18.0
+*   ESM only
 
-- [zeropress-theme](https://www.npmjs.com/package/zeropress-theme) — Theme developer toolkit (dev / validate / pack)
-- [ZeroPress Theme Spec](https://github.com/user/zeropress/blob/main/theme_guide_v2/THEME_SPEC.md)
+* * *
 
-## License
+Related
+-------
+
+*   [zeropress-theme](https://www.npmjs.com/package/zeropress-theme)
+*   ZeroPress Theme Spec: [https://zeropress.dev](https://zeropress.dev)
+
+* * *
+
+About ZeroPress
+---------------
+
+ZeroPress is a CMS built around file-based themes and a defined runtime contract.  
+It emphasizes predictable structure and portable theme bundles.
+
+Project website:  
+[https://zeropress.app](https://zeropress.app)
+
+* * *
+
+License
+-------
 
 MIT
