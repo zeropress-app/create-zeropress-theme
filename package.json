@@ -1,0 +1,25 @@
+{
+  "name": "create-zeropress-theme",
+  "version": "0.1.1",
+  "description": "ZeroPress theme scaffolding CLI",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "create-zeropress-theme": "./bin/create-zeropress-theme.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeropress-app/create-zeropress-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zeropress-app/create-zeropress-theme/issues"
+  },
+  "homepage": "https://github.com/zeropress-app/create-zeropress-theme#readme",
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}
