@@ -179,9 +179,9 @@ async function writeDevtoolsPackageJson(targetDir) {
     version: '0.1.0',
     type: 'module',
     scripts: {
-      dev: 'zeropress-theme dev',
-      validate: 'zeropress-theme validate',
-      pack: 'zeropress-theme pack',
+      dev: 'npx zeropress-theme dev',
+      validate: 'npx zeropress-theme validate',
+      pack: 'npx zeropress-theme pack',
     },
   };
   await fs.writeFile(path.join(targetDir, 'package.json'), `${JSON.stringify(pkg, null, 2)}\n`, 'utf8');
