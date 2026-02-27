@@ -39,11 +39,17 @@ npx create-zeropress-theme my-theme --template magazine
 npx create-zeropress-theme my-theme --with-devtools
 ```
 
-> In v0.1 all templates generate the same starter structure.
+Each template (`minimal`, `blog`, `magazine`) is scaffolded from its own complete file set.
+
+Template notes:
+
+- `minimal`: clean default starter based on `zeropress-starter-theme.v0.02`
+- `blog`: editorial blog-focused typography and reading flow
+- `magazine`: grid-based layout with side rail and sectioned homepage blocks
 
 * * *
 
-Starter Output (v0.1)
+Starter Output
 ---------------------
 
 ```
@@ -82,7 +88,14 @@ npm run validate
 npm run pack
 ```
 
+Validate generated themes with:
+
+```bash
+npx zeropress-theme validate my-theme
+```
+
 These scripts are thin wrappers around `npx zeropress-theme` (no global install required).  
+On first run, `npx` may download the CLI package if it is not cached locally.  
 No dependencies or lockfiles are generated.  
 The runtime contract remains unchanged.
 
@@ -100,7 +113,7 @@ Related
 -------
 
 *   [zeropress-theme](https://www.npmjs.com/package/zeropress-theme)
-*   ZeroPress Theme Spec: [https://zeropress.dev](https://zeropress.dev)
+*   ZeroPress Theme Spec v0.1: [https://zeropress.dev/spec/theme-runtime-v0.1.html](https://zeropress.dev/spec/theme-runtime-v0.1.html)
 
 * * *
 

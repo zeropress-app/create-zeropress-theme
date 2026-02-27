@@ -1,0 +1,19 @@
+<article class="post-single">
+  <header class="post-header">
+    <h1>{{post.title}}</h1>
+    <div class="post-meta">
+      <time datetime="{{post.published_at}}">{{post.published_at}}</time>
+      <span>{{post.reading_time}}</span>
+      <span>{{post.author_name}}</span>
+    </div>
+  </header>
+
+  <div class="post-content">
+    {{post.html}}
+  </div>
+
+  <footer class="post-footer">
+    <div class="post-categories">{{post.categories_html}}</div>
+    <div class="post-tags">{{post.tags_html}}</div>
+  </footer>
+</article>

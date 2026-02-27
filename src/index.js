@@ -1,21 +1,25 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const TEMPLATES = new Set(['minimal', 'blog', 'magazine']);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const TEMPLATE_ROOT = path.join(__dirname, 'templates');
 
 export async function run(argv) {
   const { name, template, withDevtools } = parseArgs(argv);
   const targetDir = path.resolve(process.cwd(), name);
 
   await ensureEmptyDirectory(targetDir);
-  await scaffoldTheme(targetDir, name);
+  await scaffoldTheme(targetDir, name, template);
 
   if (withDevtools) {
     await writeDevtoolsPackageJson(targetDir);
   }
 
   console.log(`Created ZeroPress theme at ${targetDir}`);
-  console.log(`Template: ${template} (current v0.1 behavior uses same starter files for all templates)`);
+  console.log(`Template: ${template}`);
   if (withDevtools) {
     console.log('Devtools enabled: npm run dev / npm run validate / npm run pack');
   }
@@ -89,87 +93,32 @@ async function ensureEmptyDirectory(targetDir) {
   }
 }
 
-async function scaffoldTheme(targetDir, name) {
-  await fs.mkdir(path.join(targetDir, 'partials'), { recursive: true });
-  await fs.mkdir(path.join(targetDir, 'assets'), { recursive: true });
+async function scaffoldTheme(targetDir, name, template) {
+  const templateDir = path.join(TEMPLATE_ROOT, template);
+  let stat;
 
-  const files = {
-    'theme.json': JSON.stringify(
-      {
-        name,
-        version: '0.1.0',
-        author: 'Author Name',
-        description: 'ZeroPress theme',
-      },
-      null,
-      2
-    ) + '\n',
-    'layout.html': `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{site.title}}</title>
-    <meta name="description" content="{{site.description}}" />
-    <link rel="stylesheet" href="/assets/style.css" />
-  </head>
-  <body>
-    <header>{{slot:header}}</header>
-    <main>{{slot:content}}</main>
-    <footer>{{slot:footer}}</footer>
-  </body>
-</html>
-`,
-    'index.html': `<section>
-  <h1>{{site.title}}</h1>
-  <p>{{site.description}}</p>
-  <div>{{posts}}</div>
-  <nav>{{pagination}}</nav>
-</section>
-`,
-    'post.html': `<article>
-  <h1>{{post.title}}</h1>
-  <div>{{post.html}}</div>
-</article>
-`,
-    'page.html': `<article>
-  <h1>{{page.title}}</h1>
-  <div>{{page.html}}</div>
-</article>
-`,
-    'archive.html': `<section>
-  <h1>Archive</h1>
-  <div>{{posts}}</div>
-</section>
-`,
-    'category.html': `<section>
-  <h1>Category</h1>
-  <div>{{posts}}</div>
-</section>
-`,
-    'tag.html': `<section>
-  <h1>Tag</h1>
-  <div>{{posts}}</div>
-</section>
-`,
-    '404.html': `<section>
-  <h1>404</h1>
-  <p>Not Found</p>
-</section>
-`,
-    'partials/header.html': '<a href="/">Home</a>\n',
-    'partials/footer.html': '<small>Powered by ZeroPress</small>\n',
-    'assets/style.css': `:root { font-family: system-ui, sans-serif; }
-body { margin: 0; padding: 2rem; line-height: 1.5; }
-h1 { margin-top: 0; }
-`,
-  };
+  try {
+    stat = await fs.stat(templateDir);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      throw new Error(`Template "${template}" is not available`);
+    }
+    throw error;
+  }
 
-  await Promise.all(
-    Object.entries(files).map(([filePath, content]) =>
-      fs.writeFile(path.join(targetDir, filePath), content, 'utf8')
-    )
-  );
+  if (!stat.isDirectory()) {
+    throw new Error(`Template path is not a directory: ${templateDir}`);
+  }
+
+  await fs.cp(templateDir, targetDir, { recursive: true });
+  await updateThemeName(path.join(targetDir, 'theme.json'), name);
+}
+
+async function updateThemeName(themeJsonPath, name) {
+  const raw = await fs.readFile(themeJsonPath, 'utf8');
+  const parsed = JSON.parse(raw);
+  parsed.name = name;
+  await fs.writeFile(themeJsonPath, `${JSON.stringify(parsed, null, 2)}\n`, 'utf8');
 }
 
 async function writeDevtoolsPackageJson(targetDir) {

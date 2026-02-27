@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{site.language}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{site.title}}</title>
+  <meta name="description" content="{{site.description}}">
+  <link rel="canonical" href="{{site.url}}">
+  <link rel="stylesheet" href="/assets/style.css">
+  {{slot:meta}}
+</head>
+<body class="mag-theme">
+  {{slot:header}}
+  <div class="container mag-shell">
+    <aside class="mag-rail">
+      <section class="rail-card">
+        <h2>Edition</h2>
+        <p>Weekly digest of posts and ideas.</p>
+      </section>
+      <section class="rail-card">
+        <h2>Sections</h2>
+        <p>News, analysis, and long-form stories.</p>
+      </section>
+    </aside>
+    <main class="mag-main">
+      {{slot:content}}
+    </main>
+  </div>
+  {{slot:footer}}
+</body>
+</html>

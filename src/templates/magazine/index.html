@@ -1,0 +1,28 @@
+<section class="mag-cover">
+  <p class="cover-label">This Week</p>
+  <h1>{{site.title}}</h1>
+  <p>{{site.description}}</p>
+</section>
+
+<section class="mag-grid">
+  <article class="mag-panel">
+    <h2>Top Stories</h2>
+    <div class="post-list">
+      {{posts}}
+    </div>
+  </article>
+  <article class="mag-panel">
+    <h2>In Focus</h2>
+    <p class="muted">Feature picks from the editorial desk.</p>
+    <div class="post-list">
+      {{posts}}
+    </div>
+  </article>
+</section>
+
+<section class="mag-footer-strip">
+  <h2>From the Archive</h2>
+  <div class="post-list">
+    {{posts}}
+  </div>
+</section>

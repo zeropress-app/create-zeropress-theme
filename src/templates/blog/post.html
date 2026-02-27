@@ -1,0 +1,20 @@
+<article class="blog-post">
+  <header class="blog-post-header">
+    <p class="eyebrow">Story</p>
+    <h1>{{post.title}}</h1>
+    <div class="blog-post-meta">
+      <time datetime="{{post.published_at}}">{{post.published_at}}</time>
+      <span>{{post.reading_time}}</span>
+      <span>{{post.author_name}}</span>
+    </div>
+  </header>
+
+  <div class="blog-post-content">
+    {{post.html}}
+  </div>
+
+  <footer class="blog-post-footer">
+    <div class="meta-row">Categories: {{post.categories_html}}</div>
+    <div class="meta-row">Tags: {{post.tags_html}}</div>
+  </footer>
+</article>
