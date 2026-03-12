@@ -8,6 +8,11 @@ const __dirname = path.dirname(__filename);
 const TEMPLATE_ROOT = path.join(__dirname, 'templates');
 
 export async function run(argv) {
+  if (argv.length === 0 || argv[0] === '--help' || argv[0] === '-h') {
+    printHelp();
+    return;
+  }
+
   const { name, template, withDevtools } = parseArgs(argv);
   const targetDir = path.resolve(process.cwd(), name);
 
@@ -23,6 +28,17 @@ export async function run(argv) {
   if (withDevtools) {
     console.log('Devtools enabled: npm run dev / npm run validate / npm run pack');
   }
+}
+
+function printHelp() {
+  console.log(`create-zeropress-theme - ZeroPress theme scaffolding CLI
+
+Usage:
+  create-zeropress-theme <name> [--template <minimal|blog|magazine>] [--with-devtools]
+
+Options:
+  --template <name>   Template variant (minimal, blog, magazine)
+  --with-devtools     Add package.json with dev / validate / pack scripts`);
 }
 
 function parseArgs(argv) {

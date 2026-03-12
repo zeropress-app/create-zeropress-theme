@@ -23,6 +23,12 @@ Usage
 npx create-zeropress-theme <name> [options]
 ```
 
+To print help:
+
+```bash
+npx create-zeropress-theme --help
+```
+
 ### Options
 
 | Option | Description | Default |
