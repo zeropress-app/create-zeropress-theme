@@ -34,12 +34,14 @@ npx create-zeropress-theme --help
 | Option | Description | Default |
 | --- | --- | --- |
 | `--template <name>` | Template variant (`minimal`, `blog`, `magazine`) | `minimal` |
+| `--namespace <value>` | Theme namespace written to `theme.json` | `my-company` |
 | `--with-devtools` | Include convenience dev scripts | — |
 
 Examples:
 
 ```bash
 npx create-zeropress-theme my-theme
+npx create-zeropress-theme my-theme --namespace acme-studio
 npx create-zeropress-theme my-theme --template blog
 npx create-zeropress-theme my-theme --template magazine
 npx create-zeropress-theme my-theme --with-devtools
@@ -80,6 +82,9 @@ Runtime contract note:
 
 - Required minimum for runtime compatibility: `theme.json`, `layout.html`, `index.html`, `post.html`, `page.html`, `assets/style.css`
 - Common optional files in the starter: `archive.html`, `category.html`, `tag.html`, `404.html`, `partials/*.html`
+- Generated `theme.json` follows Runtime v0.2
+- Generated `name` and `slug` both use the normalized theme directory name
+- Generated `namespace` defaults to `my-company` unless `--namespace` is provided
 
 * * *
 
@@ -119,7 +124,7 @@ Related
 -------
 
 *   [zeropress-theme](https://www.npmjs.com/package/zeropress-theme)
-*   ZeroPress Theme Spec v0.1: [https://zeropress.dev/spec/theme-runtime-v0.1.html](https://zeropress.dev/spec/theme-runtime-v0.1.html)
+*   ZeroPress Theme Spec v0.2: [https://zeropress.dev/spec/theme-runtime-v0.2.html](https://zeropress.dev/spec/theme-runtime-v0.2.html)
 
 * * *
 

@@ -3,6 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const TEMPLATES = new Set(['minimal', 'blog', 'magazine']);
+const IDENTIFIER_REGEX = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const DEFAULT_NAMESPACE = 'my-company';
+const DEFAULT_VERSION = '0.1.0';
+const DEFAULT_LICENSE = 'MIT';
+const DEFAULT_RUNTIME = '0.2';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const TEMPLATE_ROOT = path.join(__dirname, 'templates');
@@ -13,11 +18,16 @@ export async function run(argv) {
     return;
   }
 
-  const { name, template, withDevtools } = parseArgs(argv);
+  const { name, template, withDevtools, namespace } = parseArgs(argv);
+  const slug = validateSlug(name);
   const targetDir = path.resolve(process.cwd(), name);
 
   await ensureEmptyDirectory(targetDir);
-  await scaffoldTheme(targetDir, name, template);
+  await scaffoldTheme(targetDir, {
+    slug,
+    namespace,
+    template,
+  });
 
   if (withDevtools) {
     await writeDevtoolsPackageJson(targetDir);
@@ -25,6 +35,8 @@ export async function run(argv) {
 
   console.log(`Created ZeroPress theme at ${targetDir}`);
   console.log(`Template: ${template}`);
+  console.log(`theme.json namespace: ${namespace}`);
+  console.log('Update theme.json namespace before publishing if needed.');
   if (withDevtools) {
     console.log('Devtools enabled: npm run dev / npm run validate / npm run pack');
   }
@@ -34,21 +46,23 @@ function printHelp() {
   console.log(`create-zeropress-theme - ZeroPress theme scaffolding CLI
 
 Usage:
-  create-zeropress-theme <name> [--template <minimal|blog|magazine>] [--with-devtools]
+  create-zeropress-theme <name> [--template <minimal|blog|magazine>] [--namespace <value>] [--with-devtools]
 
 Options:
   --template <name>   Template variant (minimal, blog, magazine)
+  --namespace <value> Theme namespace (default: ${DEFAULT_NAMESPACE})
   --with-devtools     Add package.json with dev / validate / pack scripts`);
 }
 
 function parseArgs(argv) {
   if (argv.length === 0) {
-    throw new Error('Usage: create-zeropress-theme <name> [--template <minimal|blog|magazine>] [--with-devtools]');
+    throw new Error('Usage: create-zeropress-theme <name> [--template <minimal|blog|magazine>] [--namespace <value>] [--with-devtools]');
   }
 
   const positional = [];
   let template = 'minimal';
   let withDevtools = false;
+  let namespace = DEFAULT_NAMESPACE;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -75,6 +89,16 @@ function parseArgs(argv) {
       continue;
     }
 
+    if (arg === '--namespace') {
+      const value = argv[i + 1];
+      if (!value) {
+        throw new Error('--namespace requires a value');
+      }
+      namespace = validateNamespace(value);
+      i += 1;
+      continue;
+    }
+
     throw new Error(`Unknown option: ${arg}`);
   }
 
@@ -87,7 +111,29 @@ function parseArgs(argv) {
     throw new Error('Theme name must be a relative directory name');
   }
 
-  return { name, template, withDevtools };
+  return { name, template, withDevtools, namespace };
+}
+
+function validateNamespace(value) {
+  const normalized = String(value || '').toLowerCase().trim();
+  if (!IDENTIFIER_REGEX.test(normalized)) {
+    throw new Error('Namespace must use lowercase letters, digits, and internal hyphens only');
+  }
+  if (normalized.length < 3 || normalized.length > 24) {
+    throw new Error('Namespace must be between 3 and 24 characters');
+  }
+  return normalized;
+}
+
+function validateSlug(value) {
+  const normalized = String(value || '').trim();
+  if (!IDENTIFIER_REGEX.test(normalized)) {
+    throw new Error('Theme name must already be a valid slug using lowercase letters, digits, and internal hyphens only');
+  }
+  if (normalized.length < 3 || normalized.length > 32) {
+    throw new Error('Theme slug must be between 3 and 32 characters');
+  }
+  return normalized;
 }
 
 async function ensureEmptyDirectory(targetDir) {
@@ -109,7 +155,8 @@ async function ensureEmptyDirectory(targetDir) {
   }
 }
 
-async function scaffoldTheme(targetDir, name, template) {
+async function scaffoldTheme(targetDir, options) {
+  const { slug, namespace, template } = options;
   const templateDir = path.join(TEMPLATE_ROOT, template);
   let stat;
 
@@ -127,13 +174,26 @@ async function scaffoldTheme(targetDir, name, template) {
   }
 
   await fs.cp(templateDir, targetDir, { recursive: true });
-  await updateThemeName(path.join(targetDir, 'theme.json'), name);
+  await updateThemeManifest(path.join(targetDir, 'theme.json'), {
+    name: slug,
+    namespace,
+    slug,
+    version: DEFAULT_VERSION,
+    license: DEFAULT_LICENSE,
+    runtime: DEFAULT_RUNTIME,
+  });
 }
 
-async function updateThemeName(themeJsonPath, name) {
+async function updateThemeManifest(themeJsonPath, values) {
   const raw = await fs.readFile(themeJsonPath, 'utf8');
   const parsed = JSON.parse(raw);
-  parsed.name = name;
+  parsed.name = values.name;
+  parsed.namespace = values.namespace;
+  parsed.slug = values.slug;
+  parsed.version = values.version;
+  parsed.license = values.license;
+  parsed.runtime = values.runtime;
+  delete parsed.author;
   await fs.writeFile(themeJsonPath, `${JSON.stringify(parsed, null, 2)}\n`, 'utf8');
 }
 
