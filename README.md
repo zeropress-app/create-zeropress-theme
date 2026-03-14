@@ -6,6 +6,8 @@
 
 Scaffolding CLI for ZeroPress theme projects.
 
+Generated starters are self-validated against the current ZeroPress runtime contract using `@zeropress/theme-validator`.
+
 ---
 
 ## Quick Start
@@ -49,6 +51,12 @@ npx create-zeropress-theme my-theme --with-devtools
 
 Each template (`minimal`, `blog`, `magazine`) is scaffolded from its own complete file set.
 
+Important:
+
+- `<name>` must already be a valid theme slug
+- allowed characters are lowercase letters, digits, and internal hyphens
+- slug length must be between 3 and 32 characters
+
 Template notes:
 
 - `minimal`: clean default starter based on `zeropress-starter-theme.v0.02`
@@ -83,8 +91,9 @@ Runtime contract note:
 - Required minimum for runtime compatibility: `theme.json`, `layout.html`, `index.html`, `post.html`, `page.html`, `assets/style.css`
 - Common optional files in the starter: `archive.html`, `category.html`, `tag.html`, `404.html`, `partials/*.html`
 - Generated `theme.json` follows Runtime v0.2
-- Generated `name` and `slug` both use the normalized theme directory name
+- Generated `name` and `slug` both use the provided theme slug
 - Generated `namespace` defaults to `my-company` unless `--namespace` is provided
+- The scaffold is validated immediately after generation, and the command fails if the generated theme does not satisfy the current runtime contract
 
 * * *
 

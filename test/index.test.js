@@ -88,9 +88,65 @@ test('run accepts an explicit namespace override', async () => {
   }
 });
 
+for (const template of ['minimal', 'blog', 'magazine']) {
+  test(`run self-validates generated ${template} template`, async () => {
+    const cwd = process.cwd();
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
+
+    try {
+      process.chdir(tempDir);
+      await run([`${template}-starter`, '--template', template]);
+
+      const raw = await fs.readFile(path.join(tempDir, `${template}-starter`, 'theme.json'), 'utf8');
+      const themeJson = JSON.parse(raw);
+      assert.equal(themeJson.slug, `${template}-starter`);
+      assert.equal(themeJson.runtime, '0.2');
+    } finally {
+      process.chdir(cwd);
+      await fs.rm(tempDir, { recursive: true, force: true });
+    }
+  });
+}
+
 test('run rejects a theme name that is not already a valid slug', async () => {
   await assert.rejects(
     () => run(['My Theme']),
-    /valid slug/
+    /Theme slug must use lowercase/
   );
+});
+
+test('run rejects an invalid namespace through shared validation', async () => {
+  await assert.rejects(
+    () => run(['valid-slug', '--namespace', 'Bad Namespace']),
+    /Namespace must use lowercase/
+  );
+});
+
+test('run fails when generated scaffold does not pass self-check', async () => {
+  const cwd = process.cwd();
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
+  const originalReadDir = fs.readdir;
+
+  fs.readdir = async function patchedReadDir(currentPath, options) {
+    const result = await originalReadDir.call(this, currentPath, options);
+    if (typeof currentPath === 'string' && currentPath.endsWith('/broken-theme') && Array.isArray(result)) {
+      return result.filter((entry) => {
+        const name = typeof entry === 'string' ? entry : entry.name;
+        return name !== 'page.html';
+      });
+    }
+    return result;
+  };
+
+  try {
+    process.chdir(tempDir);
+    await assert.rejects(
+      () => run(['broken-theme']),
+      /Required template 'page\.html' is missing/
+    );
+  } finally {
+    fs.readdir = originalReadDir;
+    process.chdir(cwd);
+    await fs.rm(tempDir, { recursive: true, force: true });
+  }
 });

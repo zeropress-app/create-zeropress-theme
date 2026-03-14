@@ -1,13 +1,18 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  DEFAULT_RUNTIME,
+  validateNamespace,
+  validateSlug,
+  validateThemeFiles,
+  validateThemeManifest,
+} from '@zeropress/theme-validator';
 
 const TEMPLATES = new Set(['minimal', 'blog', 'magazine']);
-const IDENTIFIER_REGEX = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const DEFAULT_NAMESPACE = 'my-company';
 const DEFAULT_VERSION = '0.1.0';
 const DEFAULT_LICENSE = 'MIT';
-const DEFAULT_RUNTIME = '0.2';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const TEMPLATE_ROOT = path.join(__dirname, 'templates');
@@ -114,28 +119,6 @@ function parseArgs(argv) {
   return { name, template, withDevtools, namespace };
 }
 
-function validateNamespace(value) {
-  const normalized = String(value || '').toLowerCase().trim();
-  if (!IDENTIFIER_REGEX.test(normalized)) {
-    throw new Error('Namespace must use lowercase letters, digits, and internal hyphens only');
-  }
-  if (normalized.length < 3 || normalized.length > 24) {
-    throw new Error('Namespace must be between 3 and 24 characters');
-  }
-  return normalized;
-}
-
-function validateSlug(value) {
-  const normalized = String(value || '').trim();
-  if (!IDENTIFIER_REGEX.test(normalized)) {
-    throw new Error('Theme name must already be a valid slug using lowercase letters, digits, and internal hyphens only');
-  }
-  if (normalized.length < 3 || normalized.length > 32) {
-    throw new Error('Theme slug must be between 3 and 32 characters');
-  }
-  return normalized;
-}
-
 async function ensureEmptyDirectory(targetDir) {
   try {
     const stat = await fs.stat(targetDir);
@@ -174,14 +157,16 @@ async function scaffoldTheme(targetDir, options) {
   }
 
   await fs.cp(templateDir, targetDir, { recursive: true });
-  await updateThemeManifest(path.join(targetDir, 'theme.json'), {
+  const manifest = {
     name: slug,
     namespace,
     slug,
     version: DEFAULT_VERSION,
     license: DEFAULT_LICENSE,
     runtime: DEFAULT_RUNTIME,
-  });
+  };
+  await updateThemeManifest(path.join(targetDir, 'theme.json'), manifest);
+  await validateScaffoldedTheme(targetDir, manifest);
 }
 
 async function updateThemeManifest(themeJsonPath, values) {
@@ -195,6 +180,41 @@ async function updateThemeManifest(themeJsonPath, values) {
   parsed.runtime = values.runtime;
   delete parsed.author;
   await fs.writeFile(themeJsonPath, `${JSON.stringify(parsed, null, 2)}\n`, 'utf8');
+}
+
+async function validateScaffoldedTheme(targetDir, manifest) {
+  const manifestCheck = validateThemeManifest(manifest);
+  if (!manifestCheck.ok) {
+    throw new Error(manifestCheck.errors[0]?.message || 'Generated manifest is invalid');
+  }
+
+  const fileMap = await readThemeFiles(targetDir);
+  const result = await validateThemeFiles(fileMap);
+  if (!result.ok) {
+    throw new Error(result.errors[0]?.message || 'Generated theme failed validation');
+  }
+}
+
+async function readThemeFiles(rootDir) {
+  const files = new Map();
+  await walkThemeFiles(rootDir, rootDir, files);
+  return files;
+}
+
+async function walkThemeFiles(rootDir, currentDir, files) {
+  const entries = await fs.readdir(currentDir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const absolutePath = path.join(currentDir, entry.name);
+    const relativePath = path.relative(rootDir, absolutePath).replace(/\\/g, '/');
+
+    if (entry.isDirectory()) {
+      await walkThemeFiles(rootDir, absolutePath, files);
+      continue;
+    }
+
+    files.set(relativePath, await fs.readFile(absolutePath));
+  }
 }
 
 async function writeDevtoolsPackageJson(targetDir) {

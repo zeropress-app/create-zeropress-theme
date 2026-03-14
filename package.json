@@ -24,5 +24,8 @@
   },
   "scripts": {
     "test": "node --test"
+  },
+  "dependencies": {
+    "@zeropress/theme-validator": "^0.2.2"
   }
 }
