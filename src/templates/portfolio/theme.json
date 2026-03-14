@@ -1,0 +1,9 @@
+{
+  "name": "my-theme",
+  "namespace": "my-company",
+  "slug": "my-theme",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Portfolio starter for ZeroPress Theme Runtime v0.2",
+  "runtime": "0.2"
+}

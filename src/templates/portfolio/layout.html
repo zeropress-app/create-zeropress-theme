@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{site.language}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{site.title}}</title>
+  <meta name="description" content="{{site.description}}">
+  <link rel="canonical" href="{{site.url}}">
+  <link rel="stylesheet" href="/assets/style.css">
+  {{slot:meta}}
+</head>
+<body>
+  {{slot:header}}
+  <main class="container main-content">
+    {{slot:content}}
+  </main>
+  {{slot:footer}}
+</body>
+</html>

@@ -9,7 +9,7 @@ import {
   validateThemeManifest,
 } from '@zeropress/theme-validator';
 
-const TEMPLATES = new Set(['minimal', 'blog', 'magazine']);
+const TEMPLATES = new Set(['minimal', 'blog', 'magazine', 'docs', 'portfolio']);
 const DEFAULT_NAMESPACE = 'my-company';
 const DEFAULT_VERSION = '0.1.0';
 const DEFAULT_LICENSE = 'MIT';
@@ -51,17 +51,17 @@ function printHelp() {
   console.log(`create-zeropress-theme - ZeroPress theme scaffolding CLI
 
 Usage:
-  create-zeropress-theme <name> [--template <minimal|blog|magazine>] [--namespace <value>] [--with-devtools]
+  create-zeropress-theme <name> [--template <minimal|blog|magazine|docs|portfolio>] [--namespace <value>] [--with-devtools]
 
 Options:
-  --template <name>   Template variant (minimal, blog, magazine)
+  --template <name>   Template variant (minimal, blog, magazine, docs, portfolio)
   --namespace <value> Theme namespace (default: ${DEFAULT_NAMESPACE})
   --with-devtools     Add package.json with dev / validate / pack scripts`);
 }
 
 function parseArgs(argv) {
   if (argv.length === 0) {
-    throw new Error('Usage: create-zeropress-theme <name> [--template <minimal|blog|magazine>] [--namespace <value>] [--with-devtools]');
+    throw new Error('Usage: create-zeropress-theme <name> [--template <minimal|blog|magazine|docs|portfolio>] [--namespace <value>] [--with-devtools]');
   }
 
   const positional = [];
@@ -87,7 +87,7 @@ function parseArgs(argv) {
         throw new Error('--template requires a value');
       }
       if (!TEMPLATES.has(value)) {
-        throw new Error(`Invalid template "${value}". Allowed: minimal, blog, magazine`);
+        throw new Error(`Invalid template "${value}". Allowed: minimal, blog, magazine, docs, portfolio`);
       }
       template = value;
       i += 1;

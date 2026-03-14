@@ -35,7 +35,7 @@ npx create-zeropress-theme --help
 
 | Option | Description | Default |
 | --- | --- | --- |
-| `--template <name>` | Template variant (`minimal`, `blog`, `magazine`) | `minimal` |
+| `--template <name>` | Template variant (`minimal`, `blog`, `magazine`, `docs`, `portfolio`) | `minimal` |
 | `--namespace <value>` | Theme namespace written to `theme.json` | `my-company` |
 | `--with-devtools` | Include convenience dev scripts | — |
 
@@ -46,6 +46,8 @@ npx create-zeropress-theme my-theme
 npx create-zeropress-theme my-theme --namespace acme-studio
 npx create-zeropress-theme my-theme --template blog
 npx create-zeropress-theme my-theme --template magazine
+npx create-zeropress-theme my-theme --template docs
+npx create-zeropress-theme my-theme --template portfolio
 npx create-zeropress-theme my-theme --with-devtools
 ```
 
@@ -62,6 +64,8 @@ Template notes:
 - `minimal`: clean default starter based on `zeropress-starter-theme.v0.02`
 - `blog`: editorial blog-focused typography and reading flow
 - `magazine`: grid-based layout with side rail and sectioned homepage blocks
+- `docs`: documentation-focused starter for guides, references, and updates
+- `portfolio`: personal showcase starter for projects and case studies
 
 * * *
 

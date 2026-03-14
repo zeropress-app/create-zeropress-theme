@@ -88,7 +88,7 @@ test('run accepts an explicit namespace override', async () => {
   }
 });
 
-for (const template of ['minimal', 'blog', 'magazine']) {
+for (const template of ['minimal', 'blog', 'magazine', 'docs', 'portfolio']) {
   test(`run self-validates generated ${template} template`, async () => {
     const cwd = process.cwd();
     const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
