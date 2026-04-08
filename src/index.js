@@ -9,9 +9,12 @@ import {
 } from '@zeropress/theme-validator';
 
 const TEMPLATES = new Set(['minimal', 'blog', 'magazine', 'docs', 'portfolio']);
+const TEMPLATE_LIST = 'minimal, blog, magazine, docs, portfolio';
 const DEFAULT_NAMESPACE = 'my-company';
 const DEFAULT_VERSION = '0.1.0';
 const DEFAULT_LICENSE = 'MIT';
+const DEFAULT_THEME_SCHEMA = 'https://zeropress.dev/schemas/theme.schema.json';
+const MANIFEST_ORDERED_KEYS = new Set(['$schema', 'name', 'namespace', 'slug', 'version', 'license', 'runtime']);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const TEMPLATE_ROOT = path.join(__dirname, 'templates');
@@ -51,7 +54,7 @@ Usage:
 
 Options:
   --theme-slug <value> Theme slug and target directory name
-  --template <name>   Template variant (minimal, blog, magazine, docs, portfolio)`);
+  --template <name>   Template variant (${TEMPLATE_LIST})`);
 }
 
 function parseArgs(argv) {
@@ -81,10 +84,10 @@ function parseArgs(argv) {
     if (arg === '--template') {
       const value = argv[i + 1];
       if (!value || value.startsWith('--')) {
-        throw new Error('--template requires a value');
+        throw new Error(`--template requires a value. Allowed: ${TEMPLATE_LIST}`);
       }
       if (!TEMPLATES.has(value)) {
-        throw new Error(`Invalid template "${value}". Allowed: minimal, blog, magazine, docs, portfolio`);
+        throw new Error(`Invalid template "${value}". Allowed: ${TEMPLATE_LIST}`);
       }
       template = value;
       i += 1;
@@ -99,7 +102,7 @@ function parseArgs(argv) {
   }
 
   if (!template) {
-    throw new Error('--template is required');
+    throw new Error(`--template is required. Allowed: ${TEMPLATE_LIST}`);
   }
 
   return { themeSlug, template };
@@ -158,14 +161,18 @@ async function scaffoldTheme(targetDir, options) {
 async function updateThemeManifest(themeJsonPath, values) {
   const raw = await fs.readFile(themeJsonPath, 'utf8');
   const parsed = JSON.parse(raw);
-  parsed.name = values.name;
-  parsed.namespace = values.namespace;
-  parsed.slug = values.slug;
-  parsed.version = values.version;
-  parsed.license = values.license;
-  parsed.runtime = values.runtime;
-  delete parsed.author;
-  await fs.writeFile(themeJsonPath, `${JSON.stringify(parsed, null, 2)}\n`, 'utf8');
+  const optionalEntries = Object.entries(parsed).filter(([key]) => !MANIFEST_ORDERED_KEYS.has(key));
+  const orderedManifest = {
+    $schema: DEFAULT_THEME_SCHEMA,
+    name: values.name,
+    namespace: values.namespace,
+    slug: values.slug,
+    version: values.version,
+    license: values.license,
+    runtime: values.runtime,
+    ...Object.fromEntries(optionalEntries),
+  };
+  await fs.writeFile(themeJsonPath, `${JSON.stringify(orderedManifest, null, 2)}\n`, 'utf8');
 }
 
 async function validateScaffoldedTheme(targetDir, manifest) {

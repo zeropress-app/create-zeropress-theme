@@ -64,7 +64,7 @@ test('run rejects the unsupported --slug option', async () => {
 test('run requires --template when only --theme-slug is provided', async () => {
   await assert.rejects(
     () => run(['--theme-slug', 'my-theme']),
-    /--template is required/,
+    /--template is required\. Allowed: minimal, blog, magazine, docs, portfolio/,
   );
 });
 
@@ -79,6 +79,13 @@ test('run requires --theme-slug when only --template is provided', async () => {
   await assert.rejects(
     () => run(['--template', 'blog']),
     /--theme-slug is required/,
+  );
+});
+
+test('run guides allowed templates when --template value is missing', async () => {
+  await assert.rejects(
+    () => run(['--theme-slug', 'my-theme', '--template']),
+    /--template requires a value\. Allowed: minimal, blog, magazine, docs, portfolio/,
   );
 });
 
@@ -98,13 +105,23 @@ test('run scaffolds a theme with required flags and fixed namespace', async () =
     const raw = await fs.readFile(path.join(tempDir, 'my-theme', 'theme.json'), 'utf8');
     const themeJson = JSON.parse(raw);
 
+    assert.equal(themeJson.$schema, 'https://zeropress.dev/schemas/theme.schema.json');
     assert.equal(themeJson.name, 'my-theme');
     assert.equal(themeJson.namespace, 'my-company');
     assert.equal(themeJson.slug, 'my-theme');
     assert.equal(themeJson.version, '0.1.0');
     assert.equal(themeJson.license, 'MIT');
     assert.equal(themeJson.runtime, '0.2');
-    assert.equal(Object.hasOwn(themeJson, 'author'), false);
+    assert.deepEqual(Object.keys(themeJson), [
+      '$schema',
+      'name',
+      'namespace',
+      'slug',
+      'version',
+      'license',
+      'runtime',
+      'description',
+    ]);
     assert.equal(logs.some((line) => line.includes('Template: blog')), true);
     assert.equal(logs.some((line) => line.includes('theme.json namespace: my-company')), true);
     await assert.rejects(() => fs.access(path.join(tempDir, 'my-theme', 'package.json')));
