@@ -3,7 +3,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   DEFAULT_RUNTIME,
-  validateNamespace,
   validateSlug,
   validateThemeFiles,
   validateThemeManifest,
@@ -18,72 +17,70 @@ const __dirname = path.dirname(__filename);
 const TEMPLATE_ROOT = path.join(__dirname, 'templates');
 
 export async function run(argv) {
-  if (argv.length === 0 || argv[0] === '--help' || argv[0] === '-h') {
+  if (argv.includes('--help') || argv.includes('-h')) {
     printHelp();
     return;
   }
 
-  const { name, template, withDevtools, namespace } = parseArgs(argv);
-  const slug = validateSlug(name);
-  const targetDir = path.resolve(process.cwd(), name);
+  if (argv.length === 0) {
+    printHelp();
+    return;
+  }
+
+  const { themeSlug, template } = parseArgs(argv);
+  const slug = validateSlug(themeSlug);
+  const targetDir = path.resolve(process.cwd(), themeSlug);
 
   await ensureEmptyDirectory(targetDir);
   await scaffoldTheme(targetDir, {
     slug,
-    namespace,
     template,
   });
 
-  if (withDevtools) {
-    await writeDevtoolsPackageJson(targetDir);
-  }
-
   console.log(`Created ZeroPress theme at ${targetDir}`);
   console.log(`Template: ${template}`);
-  console.log(`theme.json namespace: ${namespace}`);
+  console.log(`theme.json namespace: ${DEFAULT_NAMESPACE}`);
   console.log('Update theme.json namespace before publishing if needed.');
-  if (withDevtools) {
-    console.log('Devtools enabled: npm run dev / npm run validate / npm run pack');
-  }
 }
 
 function printHelp() {
   console.log(`create-zeropress-theme - ZeroPress theme scaffolding CLI
 
 Usage:
-  create-zeropress-theme <name> [--template <minimal|blog|magazine|docs|portfolio>] [--namespace <value>] [--with-devtools]
+  create-zeropress-theme --theme-slug <value> --template <minimal|blog|magazine|docs|portfolio>
 
 Options:
-  --template <name>   Template variant (minimal, blog, magazine, docs, portfolio)
-  --namespace <value> Theme namespace (default: ${DEFAULT_NAMESPACE})
-  --with-devtools     Add package.json with dev / validate / pack scripts`);
+  --theme-slug <value> Theme slug and target directory name
+  --template <name>   Template variant (minimal, blog, magazine, docs, portfolio)`);
 }
 
 function parseArgs(argv) {
   if (argv.length === 0) {
-    throw new Error('Usage: create-zeropress-theme <name> [--template <minimal|blog|magazine|docs|portfolio>] [--namespace <value>] [--with-devtools]');
+    throw new Error('create-zeropress-theme requires --theme-slug and --template. Run with --help to see usage.');
   }
 
-  const positional = [];
-  let template = 'minimal';
-  let withDevtools = false;
-  let namespace = DEFAULT_NAMESPACE;
+  let themeSlug = null;
+  let template = null;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (!arg.startsWith('--')) {
-      positional.push(arg);
-      continue;
+      throw new Error(`Unexpected positional argument: ${arg}. Use --theme-slug <value> and --template <value>.`);
     }
 
-    if (arg === '--with-devtools') {
-      withDevtools = true;
+    if (arg === '--theme-slug') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('--')) {
+        throw new Error('--theme-slug requires a value');
+      }
+      themeSlug = value;
+      i += 1;
       continue;
     }
 
     if (arg === '--template') {
       const value = argv[i + 1];
-      if (!value) {
+      if (!value || value.startsWith('--')) {
         throw new Error('--template requires a value');
       }
       if (!TEMPLATES.has(value)) {
@@ -94,29 +91,18 @@ function parseArgs(argv) {
       continue;
     }
 
-    if (arg === '--namespace') {
-      const value = argv[i + 1];
-      if (!value) {
-        throw new Error('--namespace requires a value');
-      }
-      namespace = validateNamespace(value);
-      i += 1;
-      continue;
-    }
-
     throw new Error(`Unknown option: ${arg}`);
   }
 
-  if (positional.length !== 1) {
-    throw new Error('Expected exactly one theme directory name');
+  if (!themeSlug) {
+    throw new Error('--theme-slug is required');
   }
 
-  const name = positional[0];
-  if (!name || name.includes('..') || path.isAbsolute(name)) {
-    throw new Error('Theme name must be a relative directory name');
+  if (!template) {
+    throw new Error('--template is required');
   }
 
-  return { name, template, withDevtools, namespace };
+  return { themeSlug, template };
 }
 
 async function ensureEmptyDirectory(targetDir) {
@@ -139,7 +125,7 @@ async function ensureEmptyDirectory(targetDir) {
 }
 
 async function scaffoldTheme(targetDir, options) {
-  const { slug, namespace, template } = options;
+  const { slug, template } = options;
   const templateDir = path.join(TEMPLATE_ROOT, template);
   let stat;
 
@@ -159,7 +145,7 @@ async function scaffoldTheme(targetDir, options) {
   await fs.cp(templateDir, targetDir, { recursive: true });
   const manifest = {
     name: slug,
-    namespace,
+    namespace: DEFAULT_NAMESPACE,
     slug,
     version: DEFAULT_VERSION,
     license: DEFAULT_LICENSE,
@@ -215,19 +201,4 @@ async function walkThemeFiles(rootDir, currentDir, files) {
 
     files.set(relativePath, await fs.readFile(absolutePath));
   }
-}
-
-async function writeDevtoolsPackageJson(targetDir) {
-  const pkg = {
-    name: path.basename(targetDir),
-    private: true,
-    version: '0.1.0',
-    type: 'module',
-    scripts: {
-      dev: 'npx zeropress-theme dev',
-      validate: 'npx zeropress-theme validate',
-      pack: 'npx zeropress-theme pack',
-    },
-  };
-  await fs.writeFile(path.join(targetDir, 'package.json'), `${JSON.stringify(pkg, null, 2)}\n`, 'utf8');
 }

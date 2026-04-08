@@ -13,7 +13,7 @@ Generated starters are self-validated against the current ZeroPress runtime cont
 ## Quick Start
 
 ```bash
-npx create-zeropress-theme my-theme
+npx create-zeropress-theme --theme-slug my-theme --template blog
 ```
 
 * * *
@@ -22,7 +22,7 @@ Usage
 -----
 
 ```bash
-npx create-zeropress-theme <name> [options]
+npx create-zeropress-theme --theme-slug <value> --template <minimal|blog|magazine|docs|portfolio>
 ```
 
 To print help:
@@ -35,27 +35,22 @@ npx create-zeropress-theme --help
 
 | Option | Description | Default |
 | --- | --- | --- |
-| `--template <name>` | Template variant (`minimal`, `blog`, `magazine`, `docs`, `portfolio`) | `minimal` |
-| `--namespace <value>` | Theme namespace written to `theme.json` | `my-company` |
-| `--with-devtools` | Include convenience dev scripts | — |
+| `--theme-slug <value>` | Theme slug and target directory name | — |
+| `--template <name>` | Template variant (`minimal`, `blog`, `magazine`, `docs`, `portfolio`) | — |
 
 Examples:
 
 ```bash
-npx create-zeropress-theme my-theme
-npx create-zeropress-theme my-theme --namespace acme-studio
-npx create-zeropress-theme my-theme --template blog
-npx create-zeropress-theme my-theme --template magazine
-npx create-zeropress-theme my-theme --template docs
-npx create-zeropress-theme my-theme --template portfolio
-npx create-zeropress-theme my-theme --with-devtools
+npx create-zeropress-theme --theme-slug my-theme --template blog
+npx create-zeropress-theme --theme-slug my-theme --template magazine
+npx create-zeropress-theme --theme-slug my-theme --template docs
+npx create-zeropress-theme --theme-slug my-theme --template portfolio
 ```
 
-Each template (`minimal`, `blog`, `magazine`) is scaffolded from its own complete file set.
+Notes:
 
-Important:
-
-- `<name>` must already be a valid theme slug
+- `--theme-slug` and `--template` are both required
+- `--theme-slug` must already be a valid theme slug
 - allowed characters are lowercase letters, digits, and internal hyphens
 - slug length must be between 3 and 32 characters
 
@@ -95,33 +90,9 @@ Runtime contract note:
 - Required minimum for runtime compatibility: `theme.json`, `layout.html`, `index.html`, `post.html`, `page.html`, `assets/style.css`
 - Common optional files in the starter: `archive.html`, `category.html`, `tag.html`, `404.html`, `partials/*.html`
 - Generated `theme.json` follows Runtime v0.2
-- Generated `name` and `slug` both use the provided theme slug
-- Generated `namespace` defaults to `my-company` unless `--namespace` is provided
+- Generated directory name, `theme.json.name`, and `theme.json.slug` all use `--theme-slug`
+- Generated `namespace` is fixed to `my-company`
 - The scaffold is validated immediately after generation, and the command fails if the generated theme does not satisfy the current runtime contract
-
-* * *
-
-### --with-devtools
-
-Adds a `package.json` with convenience scripts:
-
-```bash
-cd my-theme
-npm run dev
-npm run validate
-npm run pack
-```
-
-Validate generated themes with:
-
-```bash
-npx zeropress-theme validate my-theme
-```
-
-These scripts are thin wrappers around `npx zeropress-theme` (no global install required).  
-On first run, `npx` may download the CLI package if it is not cached locally.  
-No dependencies or lockfiles are generated.  
-The runtime contract remains unchanged.
 
 * * *
 

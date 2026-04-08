@@ -15,7 +15,7 @@ test('run prints help and exits cleanly with no args', async () => {
   try {
     await run([]);
     assert.equal(logs.some((line) => line.includes('Usage:')), true);
-    assert.equal(logs.some((line) => line.includes('create-zeropress-theme <name>')), true);
+    assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <value> --template')), true);
   } finally {
     console.log = originalLog;
   }
@@ -31,13 +31,58 @@ test('run prints help and exits cleanly with --help', async () => {
   try {
     await run(['--help']);
     assert.equal(logs.some((line) => line.includes('Options:')), true);
-    assert.equal(logs.some((line) => line.includes('--with-devtools')), true);
+    assert.equal(logs.some((line) => line.includes('--theme-slug <value>')), true);
+    assert.equal(logs.some((line) => line.includes('--template <name>')), true);
   } finally {
     console.log = originalLog;
   }
 });
 
-test('run scaffolds a v0.2 theme with default namespace', async () => {
+test('run prints help when --help appears anywhere in argv', async () => {
+  const logs = [];
+  const originalLog = console.log;
+  console.log = (...args) => {
+    logs.push(args.join(' '));
+  };
+
+  try {
+    await run(['--theme-slug', 'my-theme', '--help']);
+    assert.equal(logs.some((line) => line.includes('Usage:')), true);
+    assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <value> --template')), true);
+  } finally {
+    console.log = originalLog;
+  }
+});
+
+test('run rejects the unsupported --slug option', async () => {
+  await assert.rejects(
+    () => run(['--slug', 'my-theme']),
+    /Unknown option: --slug/,
+  );
+});
+
+test('run requires --template when only --theme-slug is provided', async () => {
+  await assert.rejects(
+    () => run(['--theme-slug', 'my-theme']),
+    /--template is required/,
+  );
+});
+
+test('run rejects invalid template values', async () => {
+  await assert.rejects(
+    () => run(['--theme-slug', 'my-theme', '--template', 'cms']),
+    /Invalid template "cms"\. Allowed: minimal, blog, magazine, docs, portfolio/,
+  );
+});
+
+test('run requires --theme-slug when only --template is provided', async () => {
+  await assert.rejects(
+    () => run(['--template', 'blog']),
+    /--theme-slug is required/,
+  );
+});
+
+test('run scaffolds a theme with required flags and fixed namespace', async () => {
   const cwd = process.cwd();
   const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
   const logs = [];
@@ -48,42 +93,24 @@ test('run scaffolds a v0.2 theme with default namespace', async () => {
 
   try {
     process.chdir(tempDir);
-    await run(['mytheme1']);
+    await run(['--theme-slug', 'my-theme', '--template', 'blog']);
 
-    const raw = await fs.readFile(path.join(tempDir, 'mytheme1', 'theme.json'), 'utf8');
+    const raw = await fs.readFile(path.join(tempDir, 'my-theme', 'theme.json'), 'utf8');
     const themeJson = JSON.parse(raw);
 
-    assert.equal(themeJson.name, 'mytheme1');
+    assert.equal(themeJson.name, 'my-theme');
     assert.equal(themeJson.namespace, 'my-company');
-    assert.equal(themeJson.slug, 'mytheme1');
+    assert.equal(themeJson.slug, 'my-theme');
     assert.equal(themeJson.version, '0.1.0');
     assert.equal(themeJson.license, 'MIT');
     assert.equal(themeJson.runtime, '0.2');
     assert.equal(Object.hasOwn(themeJson, 'author'), false);
+    assert.equal(logs.some((line) => line.includes('Template: blog')), true);
     assert.equal(logs.some((line) => line.includes('theme.json namespace: my-company')), true);
+    await assert.rejects(() => fs.access(path.join(tempDir, 'my-theme', 'package.json')));
   } finally {
     process.chdir(cwd);
     console.log = originalLog;
-    await fs.rm(tempDir, { recursive: true, force: true });
-  }
-});
-
-test('run accepts an explicit namespace override', async () => {
-  const cwd = process.cwd();
-  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
-
-  try {
-    process.chdir(tempDir);
-    await run(['editorial-kit', '--namespace', 'acme-studio']);
-
-    const raw = await fs.readFile(path.join(tempDir, 'editorial-kit', 'theme.json'), 'utf8');
-    const themeJson = JSON.parse(raw);
-
-    assert.equal(themeJson.name, 'editorial-kit');
-    assert.equal(themeJson.namespace, 'acme-studio');
-    assert.equal(themeJson.slug, 'editorial-kit');
-  } finally {
-    process.chdir(cwd);
     await fs.rm(tempDir, { recursive: true, force: true });
   }
 });
@@ -95,7 +122,7 @@ for (const template of ['minimal', 'blog', 'magazine', 'docs', 'portfolio']) {
 
     try {
       process.chdir(tempDir);
-      await run([`${template}-starter`, '--template', template]);
+      await run(['--theme-slug', `${template}-starter`, '--template', template]);
 
       const raw = await fs.readFile(path.join(tempDir, `${template}-starter`, 'theme.json'), 'utf8');
       const themeJson = JSON.parse(raw);
@@ -108,17 +135,10 @@ for (const template of ['minimal', 'blog', 'magazine', 'docs', 'portfolio']) {
   });
 }
 
-test('run rejects a theme name that is not already a valid slug', async () => {
+test('run rejects a theme slug that is not already valid', async () => {
   await assert.rejects(
-    () => run(['My Theme']),
-    /Theme slug must use lowercase/
-  );
-});
-
-test('run rejects an invalid namespace through shared validation', async () => {
-  await assert.rejects(
-    () => run(['valid-slug', '--namespace', 'Bad Namespace']),
-    /Namespace must use lowercase/
+    () => run(['--theme-slug', 'My Theme', '--template', 'blog']),
+    /Theme slug must use lowercase/,
   );
 });
 
@@ -141,8 +161,8 @@ test('run fails when generated scaffold does not pass self-check', async () => {
   try {
     process.chdir(tempDir);
     await assert.rejects(
-      () => run(['broken-theme']),
-      /Required template 'page\.html' is missing/
+      () => run(['--theme-slug', 'broken-theme', '--template', 'minimal']),
+      /Required template 'page\.html' is missing/,
     );
   } finally {
     fs.readdir = originalReadDir;
