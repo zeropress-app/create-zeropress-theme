@@ -103,6 +103,7 @@ test('run scaffolds a theme with required flags and fixed namespace', async () =
     await run(['--theme-slug', 'my-theme', '--template', 'blog']);
 
     const raw = await fs.readFile(path.join(tempDir, 'my-theme', 'theme.json'), 'utf8');
+    const layoutHtml = await fs.readFile(path.join(tempDir, 'my-theme', 'layout.html'), 'utf8');
     const themeJson = JSON.parse(raw);
 
     assert.equal(themeJson.$schema, 'https://zeropress.dev/schemas/theme.schema.json');
@@ -122,6 +123,8 @@ test('run scaffolds a theme with required flags and fixed namespace', async () =
       'runtime',
       'description',
     ]);
+    assert.match(layoutHtml, /<title>\{\{meta\.title\}\}<\/title>/);
+    assert.match(layoutHtml, /\{\{meta\.head_tags\}\}/);
     assert.equal(logs.some((line) => line.includes('Template: blog')), true);
     assert.equal(logs.some((line) => line.includes('theme.json namespace: my-company')), true);
     await assert.rejects(() => fs.access(path.join(tempDir, 'my-theme', 'package.json')));
@@ -142,9 +145,12 @@ for (const template of ['minimal', 'blog', 'magazine', 'docs', 'portfolio']) {
       await run(['--theme-slug', `${template}-starter`, '--template', template]);
 
       const raw = await fs.readFile(path.join(tempDir, `${template}-starter`, 'theme.json'), 'utf8');
+      const layoutHtml = await fs.readFile(path.join(tempDir, `${template}-starter`, 'layout.html'), 'utf8');
       const themeJson = JSON.parse(raw);
       assert.equal(themeJson.slug, `${template}-starter`);
       assert.equal(themeJson.runtime, '0.2');
+      assert.match(layoutHtml, /<title>\{\{meta\.title\}\}<\/title>/);
+      assert.match(layoutHtml, /\{\{meta\.head_tags\}\}/);
     } finally {
       process.chdir(cwd);
       await fs.rm(tempDir, { recursive: true, force: true });
