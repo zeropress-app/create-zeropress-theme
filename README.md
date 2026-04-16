@@ -4,9 +4,22 @@
 ![license](https://img.shields.io/npm/l/create-zeropress-theme)
 ![node](https://img.shields.io/node/v/create-zeropress-theme)
 
-Scaffolding CLI for ZeroPress theme projects.
+ZeroPress theme starter generator.
 
 Generated starters are self-validated against the current ZeroPress runtime contract using `@zeropress/theme-validator`.
+
+---
+
+## Install
+
+```bash
+# Run directly with npx
+npx create-zeropress-theme --help
+
+# Or install globally
+npm install -g create-zeropress-theme
+create-zeropress-theme --help
+```
 
 ---
 
@@ -16,58 +29,49 @@ Generated starters are self-validated against the current ZeroPress runtime cont
 npx create-zeropress-theme --theme-slug my-theme --template blog
 ```
 
-* * *
+---
 
-Usage
------
-
-```bash
-npx create-zeropress-theme --theme-slug <value> --template <minimal|blog|magazine|docs|portfolio>
-```
-
-To print help:
+## Usage
 
 ```bash
-npx create-zeropress-theme --help
+create-zeropress-theme --theme-slug <slug> --template <template>
 ```
+
+### Required Options
+
+- `--theme-slug <slug>`: Theme slug and target directory name
+- `--template <template>`: Starter template: `minimal`, `blog`, `magazine`, `docs`, `portfolio`
 
 ### Options
 
-| Option | Description | Default |
-| --- | --- | --- |
-| `--theme-slug <value>` | Theme slug and target directory name | — |
-| `--template <name>` | Template variant (`minimal`, `blog`, `magazine`, `docs`, `portfolio`) | — |
+- `--help, -h`: Show help
+- `--version, -v`: Show version
 
-Examples:
+---
+
+## Examples
 
 ```bash
-npx create-zeropress-theme --theme-slug my-theme --template blog
-npx create-zeropress-theme --theme-slug my-theme --template magazine
-npx create-zeropress-theme --theme-slug my-theme --template docs
-npx create-zeropress-theme --theme-slug my-theme --template portfolio
+create-zeropress-theme --theme-slug my-theme --template blog
+create-zeropress-theme --theme-slug my-theme --template docs
+create-zeropress-theme --theme-slug my-theme --template portfolio
 ```
 
-Notes:
+---
 
-- `--theme-slug` and `--template` are both required
-- `--theme-slug` must already be a valid theme slug
-- allowed characters are lowercase letters, digits, and internal hyphens
-- slug length must be between 3 and 32 characters
+## Templates
 
-Template notes:
+- `minimal`: Clean default starter with a lightweight content-first structure
+- `blog`: Editorial blog starter with reading-focused layout and typography
+- `magazine`: Grid-based starter with side rail and sectioned landing layout
+- `docs`: Documentation starter for guides, references, and updates
+- `portfolio`: Personal showcase starter for projects and case studies
 
-- `minimal`: clean default starter based on `zeropress-starter-theme.v0.02`
-- `blog`: editorial blog-focused typography and reading flow
-- `magazine`: grid-based layout with side rail and sectioned homepage blocks
-- `docs`: documentation-focused starter for guides, references, and updates
-- `portfolio`: personal showcase starter for projects and case studies
+---
 
-* * *
+## What It Generates
 
-Starter Output
----------------------
-
-```
+```text
 my-theme/
   theme.json
   layout.html
@@ -85,48 +89,31 @@ my-theme/
     style.css
 ```
 
-Runtime contract note:
-
-- Required minimum for runtime compatibility: `theme.json`, `layout.html`, `index.html`, `post.html`, `page.html`, `assets/style.css`
+- Required minimum for Theme Runtime v0.3 compatibility: `theme.json`, `layout.html`, `index.html`, `post.html`, `page.html`, `assets/style.css`
 - Common optional files in the starter: `archive.html`, `category.html`, `tag.html`, `404.html`, `partials/*.html`
-- Generated `theme.json` follows Runtime v0.3
 - Generated `theme.json` includes `$schema` for IDE validation and autocomplete
 - Generated starters declare helper-only `menuSlots` for `primary` and `footer`
 - Generated headers and footers use `{{menu:primary}}` and `{{menu:footer}}`
 - Generated directory name, `theme.json.name`, and `theme.json.slug` all use `--theme-slug`
 - Generated `namespace` is fixed to `my-company`
-- The scaffold is validated immediately after generation, and the command fails if the generated theme does not satisfy the current runtime contract
+- The scaffold is validated immediately after generation and fails if the generated theme does not satisfy Theme Runtime v0.3
 
-* * *
+---
 
-Requirements
-------------
+## Requirements
 
-*   Node.js >= 18.18.0
-*   ESM only
+- Node.js >= 18.18.0
+- ESM only
 
-* * *
+---
 
-Related
--------
+## Related
 
-*   [zeropress-theme](https://www.npmjs.com/package/zeropress-theme)
-*   ZeroPress Theme Spec v0.3: [https://zeropress.dev/spec/theme-runtime-v0.3.html](https://zeropress.dev/spec/theme-runtime-v0.3.html)
+- [@zeropress/theme](https://www.npmjs.com/package/@zeropress/theme)
+- [ZeroPress Theme Runtime v0.3](https://zeropress.dev/spec/theme-runtime-v0.3.html)
 
-* * *
+---
 
-About ZeroPress
----------------
-
-ZeroPress is a CMS built around file-based themes and a defined runtime contract.  
-It emphasizes predictable structure and portable theme bundles.
-
-Project website:  
-[https://zeropress.app](https://zeropress.app)
-
-* * *
-
-License
--------
+## License
 
 MIT

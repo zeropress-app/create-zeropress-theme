@@ -5,6 +5,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { run } from '../src/index.js';
 
+const packageJsonPath = new URL('../package.json', import.meta.url);
+
 test('run prints help and exits cleanly with no args', async () => {
   const logs = [];
   const originalLog = console.log;
@@ -15,7 +17,7 @@ test('run prints help and exits cleanly with no args', async () => {
   try {
     await run([]);
     assert.equal(logs.some((line) => line.includes('Usage:')), true);
-    assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <value> --template')), true);
+    assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <slug> --template <template>')), true);
   } finally {
     console.log = originalLog;
   }
@@ -30,13 +32,33 @@ test('run prints help and exits cleanly with --help', async () => {
 
   try {
     await run(['--help']);
-    assert.equal(logs.some((line) => line.includes('Options:')), true);
-    assert.equal(logs.some((line) => line.includes('--theme-slug <value>')), true);
-    assert.equal(logs.some((line) => line.includes('--template <name>')), true);
+    assert.equal(logs.some((line) => line.includes('Required Options:')), true);
+    assert.equal(logs.some((line) => line.includes('--theme-slug <slug>')), true);
+    assert.equal(logs.some((line) => line.includes('--template <template>')), true);
+    assert.equal(logs.some((line) => line.includes('--help, -h')), true);
+    assert.equal(logs.some((line) => line.includes('--version, -v')), true);
   } finally {
     console.log = originalLog;
   }
 });
+
+for (const flag of ['--version', '-v']) {
+  test(`run prints version with ${flag}`, async () => {
+    const logs = [];
+    const originalLog = console.log;
+    console.log = (...args) => {
+      logs.push(args.join(' '));
+    };
+
+    try {
+      await run([flag]);
+      const pkg = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
+      assert.deepEqual(logs, [pkg.version]);
+    } finally {
+      console.log = originalLog;
+    }
+  });
+}
 
 test('run prints help when --help appears anywhere in argv', async () => {
   const logs = [];
@@ -48,7 +70,7 @@ test('run prints help when --help appears anywhere in argv', async () => {
   try {
     await run(['--theme-slug', 'my-theme', '--help']);
     assert.equal(logs.some((line) => line.includes('Usage:')), true);
-    assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <value> --template')), true);
+    assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <slug> --template <template>')), true);
   } finally {
     console.log = originalLog;
   }

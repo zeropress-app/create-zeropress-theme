@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import {
   DEFAULT_RUNTIME,
@@ -15,6 +16,8 @@ const DEFAULT_VERSION = '0.1.0';
 const DEFAULT_LICENSE = 'MIT';
 const DEFAULT_THEME_SCHEMA = 'https://zeropress.dev/schemas/theme.schema.json';
 const MANIFEST_ORDERED_KEYS = new Set(['$schema', 'name', 'namespace', 'slug', 'version', 'license', 'runtime']);
+const require = createRequire(import.meta.url);
+const { version: PACKAGE_VERSION } = require('../package.json');
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const TEMPLATE_ROOT = path.join(__dirname, 'templates');
@@ -22,6 +25,11 @@ const TEMPLATE_ROOT = path.join(__dirname, 'templates');
 export async function run(argv) {
   if (argv.includes('--help') || argv.includes('-h')) {
     printHelp();
+    return;
+  }
+
+  if (argv.includes('--version') || argv.includes('-v')) {
+    console.log(PACKAGE_VERSION);
     return;
   }
 
@@ -47,14 +55,23 @@ export async function run(argv) {
 }
 
 function printHelp() {
-  console.log(`create-zeropress-theme - ZeroPress theme scaffolding CLI
+  console.log(`create-zeropress-theme - ZeroPress theme starter generator
 
 Usage:
-  create-zeropress-theme --theme-slug <value> --template <minimal|blog|magazine|docs|portfolio>
+  create-zeropress-theme --theme-slug <slug> --template <template>
+
+Required Options:
+  --theme-slug <slug>   Theme slug and target directory name
+  --template <template> Starter template: ${TEMPLATE_LIST}
 
 Options:
-  --theme-slug <value> Theme slug and target directory name
-  --template <name>   Template variant (${TEMPLATE_LIST})`);
+  --help, -h            Show help
+  --version, -v         Show version
+
+Notes:
+  - creates a new theme directory in the current working directory
+  - generated theme.json uses the current ZeroPress runtime contract
+  - generated starters include helper-only menuSlots for primary and footer`);
 }
 
 function parseArgs(argv) {
