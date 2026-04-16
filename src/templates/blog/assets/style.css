@@ -61,6 +61,29 @@ a:hover { text-decoration: underline; }
   font-size: 0.95rem;
 }
 
+.main-nav ul,
+.footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav li,
+.footer-nav li {
+  margin: 0;
+}
+
+.main-nav li ul,
+.footer-nav li ul {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  padding-left: 16px;
+}
+
 .blog-main { padding: 36px 0 62px; }
 
 .eyebrow {
@@ -151,6 +174,10 @@ a:hover { text-decoration: underline; }
 .meta-row + .meta-row { margin-top: 6px; }
 
 .pagination { margin-top: 18px; }
+
+.footer-nav {
+  color: var(--text);
+}
 
 @media (max-width: 720px) {
   .header-inner,

@@ -89,8 +89,10 @@ Runtime contract note:
 
 - Required minimum for runtime compatibility: `theme.json`, `layout.html`, `index.html`, `post.html`, `page.html`, `assets/style.css`
 - Common optional files in the starter: `archive.html`, `category.html`, `tag.html`, `404.html`, `partials/*.html`
-- Generated `theme.json` follows Runtime v0.2
+- Generated `theme.json` follows Runtime v0.3
 - Generated `theme.json` includes `$schema` for IDE validation and autocomplete
+- Generated starters declare helper-only `menuSlots` for `primary` and `footer`
+- Generated headers and footers use `{{menu:primary}}` and `{{menu:footer}}`
 - Generated directory name, `theme.json.name`, and `theme.json.slug` all use `--theme-slug`
 - Generated `namespace` is fixed to `my-company`
 - The scaffold is validated immediately after generation, and the command fails if the generated theme does not satisfy the current runtime contract
@@ -109,7 +111,7 @@ Related
 -------
 
 *   [zeropress-theme](https://www.npmjs.com/package/zeropress-theme)
-*   ZeroPress Theme Spec v0.2: [https://zeropress.dev/spec/theme-runtime-v0.2.html](https://zeropress.dev/spec/theme-runtime-v0.2.html)
+*   ZeroPress Theme Spec v0.3: [https://zeropress.dev/spec/theme-runtime-v0.3.html](https://zeropress.dev/spec/theme-runtime-v0.3.html)
 
 * * *
 

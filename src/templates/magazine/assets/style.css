@@ -63,6 +63,29 @@ a:hover { text-decoration: underline; }
   gap: 10px;
 }
 
+.main-nav ul,
+.footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav li,
+.footer-nav li {
+  margin: 0;
+}
+
+.main-nav li ul,
+.footer-nav li ul {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  padding-left: 16px;
+}
+
 .main-nav a {
   padding: 6px 10px;
   border: 1px solid var(--line);
@@ -186,6 +209,10 @@ a:hover { text-decoration: underline; }
 }
 
 .pagination { margin-top: 18px; }
+
+.footer-nav {
+  color: var(--ink);
+}
 
 @media (max-width: 960px) {
   .mag-shell {

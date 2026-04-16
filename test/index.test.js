@@ -104,6 +104,8 @@ test('run scaffolds a theme with required flags and fixed namespace', async () =
 
     const raw = await fs.readFile(path.join(tempDir, 'my-theme', 'theme.json'), 'utf8');
     const layoutHtml = await fs.readFile(path.join(tempDir, 'my-theme', 'layout.html'), 'utf8');
+    const headerHtml = await fs.readFile(path.join(tempDir, 'my-theme', 'partials', 'header.html'), 'utf8');
+    const footerHtml = await fs.readFile(path.join(tempDir, 'my-theme', 'partials', 'footer.html'), 'utf8');
     const themeJson = JSON.parse(raw);
 
     assert.equal(themeJson.$schema, 'https://zeropress.dev/schemas/theme.schema.json');
@@ -112,7 +114,17 @@ test('run scaffolds a theme with required flags and fixed namespace', async () =
     assert.equal(themeJson.slug, 'my-theme');
     assert.equal(themeJson.version, '0.1.0');
     assert.equal(themeJson.license, 'MIT');
-    assert.equal(themeJson.runtime, '0.2');
+    assert.equal(themeJson.runtime, '0.3');
+    assert.deepEqual(themeJson.menuSlots, {
+      primary: {
+        title: 'Primary Menu',
+        description: 'Recommended menu_id for the main header navigation',
+      },
+      footer: {
+        title: 'Footer Menu',
+        description: 'Recommended menu_id for footer links',
+      },
+    });
     assert.deepEqual(Object.keys(themeJson), [
       '$schema',
       'name',
@@ -122,9 +134,12 @@ test('run scaffolds a theme with required flags and fixed namespace', async () =
       'license',
       'runtime',
       'description',
+      'menuSlots',
     ]);
     assert.match(layoutHtml, /<title>\{\{meta\.title\}\}<\/title>/);
     assert.match(layoutHtml, /\{\{meta\.head_tags\}\}/);
+    assert.match(headerHtml, /\{\{menu:primary\}\}/);
+    assert.match(footerHtml, /\{\{menu:footer\}\}/);
     assert.equal(logs.some((line) => line.includes('Template: blog')), true);
     assert.equal(logs.some((line) => line.includes('theme.json namespace: my-company')), true);
     await assert.rejects(() => fs.access(path.join(tempDir, 'my-theme', 'package.json')));
@@ -146,11 +161,16 @@ for (const template of ['minimal', 'blog', 'magazine', 'docs', 'portfolio']) {
 
       const raw = await fs.readFile(path.join(tempDir, `${template}-starter`, 'theme.json'), 'utf8');
       const layoutHtml = await fs.readFile(path.join(tempDir, `${template}-starter`, 'layout.html'), 'utf8');
+      const headerHtml = await fs.readFile(path.join(tempDir, `${template}-starter`, 'partials', 'header.html'), 'utf8');
+      const footerHtml = await fs.readFile(path.join(tempDir, `${template}-starter`, 'partials', 'footer.html'), 'utf8');
       const themeJson = JSON.parse(raw);
       assert.equal(themeJson.slug, `${template}-starter`);
-      assert.equal(themeJson.runtime, '0.2');
+      assert.equal(themeJson.runtime, '0.3');
+      assert.deepEqual(Object.keys(themeJson.menuSlots || {}), ['primary', 'footer']);
       assert.match(layoutHtml, /<title>\{\{meta\.title\}\}<\/title>/);
       assert.match(layoutHtml, /\{\{meta\.head_tags\}\}/);
+      assert.match(headerHtml, /\{\{menu:primary\}\}/);
+      assert.match(footerHtml, /\{\{menu:footer\}\}/);
     } finally {
       process.chdir(cwd);
       await fs.rm(tempDir, { recursive: true, force: true });
