@@ -1,7 +1,7 @@
 {
   "name": "create-zeropress-theme",
   "version": "0.2.1",
-  "description": "ZeroPress theme scaffolding CLI",
+  "description": "ZeroPress theme starter generator",
   "type": "module",
   "license": "MIT",
   "bin": {
@@ -19,11 +19,16 @@
     "url": "https://github.com/zeropress-app/create-zeropress-theme/issues"
   },
   "homepage": "https://github.com/zeropress-app/create-zeropress-theme#readme",
-  "engines": {
-    "node": ">=18.18.0"
-  },
+  "keywords": [
+    "zeropress",
+    "static-site-generator",
+    "theme"
+  ],
   "scripts": {
     "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18.18.0"
   },
   "dependencies": {
     "@zeropress/theme-validator": "^0.3.1"
