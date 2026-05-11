@@ -1,0 +1,75 @@
+{{#if route.is_post_index}}
+  <section class="grid">
+    <div class="grid__rail">{{partial:section-label number="—" title="Writing"}}</div>
+    <div class="grid__main">
+      <h1 class="page__title">Writing</h1>
+      <p class="page__lede">Notes on craft, attention, and the typography of restraint.</p>
+    </div>
+  </section>
+  <section class="grid">
+    <div class="grid__rail"></div>
+    <div class="grid__main note-list">
+      {{#for post in posts.items}}
+        {{partial:post-list-item show_excerpt=true}}
+      {{/for}}
+      {{#if pagination.total}}{{#if pagination.prev_url}}
+        <nav class="pagination mono" aria-label="Pagination">
+          <a class="pagination__link" href="{{pagination.prev_url}}">← Newer</a>
+          <span class="pagination__meta">Page {{pagination.current}} / {{pagination.total}}</span>
+          {{#if pagination.next_url}}<a class="pagination__link" href="{{pagination.next_url}}">Older →</a>{{/if}}
+        </nav>
+      {{#else_if pagination.next_url}}
+        <nav class="pagination mono" aria-label="Pagination">
+          <span></span>
+          <span class="pagination__meta">Page {{pagination.current}} / {{pagination.total}}</span>
+          <a class="pagination__link" href="{{pagination.next_url}}">Older →</a>
+        </nav>
+      {{/if}}{{/if}}
+    </div>
+  </section>
+{{#else}}
+<div class="home">
+  <section class="grid">
+    <div class="grid__rail">{{partial:section-label number="01" title="Intro"}}</div>
+    <div class="grid__main">
+      <h1 class="hero-title">{{#if site.meta.hero_headline}}{{site.meta.hero_headline}}{{#else}}{{site.title}}{{/if}}</h1>
+      {{#if site.meta.hero_lede}}
+        <p class="hero-lede">{{site.meta.hero_lede}}{{#if site.meta.hero_lede_emphasis}} <span class="hero-lede__mark">{{site.meta.hero_lede_emphasis}}</span>{{/if}}.</p>
+      {{/if}}
+    </div>
+  </section>
+
+  {{#if collections.cases.items}}
+    <section class="grid">
+      <div class="grid__rail">{{partial:section-label number="02" title="Cases"}}</div>
+      <div class="grid__main project-list">
+        {{#for project in collections.cases.items}}
+          {{partial:project-card}}
+        {{/for}}
+      </div>
+    </section>
+  {{/if}}
+
+  {{#if collections.recent-notes.items}}
+    <section class="grid">
+      <div class="grid__rail">{{partial:section-label number="03" title="Notes"}}</div>
+      <div class="grid__main note-list">
+        {{#for post in collections.recent-notes.items}}
+          {{partial:post-list-item show_excerpt=true}}
+        {{/for}}
+        <a class="all-link mono" href="/writing/">→ All writing</a>
+      </div>
+    </section>
+  {{#else_if posts.items}}
+    <section class="grid">
+      <div class="grid__rail">{{partial:section-label number="03" title="Notes"}}</div>
+      <div class="grid__main note-list">
+        {{#for post in posts.items}}
+          {{partial:post-list-item show_excerpt=true}}
+        {{/for}}
+        <a class="all-link mono" href="/writing/">→ All writing</a>
+      </div>
+    </section>
+  {{/if}}
+</div>
+{{/if}}

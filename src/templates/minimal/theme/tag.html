@@ -1,0 +1,12 @@
+<section class="site-container intro-section">
+  <p class="eyebrow">Tag</p>
+  <h1>#{{taxonomy.name}}</h1>
+  <p class="intro-copy">Posts grouped around a shared topic.</p>
+</section>
+<section class="site-container post-section">
+  <div class="post-list">
+    {{#for post in posts.items}}
+      {{partial:post-list-item variant="taxonomy" show_excerpt=true}}
+    {{/for}}
+  </div>
+</section>

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://zeropress.dev/schemas/theme.v0.5.runtime.schema.json",
+  "name": "Editorial Marginalia",
+  "namespace": "zeropress",
+  "slug": "theme-portfolio",
+  "version": "0.5.0",
+  "license": "MIT",
+  "runtime": "0.5",
+  "description": "Editorial portfolio + blog theme. Numbered section labels, paper-and-ink palette with terracotta accent, Crimson Pro + IBM Plex Mono. Curated case studies on a quiet landing, with a long-form writing index and a mock contact form.",
+  "features": {
+    "comments": false,
+    "newsletter": false,
+    "postIndex": true
+  },
+  "menuSlots": {
+    "primary": {
+      "title": "Primary nav",
+      "description": "Top nav rendered as small mono links beside the author identity"
+    },
+    "footer": {
+      "title": "Elsewhere",
+      "description": "Footer link list under the colophon"
+    }
+  },
+  "widgetAreas": {
+    "sidebar": {
+      "title": "Sidebar widgets",
+      "description": "Optional right-rail widget stack on category, tag, and archive routes"
+    }
+  },
+  "siteMeta": {
+    "author_name": {
+      "title": "Author name",
+      "type": "string"
+    },
+    "author_email": {
+      "title": "Author email",
+      "type": "string"
+    },
+    "hero_headline": {
+      "title": "Hero headline",
+      "type": "string"
+    },
+    "hero_lede": {
+      "title": "Hero lede",
+      "type": "string"
+    },
+    "hero_lede_emphasis": {
+      "title": "Hero lede emphasis",
+      "type": "string"
+    },
+    "colophon": {
+      "title": "Colophon line",
+      "type": "string"
+    }
+  },
+  "collectionSlots": {
+    "cases": {
+      "title": "Featured cases",
+      "description": "Curated case-study pages shown on the home page in order"
+    },
+    "recent-notes": {
+      "title": "Recent notes",
+      "description": "Pre-sliced posts list shown on the home page (typically the latest three)"
+    }
+  }
+}

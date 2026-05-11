@@ -1,0 +1,19 @@
+<section class="site-container intro-section">
+  <p class="eyebrow">Archive</p>
+  <h1>Everything, by date</h1>
+  <p class="intro-copy">All published writing in one place, grouped by month.</p>
+</section>
+<section class="site-container post-section">
+  <div class="archive-list">
+    {{#for group in archive.groups}}
+      <section class="archive-group">
+        <h2>{{group.label}}</h2>
+        <ul>
+          {{#for post in group.items}}
+            {{partial:post-list-item variant="archive" show_excerpt=false}}
+          {{/for}}
+        </ul>
+      </section>
+    {{/for}}
+  </div>
+</section>

@@ -14,7 +14,9 @@ const TEMPLATE_LIST = 'minimal, blog, magazine, docs, portfolio';
 const DEFAULT_NAMESPACE = 'my-company';
 const DEFAULT_VERSION = '0.1.0';
 const DEFAULT_LICENSE = 'MIT';
-const DEFAULT_THEME_SCHEMA = 'https://zeropress.dev/schemas/theme.schema.json';
+const DEFAULT_THEME_SCHEMA = 'https://zeropress.dev/schemas/theme.v0.5.runtime.schema.json';
+const ZEROPRESS_BUILD_VERSION = '0.5.2';
+const ZEROPRESS_THEME_VERSION = '0.5.1';
 const MANIFEST_ORDERED_KEYS = new Set(['$schema', 'name', 'namespace', 'slug', 'version', 'license', 'runtime']);
 const require = createRequire(import.meta.url);
 const { version: PACKAGE_VERSION } = require('../package.json');
@@ -48,10 +50,9 @@ export async function run(argv) {
     template,
   });
 
-  console.log(`Created ZeroPress theme at ${targetDir}`);
+  console.log(`Created ZeroPress starter at ${targetDir}`);
   console.log(`Template: ${template}`);
-  console.log(`theme.json namespace: ${DEFAULT_NAMESPACE}`);
-  console.log('Update theme.json namespace before publishing if needed.');
+  console.log('Next: npm install && npm run build');
 }
 
 function printHelp() {
@@ -69,9 +70,9 @@ Options:
   --version, -v         Show version
 
 Notes:
-  - creates a new theme directory in the current working directory
-  - generated theme.json uses the current ZeroPress runtime contract
-  - generated starters include helper-only menuSlots for primary and footer`);
+  - creates a new starter project in the current working directory
+  - generated output includes theme/, preview-data.json, and package.json
+  - generated theme.json uses the current ZeroPress runtime contract`);
 }
 
 function parseArgs(argv) {
@@ -147,10 +148,12 @@ async function ensureEmptyDirectory(targetDir) {
 async function scaffoldTheme(targetDir, options) {
   const { slug, template } = options;
   const templateDir = path.join(TEMPLATE_ROOT, template);
+  const themeSourceDir = path.join(templateDir, 'theme');
+  const previewDataSourcePath = path.join(templateDir, 'preview-data.json');
   let stat;
 
   try {
-    stat = await fs.stat(templateDir);
+    stat = await fs.stat(themeSourceDir);
   } catch (error) {
     if (error.code === 'ENOENT') {
       throw new Error(`Template "${template}" is not available`);
@@ -159,10 +162,13 @@ async function scaffoldTheme(targetDir, options) {
   }
 
   if (!stat.isDirectory()) {
-    throw new Error(`Template path is not a directory: ${templateDir}`);
+    throw new Error(`Template theme path is not a directory: ${themeSourceDir}`);
   }
 
-  await fs.cp(templateDir, targetDir, { recursive: true });
+  await fs.cp(themeSourceDir, path.join(targetDir, 'theme'), { recursive: true });
+  await fs.copyFile(previewDataSourcePath, path.join(targetDir, 'preview-data.json'));
+  await writeStarterPackageJson(targetDir, slug);
+
   const manifest = {
     name: slug,
     namespace: DEFAULT_NAMESPACE,
@@ -171,8 +177,27 @@ async function scaffoldTheme(targetDir, options) {
     license: DEFAULT_LICENSE,
     runtime: DEFAULT_RUNTIME,
   };
-  await updateThemeManifest(path.join(targetDir, 'theme.json'), manifest);
-  await validateScaffoldedTheme(targetDir, manifest);
+  await updateThemeManifest(path.join(targetDir, 'theme', 'theme.json'), manifest);
+  await validateScaffoldedTheme(path.join(targetDir, 'theme'));
+}
+
+async function writeStarterPackageJson(targetDir, slug) {
+  const packageJson = {
+    name: slug,
+    private: true,
+    version: DEFAULT_VERSION,
+    type: 'module',
+    scripts: {
+      build: 'zeropress-build ./theme --data ./preview-data.json --out ./dist',
+      dev: 'zeropress-theme dev ./theme --data ./preview-data.json',
+    },
+    dependencies: {
+      '@zeropress/build': ZEROPRESS_BUILD_VERSION,
+      '@zeropress/theme': ZEROPRESS_THEME_VERSION,
+    },
+  };
+
+  await fs.writeFile(path.join(targetDir, 'package.json'), `${JSON.stringify(packageJson, null, 2)}\n`, 'utf8');
 }
 
 async function updateThemeManifest(themeJsonPath, values) {
@@ -192,13 +217,14 @@ async function updateThemeManifest(themeJsonPath, values) {
   await fs.writeFile(themeJsonPath, `${JSON.stringify(orderedManifest, null, 2)}\n`, 'utf8');
 }
 
-async function validateScaffoldedTheme(targetDir, manifest) {
+async function validateScaffoldedTheme(themeDir) {
+  const manifest = JSON.parse(await fs.readFile(path.join(themeDir, 'theme.json'), 'utf8'));
   const manifestCheck = validateThemeManifest(manifest);
   if (!manifestCheck.ok) {
     throw new Error(manifestCheck.errors[0]?.message || 'Generated manifest is invalid');
   }
 
-  const fileMap = await readThemeFiles(targetDir);
+  const fileMap = await readThemeFiles(themeDir);
   const result = await validateThemeFiles(fileMap);
   if (!result.ok) {
     throw new Error(result.errors[0]?.message || 'Generated theme failed validation');

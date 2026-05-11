@@ -1,0 +1,53 @@
+<article class="post">
+  <div class="grid">
+    <aside class="grid__rail post__rail">
+      <a class="back-link mono-eyebrow" href="/writing/">← Writing</a>
+      <div class="post__rail-meta mono muted">
+        <p>{{post.published_at}}</p>
+        {{#if post.reading_time}}<p>{{post.reading_time}}</p>{{/if}}
+      </div>
+    </aside>
+    <div class="grid__main post__main">
+      <header class="post__header">
+        <h1 class="post__title">{{post.title}}</h1>
+        {{#if post.excerpt}}<p class="post__lede">{{post.excerpt}}</p>{{/if}}
+      </header>
+
+      {{#if post.featured_image}}<figure class="post__hero"><img src="{{post.featured_image}}" alt=""></figure>{{/if}}
+
+      <div class="post__body prose">{{post.html}}</div>
+
+      {{#if post.tags}}
+        <section class="filed-under">
+          <span class="mono-eyebrow muted">Filed under</span>
+          <div class="tag-list">
+            {{#for tag in post.tags}}<a class="tag-chip mono" href="{{tag.url}}">#{{tag.name}}</a>{{/for}}
+          </div>
+        </section>
+      {{/if}}
+
+      {{#if post.prev}}
+        <nav class="post-nav" aria-label="Adjacent posts">
+          <a class="post-nav__link" href="{{post.prev.url}}">
+            <span class="mono-eyebrow muted">← Previous</span>
+            <strong>{{post.prev.title}}</strong>
+          </a>
+          {{#if post.next}}
+            <a class="post-nav__link post-nav__link--end" href="{{post.next.url}}">
+              <span class="mono-eyebrow muted">Next →</span>
+              <strong>{{post.next.title}}</strong>
+            </a>
+          {{/if}}
+        </nav>
+      {{#else_if post.next}}
+        <nav class="post-nav" aria-label="Adjacent posts">
+          <span></span>
+          <a class="post-nav__link post-nav__link--end" href="{{post.next.url}}">
+            <span class="mono-eyebrow muted">Next →</span>
+            <strong>{{post.next.title}}</strong>
+          </a>
+        </nav>
+      {{/if}}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,27 @@
+<footer class="site-footer">
+  <div class="site-footer__year">
+    <span class="mono-eyebrow">© 2026</span>
+  </div>
+  <div class="site-footer__cols">
+    {{#if menus.footer.items}}
+      <div class="footer-col">
+        <p class="mono-eyebrow muted">Elsewhere</p>
+        <ul>
+          {{#for item in menus.footer.items}}
+            <li><a href="{{item.url}}"{{#if item.target}} target="{{item.target}}"{{/if}}{{#if_eq item.target "_blank"}} rel="noreferrer noopener"{{/if_eq}}>{{item.title}}</a></li>
+          {{/for}}
+        </ul>
+      </div>
+    {{/if}}
+    {{#if site.meta.colophon}}
+      <div class="footer-col footer-col--colophon">
+        <p class="mono-eyebrow muted">Colophon</p>
+        <p class="footer-colophon">{{site.meta.colophon}}</p>
+      </div>
+    {{/if}}
+  </div>
+  <div class="site-footer__attribution mono-eyebrow muted">
+    {{#if site.footer.copyright_text}}<span>{{site.footer.copyright_text}}</span>{{/if}}
+    {{#if site.footer.attribution.enabled}}<span>· Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a></span>{{/if}}
+  </div>
+</footer>

@@ -1,0 +1,15 @@
+<header class="site-nav">
+  <a class="brand" href="/">
+    <span class="brand__name">{{#if site.meta.author_name}}{{site.meta.author_name}}{{#else}}{{site.title}}{{/if}}</span>
+    {{#if site.meta.author_email}}<span class="brand__email">{{site.meta.author_email}}</span>{{/if}}
+  </a>
+  <nav class="primary-nav" aria-label="Primary">
+    {{#if menus.primary.items}}
+      <ul>
+        {{#for item in menus.primary.items}}
+          <li><a href="{{item.url}}"{{#if item.target}} target="{{item.target}}"{{/if}}{{#if_eq item.target "_blank"}} rel="noreferrer noopener"{{/if_eq}}>{{item.title}}</a></li>
+        {{/for}}
+      </ul>
+    {{/if}}
+  </nav>
+</header>

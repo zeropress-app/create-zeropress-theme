@@ -1,0 +1,42 @@
+{{#for widget in widgets.sidebar.items}}
+  {{#if_eq widget.type "recent-posts"}}
+    <section class="widget widget--list">
+      {{#if widget.title}}<h3 class="widget__title">{{widget.title}}</h3>{{/if}}
+      <ul>
+        {{#for item in widget.items}}<li><a href="{{item.url}}">{{item.title}}</a></li>{{/for}}
+      </ul>
+    </section>
+  {{#else_if_eq widget.type "categories"}}
+    <section class="widget widget--tags">
+      {{#if widget.title}}<h3 class="widget__title">{{widget.title}}</h3>{{/if}}
+      <div class="widget__tag-cloud">
+        {{#for item in widget.items}}<a href="{{item.url}}" class="chip">{{item.name}}{{#if widget.show_count}} <em>({{item.count}})</em>{{/if}}</a>{{/for}}
+      </div>
+    </section>
+  {{#else_if_eq widget.type "tags"}}
+    <section class="widget widget--tags">
+      {{#if widget.title}}<h3 class="widget__title">{{widget.title}}</h3>{{/if}}
+      <div class="widget__tag-cloud">
+        {{#for item in widget.items}}<a href="{{item.url}}" class="chip">#{{item.name}}</a>{{/for}}
+      </div>
+    </section>
+  {{#else_if_eq widget.type "archives"}}
+    <section class="widget widget--list">
+      {{#if widget.title}}<h3 class="widget__title">{{widget.title}}</h3>{{/if}}
+      <ul>
+        {{#for item in widget.items}}<li><a href="{{item.url}}">{{item.label}}</a> <span>{{item.meta}}</span></li>{{/for}}
+      </ul>
+    </section>
+  {{#else_if_eq widget.type "text"}}
+    <section class="widget widget--text">
+      {{#if widget.title}}<h3 class="widget__title">{{widget.title}}</h3>{{/if}}
+      <div>{{widget.html}}</div>
+    </section>
+  {{#else_if_eq widget.type "profile"}}
+    <section class="widget widget--profile">
+      {{#if widget.avatar_url}}<img src="{{widget.avatar_url}}" alt="" class="widget__avatar">{{/if}}
+      {{#if widget.display_name}}<p class="widget__name">{{widget.display_name}}</p>{{/if}}
+      {{#if widget.bio_text}}<p class="widget__bio">{{widget.bio_text}}</p>{{/if}}
+    </section>
+  {{/if_eq}}
+{{/for}}

@@ -1,0 +1,162 @@
+{{#if route.is_front_page}}
+<div class="magazine-shell">
+
+  <!-- Cover -->
+  <section id="cover" class="cover">
+    <div class="cover__head">
+      <span class="eyebrow">Issue 04 — The Quiet Issue</span>
+      <span class="smallcaps muted">Spring / 2026</span>
+    </div>
+    <div class="cover__grid">
+      <div class="cover__copy">
+        <h1 class="display">On the art of <em>stillness</em>, and the rooms it builds.</h1>
+        <div class="cover__sub">
+          {{#for post in posts.items}}{{#if loop.first}}
+            <div class="cover__story">
+              <div class="eyebrow">Cover Story</div>
+              <p class="serif-lg"><a href="{{post.url}}">{{post.title}}</a> — {{post.excerpt}}</p>
+            </div>
+          {{/if}}{{/for}}
+          <div class="cover__index">
+            <div class="eyebrow">In this issue</div>
+            <ul class="issue-list">
+              {{#for post in posts.items}}<li>· {{post.title}}</li>{{/for}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <figure class="cover__figure">
+        <img src="/assets/img/cover.jpg" alt="Cover photograph" loading="eager">
+        <figcaption class="smallcaps">Photograph — M. Lavigne</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Features (first 3 posts via CSS-limited grid) -->
+  <section id="features" class="features">
+    <header class="section-head">
+      <div>
+        <div class="eyebrow">Section II — Features</div>
+        <h2 class="serif-xl">Three pieces, read slowly.</h2>
+      </div>
+      <a class="link-rule smallcaps" href="/archive/">All Features →</a>
+    </header>
+    <div class="features__grid" data-limit-3>
+      {{#for post in posts.items}}
+        <article class="feature">
+          <a href="{{post.url}}" class="feature__link">
+            {{#if post.featured_image}}<div class="feature__media"><img src="{{post.featured_image}}" alt="" loading="lazy"></div>{{#else}}<div class="feature__media feature__media--ph"></div>{{/if}}
+            <div class="feature__row smallcaps">
+              <span class="hl">{{#for cat in post.categories}}{{#if loop.first}}{{cat.name}}{{/if}}{{/for}}</span>
+              <span class="muted">Nº 0{{loop.index}}</span>
+            </div>
+            <h3 class="serif-lg">{{post.title}}</h3>
+            <p class="dek">{{post.excerpt}}</p>
+            <div class="feature__byline smallcaps">
+              <span>By {{post.author.display_name}}</span><span>{{post.reading_time}}</span>
+            </div>
+          </a>
+        </article>
+      {{/for}}
+    </div>
+  </section>
+
+  <!-- Essay — picks the 4th post -->
+  <section id="essay" class="essay">
+    <div class="essay__grid">
+      <aside class="essay__rail">
+        <div class="eyebrow">Section III — Essay</div>
+        <div class="serif-display italic">Pp. 42</div>
+        <div class="essay__pick-list">
+        {{#for post in posts.items}}
+          <div class="smallcaps muted essay__meta essay__pick">
+            <div>By {{post.author.display_name}}</div>
+            <div>{{post.reading_time}}</div>
+          </div>
+        {{/for}}
+        </div>
+      </aside>
+      <article class="essay__body">
+        <div class="essay__pick-list">
+        {{#for post in posts.items}}
+          <div class="essay__pick">
+            <h2 class="serif-xxl"><a href="{{post.url}}">{{post.title}}</a></h2>
+            <p class="drop-cap serif-lg">{{post.excerpt}}</p>
+            <a class="link-rule smallcaps" href="{{post.url}}">Continue reading →</a>
+          </div>
+        {{/for}}
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Gallery — uses up to next 4 featured images -->
+  <section id="gallery" class="gallery">
+    <header class="section-head">
+      <div>
+        <div class="eyebrow">Section IV — Portfolio</div>
+        <h2 class="serif-xl">Four plates from the field.</h2>
+      </div>
+      <span class="smallcaps muted">Photographs — Various</span>
+    </header>
+    <div class="gallery__grid" data-limit-4>
+      {{#for post in posts.items}}
+        <figure class="plate">
+          {{#if post.featured_image}}<img src="{{post.featured_image}}" alt="" loading="lazy">{{#else}}<div class="plate__ph"></div>{{/if}}
+          <figcaption class="smallcaps">Plate — {{post.title}}</figcaption>
+        </figure>
+      {{/for}}
+    </div>
+  </section>
+
+  <!-- Masthead / Subscribe -->
+  <section id="subscribe" class="masthead">
+    <div class="masthead__grid">
+      <div class="masthead__cta">
+        <div class="eyebrow">Section V — Subscribe</div>
+        <h2 class="serif-xxl">Four issues <em>a year</em>, delivered by post.</h2>
+        <p class="serif-lg">Printed on uncoated stock, hand-stitched, and sent the long way round.</p>
+        <form class="subscribe-form" data-newsletter-form>
+          <label class="sr-only" for="magazine-newsletter-email">Email address</label>
+          <input id="magazine-newsletter-email" type="email" placeholder="your@address.com" required>
+          <button type="submit" class="smallcaps">Subscribe →</button>
+        </form>
+        <p class="subscribe-form__status smallcaps muted" data-newsletter-status hidden aria-live="polite"></p>
+        <p class="smallcaps muted">From €72 / year. Cancel anytime.</p>
+      </div>
+      <div class="masthead__colophon">
+        <div class="eyebrow">Colophon</div>
+        <dl>
+          <div><dt class="smallcaps muted">Editor-in-Chief</dt><dd>M. Lavigne</dd></div>
+          <div><dt class="smallcaps muted">Art Director</dt><dd>S. Beaumont</dd></div>
+          <div><dt class="smallcaps muted">Photography</dt><dd>I. Marot</dd></div>
+          <div><dt class="smallcaps muted">Type</dt><dd>Fraunces &amp; Inter</dd></div>
+          <div><dt class="smallcaps muted">Printer</dt><dd>Atelier Reliure, Lyon</dd></div>
+          <div><dt class="smallcaps muted">Established</dt><dd>MMXXII</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</div>
+{{#else}}
+<!-- post_index fallback -->
+<section class="shell narrow-intro">
+  <p class="eyebrow">Section II — Features</p>
+  <h1 class="serif-xxl">Recent dispatches</h1>
+</section>
+<section class="shell">
+  <div class="features__grid">
+    {{#for post in posts.items}}
+      {{partial:post-card variant="grid" show_excerpt=true}}
+    {{/for}}
+  </div>
+  {{#if pagination.has_multiple_pages}}
+    <nav class="pagination" aria-label="Pagination">
+      {{#if pagination.has_prev}}<a href="{{pagination.prev_url}}" class="prev">← Previous</a>{{/if}}
+      {{#for page in pagination.window}}{{#if_eq page.kind "page"}}<a href="{{page.url}}" class="page-link {{#if page.current}}current{{/if}}">{{page.number}}</a>{{#else_if_eq page.kind "gap"}}<span>…</span>{{/if_eq}}{{/for}}
+      {{#if pagination.has_next}}<a href="{{pagination.next_url}}" class="next">Next →</a>{{/if}}
+    </nav>
+  {{/if}}
+</section>
+{{/if}}

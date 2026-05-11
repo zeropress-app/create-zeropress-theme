@@ -1,0 +1,83 @@
+{
+  "$schema": "https://zeropress.dev/schemas/preview-data.v0.5.schema.json",
+  "version": "0.5",
+  "generator": "create-zeropress-theme",
+  "generated_at": "2026-05-10T00:00:00Z",
+  "site": {
+    "title": "ZeroPress Docs Starter",
+    "description": "A compact documentation starter built with ZeroPress.",
+    "url": "https://example.com",
+    "mediaBaseUrl": "",
+    "locale": "en-US",
+    "postsPerPage": 10,
+    "dateFormat": "YYYY-MM-DD",
+    "timeFormat": "HH:mm",
+    "timezone": "UTC",
+    "disallowComments": true,
+    "front_page": {
+      "type": "theme_index"
+    },
+    "post_index": {
+      "enabled": false
+    },
+    "footer": {
+      "copyright_text": "ZeroPress Docs Starter",
+      "attribution": {
+        "enabled": true
+      }
+    }
+  },
+  "content": {
+    "authors": [],
+    "posts": [],
+    "pages": [
+      {
+        "title": "Getting Started",
+        "slug": "getting-started",
+        "content": "## Install\n\nCreate your first documentation page and keep content in preview-data or generated Markdown sources.\n\n## Build\n\nRun `zeropress-build` with this theme and preview-data fixture to produce static HTML.\n",
+        "document_type": "markdown",
+        "excerpt": "Create and build a small ZeroPress documentation site.",
+        "status": "published"
+      },
+      {
+        "title": "Theme Runtime",
+        "slug": "theme-runtime",
+        "content": "## Templates\n\nZeroPress themes use `layout.html`, route templates, partials, and theme-owned assets.\n\n## Render Context\n\nTemplates receive route data, menus, taxonomies, collections, and site metadata from the build step.\n",
+        "document_type": "markdown",
+        "excerpt": "A short overview of the ZeroPress theme runtime.",
+        "status": "published"
+      }
+    ],
+    "categories": [],
+    "tags": []
+  },
+  "menus": {
+    "primary": {
+      "name": "Primary navigation",
+      "items": [
+        {
+          "title": "Home",
+          "url": "/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Getting Started",
+          "url": "/getting-started/",
+          "type": "page",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Theme Runtime",
+          "url": "/theme-runtime/",
+          "type": "page",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    }
+  },
+  "widgets": {}
+}

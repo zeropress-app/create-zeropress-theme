@@ -1,0 +1,328 @@
+{
+  "$schema": "https://zeropress.dev/schemas/preview-data.v0.5.schema.json",
+  "version": "0.5",
+  "generator": "editorial-marginalia-portfolio-mock",
+  "generated_at": "2026-05-10T09:00:00Z",
+  "site": {
+    "title": "Elias Thorne",
+    "description": "Product designer and researcher. Quiet, capable interfaces for specialists.",
+    "url": "https://eliasthorne.test",
+    "mediaBaseUrl": "",
+    "locale": "en-US",
+    "postsPerPage": 10,
+    "dateFormat": "MMM DD, YYYY",
+    "timeFormat": "HH:mm",
+    "timezone": "UTC",
+    "disallowComments": true,
+    "post_index": {
+      "enabled": true,
+      "path": "/writing",
+      "paginate": true
+    },
+    "footer": {
+      "attribution": {
+        "enabled": true
+      }
+    },
+    "meta": {
+      "author_name": "Elias Thorne",
+      "author_email": "elias@thorne.design",
+      "hero_headline": "I navigate ambiguity to build durable software.",
+      "hero_lede": "Product designer and researcher. Currently untangling specialized workflows and translating them into quiet, capable interfaces for acute care environments at",
+      "hero_lede_emphasis": "Kinetis Medical",
+      "colophon": "Typeset in Crimson Pro and IBM Plex Mono. Built to feel like paper."
+    }
+  },
+  "content": {
+    "authors": [
+      {
+        "id": "auth-elias",
+        "display_name": "Elias Thorne"
+      }
+    ],
+    "posts": [
+      {
+        "public_id": 3001,
+        "title": "The False Promise of 'Frictionless'",
+        "slug": "false-promise-of-frictionless",
+        "content": "# The False Promise of 'Frictionless'\n\n_In high-stakes environments, friction is a feature, not a bug. Removing it entirely often delegates the cognitive load from the interface to the user's anxiety._\n\n## On materials\n\nWe treat pixels as if they cost nothing. They cost attention, which is the only currency in interface design. Every glyph, every rule, every margin is a withdrawal from the reader's account. The discipline is to make each withdrawal earn its keep.\n\n> The detail is not the detail. The detail makes the design. — Charles Eames\n\nWhat follows is a working set of principles I've returned to across the last decade of building tools for specialists. None are original. All are hard-won.\n",
+        "document_type": "markdown",
+        "excerpt": "In high-stakes environments, friction is a feature, not a bug. Removing it entirely often delegates the cognitive load from the interface to the user's anxiety.",
+        "published_at_iso": "2024-10-12T09:00:00Z",
+        "updated_at_iso": "2024-10-12T09:00:00Z",
+        "author_id": "auth-elias",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "essay"
+        ],
+        "tag_slugs": [
+          "design",
+          "process"
+        ]
+      },
+      {
+        "public_id": 3002,
+        "title": "On Marginalia: Designing for the Edges",
+        "slug": "designing-for-the-edges",
+        "content": "# On Marginalia: Designing for the Edges\n\n_When we build enterprise software, the most important work often happens in the notes fields, the workarounds, and the sticky notes on the monitor. How do we design for the margins?_\n\nThe most reliable insights came from the moments when operators reached for paper, opened a second window, or muttered under their breath. Those are the seams in the existing interface, and they pointed precisely where the redesign needed to begin.\n",
+        "document_type": "markdown",
+        "excerpt": "When we build enterprise software, the most important work often happens in the notes fields, the workarounds, and the sticky notes on the monitor.",
+        "published_at_iso": "2024-09-04T09:00:00Z",
+        "updated_at_iso": "2024-09-04T09:00:00Z",
+        "author_id": "auth-elias",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "essay"
+        ],
+        "tag_slugs": [
+          "design",
+          "research"
+        ]
+      },
+      {
+        "public_id": 3003,
+        "title": "Syntax over Semantics in Component Libraries",
+        "slug": "syntax-over-semantics",
+        "content": "# Syntax over Semantics in Component Libraries\n\n_A critical look at why rigid semantic naming conventions in design systems inevitably collapse under the weight of product reality._\n\nNaming is the second-hardest problem in software, and design systems make it harder by insisting that one name must serve every product surface. The same component is a card here, a tile there, a panel in the third place. Pretending otherwise is a small act of dishonesty that compounds over a release cycle.\n",
+        "document_type": "markdown",
+        "excerpt": "A critical look at why rigid semantic naming conventions in design systems inevitably collapse under the weight of product reality.",
+        "published_at_iso": "2024-07-22T09:00:00Z",
+        "updated_at_iso": "2024-07-22T09:00:00Z",
+        "author_id": "auth-elias",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "craft"
+        ],
+        "tag_slugs": [
+          "systems",
+          "design"
+        ]
+      },
+      {
+        "public_id": 3004,
+        "title": "The Architecture of Silence in UI",
+        "slug": "the-architecture-of-silence",
+        "content": "# The Architecture of Silence in UI\n\n_What we choose not to render is as important as what we do. A study of negative space, deliberate omission, and the typography of restraint._\n\nA well-set paragraph delivers more comprehension per square inch than a kanban board ever will, because it exploits a system the reader has spent decades training: the act of reading prose.\n",
+        "document_type": "markdown",
+        "excerpt": "What we choose not to render is as important as what we do. A study of negative space, deliberate omission, and the typography of restraint.",
+        "published_at_iso": "2024-03-18T09:00:00Z",
+        "updated_at_iso": "2024-03-18T09:00:00Z",
+        "author_id": "auth-elias",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "essay"
+        ],
+        "tag_slugs": [
+          "typography",
+          "design"
+        ]
+      }
+    ],
+    "pages": [
+      {
+        "title": "About",
+        "slug": "about",
+        "content": "I'm a product designer and researcher based in Oslo. For the last decade I've worked at the intersection of complex technical domains and human attention — building the quiet, capable interfaces that specialists rely on without thinking about.\n\nMy background is in industrial design and information architecture. Before software, I spent four years designing surgical instruments, which taught me that a good tool disappears in the hand. I try to build software the same way.\n\nCurrently I lead product design at **Kinetis Medical**, where we are rebuilding the triage stack used across forty hospital networks. Before Kinetis I led design at Oculus Logistics and consulted independently for ledger and identity protocols.\n\n## Currently\n\n- Reading *The Craftsman* by Richard Sennett\n- Listening to Nils Frahm, *Spaces*\n- Building a small workshop in the garden\n",
+        "document_type": "markdown",
+        "excerpt": "About Elias Thorne — product designer and researcher.",
+        "status": "published"
+      },
+      {
+        "title": "Typography",
+        "slug": "typography",
+        "path": "typography",
+        "content": "Typography page is rendered by the theme.",
+        "document_type": "markdown",
+        "excerpt": "A measured voice, set in Crimson Pro and IBM Plex Mono.",
+        "status": "published"
+      },
+      {
+        "title": "Oculus Logistics Framework",
+        "slug": "oculus-logistics",
+        "path": "work/oculus-logistics",
+        "content": "## The brief\n\nThe team had outgrown its original mental model. What began as a focused tool for a small set of operators had calcified into a sprawling surface where every workflow competed for attention. Our charter was to find the underlying structure and rebuild the interface around it.\n\n## Approach\n\nWe started with two weeks of shadowing. Not interviews — observation. The most reliable insights came from the moments when operators reached for paper, opened a second window, or muttered under their breath. Those are the seams in the existing interface, and they pointed precisely where the redesign needed to begin.\n\n## Outcome\n\nTwelve weeks later we shipped a system organized around the operator's actual unit of work, rather than the database's unit of storage. Adoption hit ninety-four percent in the first month, error rates dropped by nearly half, and — perhaps most telling — support tickets stopped using the word \"confusing.\"\n",
+        "document_type": "markdown",
+        "excerpt": "Orchestrating global freight movement through a unified tracking primitive. We reduced dispatch errors by 41% by treating physical containers as state machines rather than static assets.",
+        "featured_image": "/assets/img/case-1.jpg",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "role": "Lead Product Designer",
+          "year": "2022 — 2023"
+        }
+      },
+      {
+        "title": "Vanguard Protocol",
+        "slug": "vanguard-protocol",
+        "path": "work/vanguard-protocol",
+        "content": "## The brief\n\nRedesigning the reconciliation engine for decentralized ledgers. The challenge was making cryptographic finality legible to institutional compliance officers without abstracting away the underlying risk mechanics.\n\n## Approach\n\nThe research surfaced a recurring tension: compliance teams wanted certainty, while engineering wanted to expose probabilistic guarantees as they actually are. We reframed the question as a typographic one — what does honest uncertainty look like, in a number and in a chart, when the reader is a senior auditor?\n\n## Outcome\n\nThe new reconciliation surface separated finality state from operational state, and made the wait visible rather than hiding it behind spinners. Auditor onboarding time dropped from six weeks to nine days.\n",
+        "document_type": "markdown",
+        "excerpt": "Redesigning the reconciliation engine for decentralized ledgers. The challenge was making cryptographic finality legible to institutional compliance officers without abstracting away the underlying risk mechanics.",
+        "featured_image": "/assets/img/case-2.jpg",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "role": "UX Research & System Design",
+          "year": "2021"
+        }
+      },
+      {
+        "title": "Kinetis Medical Suite",
+        "slug": "kinetis-medical",
+        "path": "work/kinetis-medical",
+        "content": "## The brief\n\nA quiet, capable interface for acute care environments. Translating specialized clinical workflows into a calm, focused triage experience used across forty hospital networks.\n\n## Approach\n\nWe shadowed clinical teams across three regions, paying attention to the moments where the interface forced the operator to break their attention from the patient. Each break became a candidate for redesign.\n\n## Outcome\n\nWe shipped a triage stack that consolidated three separate tools into a single, calmer surface. Time-to-decision improved measurably; more importantly, clinicians described the new interface as \"out of the way.\"\n",
+        "document_type": "markdown",
+        "excerpt": "A quiet, capable interface for acute care environments. Translating specialized clinical workflows into a calm, focused triage experience used across forty hospital networks.",
+        "featured_image": "/assets/img/case-3.jpg",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "role": "Product Design Lead",
+          "year": "2024 — Present"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Essay",
+        "slug": "essay",
+        "description": "Long-form essays."
+      },
+      {
+        "name": "Craft",
+        "slug": "craft",
+        "description": "Notes on the craft of building software."
+      }
+    ],
+    "tags": [
+      {
+        "name": "Design",
+        "slug": "design"
+      },
+      {
+        "name": "Process",
+        "slug": "process"
+      },
+      {
+        "name": "Research",
+        "slug": "research"
+      },
+      {
+        "name": "Systems",
+        "slug": "systems"
+      },
+      {
+        "name": "Typography",
+        "slug": "typography"
+      }
+    ]
+  },
+  "menus": {
+    "primary": {
+      "name": "Primary",
+      "items": [
+        {
+          "title": "Work",
+          "url": "/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Writing",
+          "url": "/writing/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Type",
+          "url": "/typography/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "About",
+          "url": "/about/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
+    "footer": {
+      "name": "Elsewhere",
+      "items": [
+        {
+          "title": "Read.cv",
+          "url": "https://read.cv/elias",
+          "type": "custom",
+          "target": "_blank",
+          "children": []
+        },
+        {
+          "title": "Substack",
+          "url": "https://example.substack.com",
+          "type": "custom",
+          "target": "_blank",
+          "children": []
+        },
+        {
+          "title": "Are.na",
+          "url": "https://are.na/elias",
+          "type": "custom",
+          "target": "_blank",
+          "children": []
+        },
+        {
+          "title": "GitHub",
+          "url": "https://github.com/elias",
+          "type": "custom",
+          "target": "_blank",
+          "children": []
+        }
+      ]
+    }
+  },
+  "collections": {
+    "cases": {
+      "title": "Featured cases",
+      "items": [
+        {
+          "type": "page",
+          "slug": "oculus-logistics"
+        },
+        {
+          "type": "page",
+          "slug": "vanguard-protocol"
+        },
+        {
+          "type": "page",
+          "slug": "kinetis-medical"
+        }
+      ]
+    },
+    "recent-notes": {
+      "title": "Recent notes",
+      "items": [
+        {
+          "type": "post",
+          "slug": "false-promise-of-frictionless"
+        },
+        {
+          "type": "post",
+          "slug": "designing-for-the-edges"
+        },
+        {
+          "type": "post",
+          "slug": "syntax-over-semantics"
+        }
+      ]
+    }
+  }
+}

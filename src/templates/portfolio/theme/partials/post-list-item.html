@@ -1,0 +1,8 @@
+<a class="note-row" href="{{post.url}}">
+  <span class="note-row__date mono muted">{{post.published_at}}</span>
+  <div class="note-row__body">
+    <h3 class="note-row__title">{{post.title}}</h3>
+    {{#if partial.show_excerpt}}{{#if post.excerpt}}<p class="note-row__excerpt">{{post.excerpt}}</p>{{/if}}{{/if}}
+  </div>
+  {{#if partial.show_reading_time}}<span class="note-row__time mono muted">{{post.reading_time}}</span>{{/if}}
+</a>

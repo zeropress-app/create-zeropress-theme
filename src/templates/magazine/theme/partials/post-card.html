@@ -1,0 +1,17 @@
+<article class="post-card post-card--{{partial.variant}}">
+  <a href="{{post.url}}" class="post-card__link">
+    {{#if post.featured_image}}
+      <div class="post-card__media"><img src="{{post.featured_image}}" alt="" loading="lazy"></div>
+    {{/if}}
+    <div class="post-card__meta smallcaps">
+      {{#for category in post.categories}}<span class="post-card__section">{{category.name}}</span>{{/for}}
+      <span class="post-card__num">Nº {{loop.index}}</span>
+    </div>
+    <h3 class="post-card__title">{{post.title}}</h3>
+    {{#if partial.show_excerpt}}<p class="post-card__dek">{{post.excerpt}}</p>{{/if}}
+    <div class="post-card__byline smallcaps">
+      {{#if post.author.display_name}}<span>By {{post.author.display_name}}</span>{{/if}}
+      <span>{{post.reading_time}}</span>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,52 @@
+{{#if_eq page.meta.page_type "project"}}
+  <article class="project-page">
+    <div class="grid">
+      <aside class="grid__rail">
+        <a class="back-link mono-eyebrow" href="/">← Work</a>
+      </aside>
+      <header class="grid__main project-page__header">
+        <div class="mono-eyebrow muted">
+          {{#if page.meta.year}}{{page.meta.year}}{{/if}}{{#if page.meta.role}} · {{page.meta.role}}{{/if}}
+        </div>
+        <h1 class="project-page__title">{{page.title}}</h1>
+        {{#if page.excerpt}}<p class="project-page__lede">{{page.excerpt}}</p>{{/if}}
+      </header>
+    </div>
+
+    {{#if page.featured_image}}
+      <figure class="project-page__hero"><img src="{{page.featured_image}}" alt=""></figure>
+    {{/if}}
+
+    <div class="grid">
+      <div class="grid__rail"></div>
+      <div class="grid__main project-page__body prose">{{page.html}}</div>
+    </div>
+  </article>
+
+{{#else_if_eq page.slug "typography"}}
+  {{partial:typography-specimen}}
+
+{{#else_if_eq page.slug "about"}}
+  <article class="about">
+    <div class="grid">
+      <div class="grid__rail">{{partial:section-label number="—" title="About"}}</div>
+      <div class="grid__main">
+        <h1 class="about__title">{{page.title}}</h1>
+        <div class="about__body prose">{{page.html}}</div>
+      </div>
+    </div>
+  </article>
+
+  {{partial:contact-form}}
+
+{{#else}}
+  <article class="page">
+    <div class="grid">
+      <div class="grid__rail">{{partial:section-label number="—" title="Page"}}</div>
+      <div class="grid__main">
+        <h1 class="page__title">{{page.title}}</h1>
+        <div class="page__body prose">{{page.html}}</div>
+      </div>
+    </div>
+  </article>
+{{/if_eq}}

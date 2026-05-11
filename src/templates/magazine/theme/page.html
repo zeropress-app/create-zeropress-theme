@@ -1,0 +1,14 @@
+{{#if route.is_front_page}}
+  <div class="shell page-shell">
+    <article class="article"><div class="article__body prose">{{page.html}}</div></article>
+  </div>
+{{#else}}
+  <div class="shell page-shell">
+    <article class="article">
+      <header class="article__header">
+        <p class="eyebrow">Page</p>
+      </header>
+      <div class="article__body prose">{{page.html}}</div>
+    </article>
+  </div>
+{{/if}}

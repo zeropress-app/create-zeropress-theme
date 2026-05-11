@@ -3,11 +3,31 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { fileURLToPath } from 'node:url';
 import { run } from '../src/index.js';
 
+const execFileAsync = promisify(execFile);
 const packageJsonPath = new URL('../package.json', import.meta.url);
+const packageRoot = path.dirname(fileURLToPath(packageJsonPath));
+const buildBin = path.join(packageRoot, 'node_modules', '.bin', 'zeropress-build');
+const templates = ['minimal', 'blog', 'magazine', 'docs', 'portfolio'];
 
-test('run prints help and exits cleanly with no args', async () => {
+async function withTempCwd(fn) {
+  const cwd = process.cwd();
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
+
+  try {
+    process.chdir(tempDir);
+    return await fn(tempDir);
+  } finally {
+    process.chdir(cwd);
+    await fs.rm(tempDir, { recursive: true, force: true });
+  }
+}
+
+async function captureLogs(fn) {
   const logs = [];
   const originalLog = console.log;
   console.log = (...args) => {
@@ -15,65 +35,45 @@ test('run prints help and exits cleanly with no args', async () => {
   };
 
   try {
-    await run([]);
-    assert.equal(logs.some((line) => line.includes('Usage:')), true);
-    assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <slug> --template <template>')), true);
+    await fn();
+    return logs;
   } finally {
     console.log = originalLog;
   }
+}
+
+test('run prints help and exits cleanly with no args', async () => {
+  const logs = await captureLogs(() => run([]));
+
+  assert.equal(logs.some((line) => line.includes('Usage:')), true);
+  assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <slug> --template <template>')), true);
+  assert.equal(logs.some((line) => line.includes('theme/, preview-data.json, and package.json')), true);
 });
 
 test('run prints help and exits cleanly with --help', async () => {
-  const logs = [];
-  const originalLog = console.log;
-  console.log = (...args) => {
-    logs.push(args.join(' '));
-  };
+  const logs = await captureLogs(() => run(['--help']));
 
-  try {
-    await run(['--help']);
-    assert.equal(logs.some((line) => line.includes('Required Options:')), true);
-    assert.equal(logs.some((line) => line.includes('--theme-slug <slug>')), true);
-    assert.equal(logs.some((line) => line.includes('--template <template>')), true);
-    assert.equal(logs.some((line) => line.includes('--help, -h')), true);
-    assert.equal(logs.some((line) => line.includes('--version, -v')), true);
-  } finally {
-    console.log = originalLog;
-  }
+  assert.equal(logs.some((line) => line.includes('Required Options:')), true);
+  assert.equal(logs.some((line) => line.includes('--theme-slug <slug>')), true);
+  assert.equal(logs.some((line) => line.includes('--template <template>')), true);
+  assert.equal(logs.some((line) => line.includes('--help, -h')), true);
+  assert.equal(logs.some((line) => line.includes('--version, -v')), true);
 });
 
 for (const flag of ['--version', '-v']) {
   test(`run prints version with ${flag}`, async () => {
-    const logs = [];
-    const originalLog = console.log;
-    console.log = (...args) => {
-      logs.push(args.join(' '));
-    };
+    const logs = await captureLogs(() => run([flag]));
+    const pkg = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
 
-    try {
-      await run([flag]);
-      const pkg = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
-      assert.deepEqual(logs, [pkg.version]);
-    } finally {
-      console.log = originalLog;
-    }
+    assert.deepEqual(logs, [pkg.version]);
   });
 }
 
 test('run prints help when --help appears anywhere in argv', async () => {
-  const logs = [];
-  const originalLog = console.log;
-  console.log = (...args) => {
-    logs.push(args.join(' '));
-  };
+  const logs = await captureLogs(() => run(['--theme-slug', 'my-theme', '--help']));
 
-  try {
-    await run(['--theme-slug', 'my-theme', '--help']);
-    assert.equal(logs.some((line) => line.includes('Usage:')), true);
-    assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <slug> --template <template>')), true);
-  } finally {
-    console.log = originalLog;
-  }
+  assert.equal(logs.some((line) => line.includes('Usage:')), true);
+  assert.equal(logs.some((line) => line.includes('create-zeropress-theme --theme-slug <slug> --template <template>')), true);
 });
 
 test('run rejects the unsupported --slug option', async () => {
@@ -111,92 +111,57 @@ test('run guides allowed templates when --template value is missing', async () =
   );
 });
 
-test('run scaffolds a theme with required flags and fixed namespace', async () => {
-  const cwd = process.cwd();
-  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
-  const logs = [];
-  const originalLog = console.log;
-  console.log = (...args) => {
-    logs.push(args.join(' '));
-  };
+test('run scaffolds a buildable v0.5 starter project', async () => {
+  await withTempCwd(async (tempDir) => {
+    const logs = await captureLogs(() => run(['--theme-slug', 'my-theme', '--template', 'portfolio']));
+    const projectDir = path.join(tempDir, 'my-theme');
+    const themeJson = JSON.parse(await fs.readFile(path.join(projectDir, 'theme', 'theme.json'), 'utf8'));
+    const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'preview-data.json'), 'utf8'));
+    const starterPackage = JSON.parse(await fs.readFile(path.join(projectDir, 'package.json'), 'utf8'));
 
-  try {
-    process.chdir(tempDir);
-    await run(['--theme-slug', 'my-theme', '--template', 'blog']);
-
-    const raw = await fs.readFile(path.join(tempDir, 'my-theme', 'theme.json'), 'utf8');
-    const layoutHtml = await fs.readFile(path.join(tempDir, 'my-theme', 'layout.html'), 'utf8');
-    const headerHtml = await fs.readFile(path.join(tempDir, 'my-theme', 'partials', 'header.html'), 'utf8');
-    const footerHtml = await fs.readFile(path.join(tempDir, 'my-theme', 'partials', 'footer.html'), 'utf8');
-    const themeJson = JSON.parse(raw);
-
-    assert.equal(themeJson.$schema, 'https://zeropress.dev/schemas/theme.schema.json');
+    assert.equal(themeJson.$schema, 'https://zeropress.dev/schemas/theme.v0.5.runtime.schema.json');
     assert.equal(themeJson.name, 'my-theme');
     assert.equal(themeJson.namespace, 'my-company');
     assert.equal(themeJson.slug, 'my-theme');
     assert.equal(themeJson.version, '0.1.0');
     assert.equal(themeJson.license, 'MIT');
-    assert.equal(themeJson.runtime, '0.3');
-    assert.deepEqual(themeJson.menuSlots, {
-      primary: {
-        title: 'Primary Menu',
-        description: 'Recommended menu_id for the main header navigation',
-      },
-      footer: {
-        title: 'Footer Menu',
-        description: 'Recommended menu_id for footer links',
-      },
+    assert.equal(themeJson.runtime, '0.5');
+    assert.equal(previewData.version, '0.5');
+    assert.equal(previewData.$schema, 'https://zeropress.dev/schemas/preview-data.v0.5.schema.json');
+    assert.equal(starterPackage.private, true);
+    assert.equal(starterPackage.scripts.build, 'zeropress-build ./theme --data ./preview-data.json --out ./dist');
+    assert.equal(starterPackage.scripts.dev, 'zeropress-theme dev ./theme --data ./preview-data.json');
+    assert.deepEqual(starterPackage.dependencies, {
+      '@zeropress/build': '0.5.2',
+      '@zeropress/theme': '0.5.1',
     });
-    assert.deepEqual(Object.keys(themeJson), [
-      '$schema',
-      'name',
-      'namespace',
-      'slug',
-      'version',
-      'license',
-      'runtime',
-      'description',
-      'menuSlots',
-    ]);
-    assert.match(layoutHtml, /<title>\{\{meta\.title\}\}<\/title>/);
-    assert.match(layoutHtml, /\{\{meta\.head_tags\}\}/);
-    assert.match(headerHtml, /\{\{menu:primary\}\}/);
-    assert.match(footerHtml, /\{\{menu:footer\}\}/);
-    assert.equal(logs.some((line) => line.includes('Template: blog')), true);
-    assert.equal(logs.some((line) => line.includes('theme.json namespace: my-company')), true);
-    await assert.rejects(() => fs.access(path.join(tempDir, 'my-theme', 'package.json')));
-  } finally {
-    process.chdir(cwd);
-    console.log = originalLog;
-    await fs.rm(tempDir, { recursive: true, force: true });
-  }
+    assert.equal(logs.some((line) => line.includes('Template: portfolio')), true);
+    assert.equal(logs.some((line) => line.includes('Next: npm install && npm run build')), true);
+    await assert.rejects(() => fs.access(path.join(projectDir, 'layout.html')));
+  });
 });
 
-for (const template of ['minimal', 'blog', 'magazine', 'docs', 'portfolio']) {
-  test(`run self-validates generated ${template} template`, async () => {
-    const cwd = process.cwd();
-    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
+for (const template of templates) {
+  test(`run self-validates and builds generated ${template} starter`, async () => {
+    await withTempCwd(async (tempDir) => {
+      const slug = `${template}-starter`;
+      await run(['--theme-slug', slug, '--template', template]);
 
-    try {
-      process.chdir(tempDir);
-      await run(['--theme-slug', `${template}-starter`, '--template', template]);
+      const projectDir = path.join(tempDir, slug);
+      const themeJson = JSON.parse(await fs.readFile(path.join(projectDir, 'theme', 'theme.json'), 'utf8'));
+      assert.equal(themeJson.slug, slug);
+      assert.equal(themeJson.runtime, '0.5');
 
-      const raw = await fs.readFile(path.join(tempDir, `${template}-starter`, 'theme.json'), 'utf8');
-      const layoutHtml = await fs.readFile(path.join(tempDir, `${template}-starter`, 'layout.html'), 'utf8');
-      const headerHtml = await fs.readFile(path.join(tempDir, `${template}-starter`, 'partials', 'header.html'), 'utf8');
-      const footerHtml = await fs.readFile(path.join(tempDir, `${template}-starter`, 'partials', 'footer.html'), 'utf8');
-      const themeJson = JSON.parse(raw);
-      assert.equal(themeJson.slug, `${template}-starter`);
-      assert.equal(themeJson.runtime, '0.3');
-      assert.deepEqual(Object.keys(themeJson.menuSlots || {}), ['primary', 'footer']);
-      assert.match(layoutHtml, /<title>\{\{meta\.title\}\}<\/title>/);
-      assert.match(layoutHtml, /\{\{meta\.head_tags\}\}/);
-      assert.match(headerHtml, /\{\{menu:primary\}\}/);
-      assert.match(footerHtml, /\{\{menu:footer\}\}/);
-    } finally {
-      process.chdir(cwd);
-      await fs.rm(tempDir, { recursive: true, force: true });
-    }
+      await execFileAsync(buildBin, [
+        './theme',
+        '--data',
+        './preview-data.json',
+        '--out',
+        './dist',
+      ], { cwd: projectDir });
+
+      await fs.access(path.join(projectDir, 'dist', 'index.html'));
+    });
   });
 }
 
@@ -208,13 +173,11 @@ test('run rejects a theme slug that is not already valid', async () => {
 });
 
 test('run fails when generated scaffold does not pass self-check', async () => {
-  const cwd = process.cwd();
-  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'create-zp-theme-'));
   const originalReadDir = fs.readdir;
 
   fs.readdir = async function patchedReadDir(currentPath, options) {
     const result = await originalReadDir.call(this, currentPath, options);
-    if (typeof currentPath === 'string' && currentPath.endsWith('/broken-theme') && Array.isArray(result)) {
+    if (typeof currentPath === 'string' && currentPath.endsWith('/broken-theme/theme') && Array.isArray(result)) {
       return result.filter((entry) => {
         const name = typeof entry === 'string' ? entry : entry.name;
         return name !== 'page.html';
@@ -224,14 +187,13 @@ test('run fails when generated scaffold does not pass self-check', async () => {
   };
 
   try {
-    process.chdir(tempDir);
-    await assert.rejects(
-      () => run(['--theme-slug', 'broken-theme', '--template', 'minimal']),
-      /Required template 'page\.html' is missing/,
-    );
+    await withTempCwd(async () => {
+      await assert.rejects(
+        () => run(['--theme-slug', 'broken-theme', '--template', 'minimal']),
+        /Required template 'page\.html' is missing/,
+      );
+    });
   } finally {
     fs.readdir = originalReadDir;
-    process.chdir(cwd);
-    await fs.rm(tempDir, { recursive: true, force: true });
   }
 });

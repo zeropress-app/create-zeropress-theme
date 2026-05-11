@@ -1,0 +1,31 @@
+{
+  "$schema": "https://zeropress.dev/schemas/theme.v0.5.runtime.schema.json",
+  "name": "Æther Quarterly",
+  "namespace": "zeropress",
+  "slug": "theme-magazine",
+  "version": "0.5.0",
+  "license": "MIT",
+  "runtime": "0.5",
+  "description": "Editorial magazine theme. Numbered side rail, sectioned landing (cover, features, essay, gallery, masthead), and a long-form post layout with reading progress and drop caps.",
+  "features": {
+    "comments": false,
+    "newsletter": true,
+    "postIndex": true
+  },
+  "menuSlots": {
+    "primary": {
+      "title": "Section nav",
+      "description": "Top section nav rendered as small-caps links beneath the masthead"
+    },
+    "footer": {
+      "title": "Footer links",
+      "description": "Compact footer link list under the colophon"
+    }
+  },
+  "widgetAreas": {
+    "sidebar": {
+      "title": "Sidebar widgets",
+      "description": "Right-rail widget stack on category, tag, and archive routes"
+    }
+  }
+}

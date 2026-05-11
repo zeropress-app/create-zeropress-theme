@@ -1,0 +1,16 @@
+{{! project-card — expects current context to expose a page-shaped item as `project` }}
+<a class="project-card" href="{{project.url}}" aria-label="Read case study: {{project.title}}">
+  <div class="project-card__cover">
+    {{#if project.featured_image}}<img src="{{project.featured_image}}" alt="" loading="lazy" width="1200" height="704">{{/if}}
+  </div>
+  <div class="project-card__body">
+    <div class="project-card__copy">
+      <h2 class="project-card__title">{{project.title}}</h2>
+      {{#if project.excerpt}}<p class="project-card__summary">{{project.excerpt}}</p>{{/if}}
+    </div>
+    <div class="project-card__meta">
+      {{#if project.meta.role}}<span class="mono">{{project.meta.role}}</span>{{/if}}
+      {{#if project.meta.year}}<span class="mono muted">{{project.meta.year}}</span>{{/if}}
+    </div>
+  </div>
+</a>

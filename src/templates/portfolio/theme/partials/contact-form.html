@@ -1,0 +1,36 @@
+<section class="contact-block" id="contact">
+  <div class="grid">
+    <div class="grid__rail">{{partial:section-label number="—" title="Contact"}}</div>
+    <div class="grid__main">
+      <h2 class="contact-block__title">Send a note. I read everything.</h2>
+      <p class="contact-block__lede">Project inquiries, considered questions, or quiet hellos — all welcome.</p>
+
+      <form class="contact-form" data-contact-form
+            {{#if site.meta.author_email}}data-recipient="{{site.meta.author_email}}"{{/if}}
+            novalidate>
+        <div class="contact-form__field">
+          <label for="contact-name" class="mono-eyebrow muted">Name</label>
+          <input id="contact-name" name="name" type="text" maxlength="100" required>
+          <p class="contact-form__error mono muted" data-error-for="name" hidden></p>
+        </div>
+        <div class="contact-form__field">
+          <label for="contact-email" class="mono-eyebrow muted">Email</label>
+          <input id="contact-email" name="email" type="email" maxlength="255" required>
+          <p class="contact-form__error mono muted" data-error-for="email" hidden></p>
+        </div>
+        <div class="contact-form__field">
+          <label for="contact-message" class="mono-eyebrow muted">Message</label>
+          <textarea id="contact-message" name="message" rows="5" maxlength="1000" required></textarea>
+          <div class="contact-form__row">
+            <p class="contact-form__error mono muted" data-error-for="message" hidden></p>
+            <span class="contact-form__count mono muted" data-char-count>0/1000</span>
+          </div>
+        </div>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn-ink">Send message</button>
+        </div>
+        <p class="contact-form__status mono muted" data-contact-status hidden aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>

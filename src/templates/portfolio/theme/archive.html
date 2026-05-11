@@ -1,0 +1,16 @@
+<section class="grid">
+  <div class="grid__rail">{{partial:section-label number="—" title="Writing"}}</div>
+  <div class="grid__main">
+    <h1 class="hero-title">Notes on craft, systems, and the margins.</h1>
+
+    {{#if posts.items}}
+      <div class="note-list note-list--full">
+        {{#for post in posts.items}}
+          {{partial:post-list-item show_excerpt=true show_reading_time=true}}
+        {{/for}}
+      </div>
+    {{/if}}
+
+    {{partial:pagination}}
+  </div>
+</section>

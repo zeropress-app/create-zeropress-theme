@@ -1,0 +1,519 @@
+{
+  "$schema": "https://zeropress.dev/schemas/preview-data.v0.5.schema.json",
+  "version": "0.5",
+  "generator": "aether-quarterly-magazine-mock",
+  "generated_at": "2026-05-08T09:00:00Z",
+  "site": {
+    "title": "Æther Quarterly",
+    "description": "An editorial quarterly on stillness, craft, and the slow attention of looking twice.",
+    "url": "https://aetherquarterly.test",
+    "mediaBaseUrl": "https://aetherquarterly.test",
+    "locale": "en-US",
+    "postsPerPage": 6,
+    "dateFormat": "MMMM DD, YYYY",
+    "timeFormat": "HH:mm",
+    "timezone": "UTC",
+    "disallowComments": true
+  },
+  "content": {
+    "authors": [
+      {
+        "id": "auth-okonkwo",
+        "display_name": "J. Okonkwo"
+      },
+      {
+        "id": "auth-mendes",
+        "display_name": "A. Mendes"
+      },
+      {
+        "id": "auth-beaumont",
+        "display_name": "S. Beaumont"
+      },
+      {
+        "id": "auth-halevi",
+        "display_name": "Lior Halevi"
+      },
+      {
+        "id": "auth-lavigne",
+        "display_name": "M. Lavigne"
+      },
+      {
+        "id": "auth-castellani",
+        "display_name": "R. Castellani"
+      },
+      {
+        "id": "auth-aaltonen",
+        "display_name": "C. Aaltonen"
+      }
+    ],
+    "posts": [
+      {
+        "public_id": 2001,
+        "title": "The honest weight of concrete",
+        "slug": "honest-weight-of-concrete",
+        "content": "# The honest weight of concrete\n\n_On a brutalist library in Marseille, and what it asks of those who enter._\n\nThere is a building in Marseille that does not flatter you. It does not curve toward the visitor or soften its edges for the camera. It stands, instead, with the steady patience of something that has decided what it is, and it asks the same of you on entering.\n\n## A material with a memory\n\nThe library was finished in 1974. The architect, who would not live to see it open, had insisted on a single material: a pale, locally cast concrete, mixed with the dust of the limestone hills above the city. From a distance it reads as stone. Up close, the seams of the formwork remain — the wood grain pressed permanently into the wall, a kind of fossil of the carpenters who built it.\n\n## Light, rationed\n\nInside, the light is rationed carefully. There are no skylights. The windows are deep-set, narrow, oriented away from the sea. What enters is reflected light, soft and slow, the kind that asks the eye to adjust before it commits to a page.\n\n> The building does not try to be loved. That, I think, is why it is.\n\nI came in the late afternoon, when the reading rooms were already half-empty, and the long tables held only the few students who would stay until closing. A librarian — who had worked here for thirty-one years — told me that what she loved most about the building was that it did not try to be loved.\n",
+        "document_type": "markdown",
+        "excerpt": "On a brutalist library in Marseille, and what it asks of those who enter.",
+        "published_at_iso": "2026-03-14T09:00:00Z",
+        "updated_at_iso": "2026-03-14T09:00:00Z",
+        "author_id": "auth-okonkwo",
+        "featured_image": "https://images.unsplash.com/photo-1503602642458-232111445657?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "architecture"
+        ],
+        "tag_slugs": [
+          "concrete",
+          "brutalism",
+          "libraries"
+        ]
+      },
+      {
+        "public_id": 2002,
+        "title": "A room, a vase, a single stem",
+        "slug": "room-vase-single-stem",
+        "content": "# A room, a vase, a single stem\n\n_Hiro Yamazaki on the discipline of subtraction, and arranging air._\n\nHiro Yamazaki has been arranging flowers for forty-two years. His studio in Kyoto, on the second floor of a wooden house near the Kamo river, contains, on the morning I visit, exactly three objects: a low table, a ceramic vase the colour of wet slate, and a single white camellia.\n\n## The air is the arrangement\n\nHe laughs, gently, when I ask about the absence. 'There is no absence,' he says. 'There is air. The air is the arrangement.'\n\nWhat he means, he explains, is that flowers are not the subject of ikebana. The subject is the relationship between what is shown and what is not — the held breath, the long silence between two notes.\n\n## An hour without speaking\n\nWe sit for an hour without speaking, watching the camellia. By the end I am no longer sure whether I am looking at a flower, or at the room around it, or at the slow attention the flower has demanded of the room.\n",
+        "document_type": "markdown",
+        "excerpt": "Hiro Yamazaki on the discipline of subtraction, and arranging air.",
+        "published_at_iso": "2026-03-08T09:00:00Z",
+        "updated_at_iso": "2026-03-08T09:00:00Z",
+        "author_id": "auth-mendes",
+        "featured_image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "still-life"
+        ],
+        "tag_slugs": [
+          "ikebana",
+          "kyoto",
+          "craft"
+        ]
+      },
+      {
+        "public_id": 2003,
+        "title": "Walking out of the weather",
+        "slug": "walking-out-of-the-weather",
+        "content": "# Walking out of the weather\n\n_Three days in the Dolomites with nothing but a notebook and rain._\n\nIt rained for the entire first day. Not the soft rain of the lowlands, but the sideways, committed rain of high altitude, the kind that finds every weakness in your kit and exploits it without comment.\n\n## A companion, eventually\n\nBy the second morning the rain had become a kind of companion. I had given up on the idea of staying dry, and with that surrender came a strange lightness — a willingness to walk into the weather rather than away from it.\n\nThe notebook, wrapped twice in plastic, came out only at the refuges. I wrote shorter sentences than I usually write. The mountains, I think, were teaching me to economise.\n\n## Sassolungo, briefly\n\nOn the third day the cloud lifted for an hour and the Sassolungo appeared, briefly, like a thought one almost remembers. Then it was gone again, and I walked the last six kilometres back into the rain, content.\n",
+        "document_type": "markdown",
+        "excerpt": "Three days in the Dolomites with nothing but a notebook and rain.",
+        "published_at_iso": "2026-02-27T09:00:00Z",
+        "updated_at_iso": "2026-02-27T09:00:00Z",
+        "author_id": "auth-beaumont",
+        "featured_image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "travel"
+        ],
+        "tag_slugs": [
+          "mountains",
+          "walking",
+          "weather"
+        ]
+      },
+      {
+        "public_id": 2004,
+        "title": "Letters from the lighthouse",
+        "slug": "letters-from-the-lighthouse",
+        "content": "# Letters from the lighthouse\n\n_Thirty-two days of weather, and the slow erosion of the speaker._\n\nFor thirty-two days the keeper wrote nothing. The wind, he said in the first page after, had argued each word out of him.\n\nWe arrived on a Tuesday, when the fog had finally lifted enough to make the crossing possible. The boat was small. The journey was longer than its length.\n\n## On the notebooks\n\nWhat follows is taken from his notebooks, with permission, and with as little of our hand on them as we could manage. We have changed only the names of the ships, and one of the birds.\n\n> There is no loneliness in a place that is full of weather. The wind is a kind of company, if you let it be.\n",
+        "document_type": "markdown",
+        "excerpt": "Thirty-two days of weather, and the slow erosion of the speaker.",
+        "published_at_iso": "2026-02-19T09:00:00Z",
+        "updated_at_iso": "2026-02-19T09:00:00Z",
+        "author_id": "auth-halevi",
+        "featured_image": "https://images.unsplash.com/photo-1507608616040-3d0d6cdf2c97?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "essay"
+        ],
+        "tag_slugs": [
+          "solitude",
+          "weather",
+          "field-notes"
+        ]
+      },
+      {
+        "public_id": 2005,
+        "title": "On the art of stillness",
+        "slug": "stillness-rooms-it-builds",
+        "content": "# On the art of stillness\n\n_A morning with photographer Ines Marot, between the studio and the sea._\n\nInes Marot photographs slowly. Her camera, a 1962 Rolleiflex, holds twelve frames per roll, and she rarely finishes a roll in a single day.\n\n## The part that survives the waiting\n\n'The picture,' she tells me, 'is the part that survives the waiting.' We are sitting in her studio above the harbour. The light is the kind of pale northern light that painters used to leave their cities to find.\n\nShe works in series, never single images. A subject — a doorway, a hand, the particular grey of a Tuesday — will return to her work for years, gathering small variations.\n\n## Two photographs\n\nBy the end of the morning she has taken exactly two photographs. She seems content with this. 'Two is more than yesterday,' she says.\n",
+        "document_type": "markdown",
+        "excerpt": "A morning with photographer Ines Marot, between the studio and the sea.",
+        "published_at_iso": "2026-02-11T09:00:00Z",
+        "updated_at_iso": "2026-02-11T09:00:00Z",
+        "author_id": "auth-lavigne",
+        "featured_image": "https://images.unsplash.com/photo-1531913764164-f85c52e6e654?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "culture"
+        ],
+        "tag_slugs": [
+          "photography",
+          "studio",
+          "interview"
+        ]
+      },
+      {
+        "public_id": 2006,
+        "title": "The slow renaissance of paper",
+        "slug": "slow-renaissance-of-paper",
+        "content": "# The slow renaissance of paper\n\n_Why a generation raised on screens is returning, quietly, to the page._\n\nThe mill at Fabriano has been making paper since 1264. The current director, the eleventh in his family to hold the post, tells me that the last five years have been the busiest of his career.\n\n## Younger buyers\n\nThe buyers are younger than they used to be. They want notebooks, mostly. Plain, unruled, in modest sizes. They want, he thinks, something that will not interrupt them.\n\n## A patience that is almost embarrassing\n\nThere is a quietness to paper that no screen has yet replicated. It does not notify. It does not update. It waits, with a patience that is almost embarrassing, for you to return to it.\n\nI bought a small notebook on the way out. I have been writing in it slowly, ever since.\n",
+        "document_type": "markdown",
+        "excerpt": "Why a generation raised on screens is returning, quietly, to the page.",
+        "published_at_iso": "2026-02-03T09:00:00Z",
+        "updated_at_iso": "2026-02-03T09:00:00Z",
+        "author_id": "auth-castellani",
+        "featured_image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "design"
+        ],
+        "tag_slugs": [
+          "paper",
+          "craft",
+          "stationery"
+        ]
+      },
+      {
+        "public_id": 2007,
+        "title": "An interview with Hiro Yamazaki",
+        "slug": "interview-hiro-yamazaki",
+        "content": "# An interview with Hiro Yamazaki\n\n_On forty years of arranging, and the long apprenticeship of attention._\n\nWe meet for the second time in a small tea house behind his studio. He has agreed to a longer conversation, on the condition that we do not record it. I take notes by hand, slowly, and he waits for me to finish each sentence before beginning the next.\n\n## The long apprenticeship\n\n'The first ten years,' he says, 'I was learning to see the flower. The next ten, to see the vase. The ten after that, to see the room. I am still learning to see the room.'\n\nHe is sceptical of the word mastery. 'In my craft there is no mastery. There is only a longer and longer apprenticeship.'\n\n## Forty-eight minutes\n\nWhen the tea is finished he stands, bows slightly, and returns to his studio. The interview, such as it was, has lasted forty-eight minutes. I will think about it for years.\n",
+        "document_type": "markdown",
+        "excerpt": "On forty years of arranging, and the long apprenticeship of attention.",
+        "published_at_iso": "2026-01-24T09:00:00Z",
+        "updated_at_iso": "2026-01-24T09:00:00Z",
+        "author_id": "auth-mendes",
+        "featured_image": "https://images.unsplash.com/photo-1503602642458-232111445657?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "interview"
+        ],
+        "tag_slugs": [
+          "ikebana",
+          "craft",
+          "kyoto"
+        ]
+      },
+      {
+        "public_id": 2008,
+        "title": "The uniform of the quiet life",
+        "slug": "uniform-of-the-quiet-life",
+        "content": "# The uniform of the quiet life\n\n_On dressing to be forgotten, and the small freedoms of a small wardrobe._\n\nFor the past three years I have worn, more or less, the same five things. Two pairs of trousers, three shirts, one coat for winter, one for the rest of the year. The list is short enough to memorise.\n\n## Not by conviction\n\nI did not arrive at this by conviction. I arrived at it by exhaustion — by the small, daily fatigue of choosing, and the realisation that the choices were rarely worth the energy they took.\n\n## A kind of quiet\n\nWhat I have found, in the years since, is that a small wardrobe is a kind of quiet. It is one fewer voice in the morning. It is one fewer decision before the work begins.\n\nI do not recommend it as a discipline. I recommend it only as a relief.\n",
+        "document_type": "markdown",
+        "excerpt": "On dressing to be forgotten, and the small freedoms of a small wardrobe.",
+        "published_at_iso": "2026-01-15T09:00:00Z",
+        "updated_at_iso": "2026-01-15T09:00:00Z",
+        "author_id": "auth-aaltonen",
+        "featured_image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "style"
+        ],
+        "tag_slugs": [
+          "wardrobe",
+          "slow-living"
+        ]
+      }
+    ],
+    "pages": [
+      {
+        "title": "About",
+        "slug": "about",
+        "content": "# About Æther Quarterly\n\nÆther Quarterly is an editorial journal published four times a year, on uncoated stock, hand-stitched, and sent the long way round.\n\nWe write about stillness, craft, and the slow attention of looking twice. We are not in a hurry, and we hope you aren't either.\n\n## Editors\n\n- **Editor-in-Chief** — M. Lavigne\n- **Art Director** — S. Beaumont\n- **Photography** — I. Marot\n",
+        "document_type": "markdown",
+        "excerpt": "An editorial quarterly on stillness, craft, and looking twice.",
+        "status": "published"
+      },
+      {
+        "title": "Subscribe",
+        "slug": "subscribe",
+        "content": "# Subscribe\n\nFour issues a year, delivered by post.\n\nFrom **€72 / year**. Cancel anytime.\n\nWrite to **subscribe@aetherquarterly.test** with your address, and we will do the rest.\n",
+        "document_type": "markdown",
+        "excerpt": "Four issues a year, delivered by post.",
+        "status": "published"
+      },
+      {
+        "title": "Colophon",
+        "slug": "colophon",
+        "content": "# Colophon\n\n- **Type** — Fraunces & Inter\n- **Printer** — Atelier Reliure, Lyon\n- **Paper** — 120gsm uncoated cream\n- **Established** — MMXXII\n",
+        "document_type": "markdown",
+        "excerpt": "How the magazine is made.",
+        "status": "published"
+      }
+    ],
+    "categories": [
+      {
+        "name": "Culture",
+        "slug": "culture",
+        "description": "Conversations with the people behind the work."
+      },
+      {
+        "name": "Design",
+        "slug": "design",
+        "description": "On objects, surfaces, and small considered things."
+      },
+      {
+        "name": "Travel",
+        "slug": "travel",
+        "description": "Dispatches from somewhere slower."
+      },
+      {
+        "name": "Essay",
+        "slug": "essay",
+        "description": "Long-form thinking, written without hurry."
+      },
+      {
+        "name": "Interview",
+        "slug": "interview",
+        "description": "Sit-down conversations, transcribed by hand."
+      },
+      {
+        "name": "Style",
+        "slug": "style",
+        "description": "Clothes, rooms, and the way one is in them."
+      },
+      {
+        "name": "Architecture",
+        "slug": "architecture",
+        "description": "Buildings that ask something of those who enter."
+      },
+      {
+        "name": "Still Life",
+        "slug": "still-life",
+        "description": "Objects, light, and the room around them."
+      }
+    ],
+    "tags": [
+      {
+        "name": "Concrete",
+        "slug": "concrete"
+      },
+      {
+        "name": "Brutalism",
+        "slug": "brutalism"
+      },
+      {
+        "name": "Libraries",
+        "slug": "libraries"
+      },
+      {
+        "name": "Ikebana",
+        "slug": "ikebana"
+      },
+      {
+        "name": "Kyoto",
+        "slug": "kyoto"
+      },
+      {
+        "name": "Craft",
+        "slug": "craft"
+      },
+      {
+        "name": "Mountains",
+        "slug": "mountains"
+      },
+      {
+        "name": "Walking",
+        "slug": "walking"
+      },
+      {
+        "name": "Weather",
+        "slug": "weather"
+      },
+      {
+        "name": "Solitude",
+        "slug": "solitude"
+      },
+      {
+        "name": "Field notes",
+        "slug": "field-notes"
+      },
+      {
+        "name": "Photography",
+        "slug": "photography"
+      },
+      {
+        "name": "Studio",
+        "slug": "studio"
+      },
+      {
+        "name": "Interview",
+        "slug": "interview"
+      },
+      {
+        "name": "Paper",
+        "slug": "paper"
+      },
+      {
+        "name": "Stationery",
+        "slug": "stationery"
+      },
+      {
+        "name": "Wardrobe",
+        "slug": "wardrobe"
+      },
+      {
+        "name": "Slow living",
+        "slug": "slow-living"
+      }
+    ]
+  },
+  "menus": {
+    "primary": {
+      "name": "Primary Menu",
+      "items": [
+        {
+          "title": "Culture",
+          "url": "/categories/culture/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Design",
+          "url": "/categories/design/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Travel",
+          "url": "/categories/travel/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Essay",
+          "url": "/categories/essay/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Architecture",
+          "url": "/categories/architecture/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Archive",
+          "url": "/archive/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "About",
+          "url": "/about/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
+    "footer": {
+      "name": "Footer Menu",
+      "items": [
+        {
+          "title": "About",
+          "url": "/about/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Subscribe",
+          "url": "/subscribe/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Colophon",
+          "url": "/colophon/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Archive",
+          "url": "/archive/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Feed",
+          "url": "/feed.xml",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    }
+  },
+  "widgets": {
+    "sidebar": {
+      "name": "Sidebar",
+      "items": [
+        {
+          "type": "text",
+          "title": "About this issue",
+          "settings": {
+            "document_type": "markdown",
+            "content": "**Issue 04 — The Quiet Issue.** Eight pieces on stillness, craft, and the slow attention of looking twice."
+          }
+        },
+        {
+          "type": "recent-posts",
+          "title": "Recent dispatches",
+          "settings": {
+            "limit": 5,
+            "show_date": true
+          }
+        },
+        {
+          "type": "categories",
+          "title": "Sections",
+          "settings": {
+            "show_count": true,
+            "hierarchical": false
+          }
+        },
+        {
+          "type": "tags",
+          "title": "Topics",
+          "settings": {
+            "limit": 18,
+            "show_count": true
+          }
+        },
+        {
+          "type": "archives",
+          "title": "Back issues",
+          "settings": {
+            "limit": 12
+          }
+        },
+        {
+          "type": "search",
+          "title": "Search",
+          "settings": {
+            "placeholder": "Search the quarterly",
+            "button_label": "Search"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -4,29 +4,28 @@
 ![license](https://img.shields.io/npm/l/create-zeropress-theme)
 ![node](https://img.shields.io/node/v/create-zeropress-theme)
 
-ZeroPress theme starter generator.
+ZeroPress v0.5 starter generator.
 
-Generated starters are self-validated against the current ZeroPress runtime contract using `@zeropress/theme-validator`.
-
----
-
-## Install
-
-```bash
-# Run directly with npx
-npx create-zeropress-theme --help
-
-# Or install globally
-npm install -g create-zeropress-theme
-create-zeropress-theme --help
-```
+This package creates a small buildable ZeroPress starter project for the
+`preview-data.json + theme/` workflow.
 
 ---
 
 ## Quick Start
 
 ```bash
-npx create-zeropress-theme --theme-slug my-theme --template blog
+npx create-zeropress-theme --theme-slug my-portfolio --template portfolio
+cd my-portfolio
+npm install
+npm run build
+```
+
+The build output is written to `dist/`.
+
+For local preview while developing the theme:
+
+```bash
+npm run dev
 ```
 
 ---
@@ -39,78 +38,101 @@ create-zeropress-theme --theme-slug <slug> --template <template>
 
 ### Required Options
 
-- `--theme-slug <slug>`: Theme slug and target directory name
-- `--template <template>`: Starter template: `minimal`, `blog`, `magazine`, `docs`, `portfolio`
+- `--theme-slug <slug>`: starter directory name and generated `theme.json.slug`
+- `--template <template>`: `minimal`, `blog`, `docs`, `portfolio`, or `magazine`
 
-### Options
+### Other Options
 
-- `--help, -h`: Show help
-- `--version, -v`: Show version
-
----
-
-## Examples
-
-```bash
-create-zeropress-theme --theme-slug my-theme --template blog
-create-zeropress-theme --theme-slug my-theme --template docs
-create-zeropress-theme --theme-slug my-theme --template portfolio
-```
+- `--help`, `-h`: show help
+- `--version`, `-v`: show package version
 
 ---
 
 ## Templates
 
-- `minimal`: Clean default starter with a lightweight content-first structure
-- `blog`: Editorial blog starter with reading-focused layout and typography
-- `magazine`: Grid-based starter with side rail and sectioned landing layout
-- `docs`: Documentation starter for guides, references, and updates
-- `portfolio`: Personal showcase starter for projects and case studies
+- `minimal`: clean content-first blog starter.
+- `blog`: editorial blog starter with menus, widgets, posts, categories, and tags.
+- `docs`: compact documentation starter with pages, navigation, and page TOC.
+- `portfolio`: personal portfolio starter using `site.meta` and named collections.
+- `magazine`: editorial magazine starter with sectioned landing and post lists.
+
+Each template includes a matching `preview-data.json` fixture. The fixture is
+part of the starter because different theme categories need different render
+data shapes.
 
 ---
 
-## What It Generates
+## Generated Project
 
 ```text
-my-theme/
-  theme.json
-  layout.html
-  index.html
-  post.html
-  page.html
-  archive.html
-  category.html
-  tag.html
-  404.html
-  partials/
-    header.html
-    footer.html
-  assets/
-    style.css
+my-portfolio/
+  package.json
+  preview-data.json
+  theme/
+    theme.json
+    layout.html
+    index.html
+    post.html
+    page.html
+    archive.html
+    category.html
+    tag.html
+    404.html
+    partials/
+    assets/
 ```
 
-- Required minimum for Theme Runtime v0.3 compatibility: `theme.json`, `layout.html`, `index.html`, `post.html`, `page.html`, `assets/style.css`
-- Common optional files in the starter: `archive.html`, `category.html`, `tag.html`, `404.html`, `partials/*.html`
-- Generated `theme.json` includes `$schema` for IDE validation and autocomplete
-- Generated starters declare helper-only `menuSlots` for `primary` and `footer`
-- Generated headers and footers use `{{menu:primary}}` and `{{menu:footer}}`
-- Generated directory name, `theme.json.name`, and `theme.json.slug` all use `--theme-slug`
-- Generated `namespace` is fixed to `my-company`
-- The scaffold is validated immediately after generation and fails if the generated theme does not satisfy Theme Runtime v0.3
+Generated `package.json` includes:
+
+```json
+{
+  "scripts": {
+    "build": "zeropress-build ./theme --data ./preview-data.json --out ./dist",
+    "dev": "zeropress-theme dev ./theme --data ./preview-data.json"
+  },
+  "dependencies": {
+    "@zeropress/build": "0.5.2",
+    "@zeropress/theme": "0.5.1"
+  }
+}
+```
+
+Generated `theme/theme.json` is rewritten with:
+
+- `$schema: "https://zeropress.dev/schemas/theme.v0.5.runtime.schema.json"`
+- `runtime: "0.5"`
+- `namespace: "my-company"`
+- `slug` and `name` from `--theme-slug`
+- `version: "0.1.0"`
+
+Update `namespace`, `name`, and demo fixture content before publishing a theme.
+
+---
+
+## Validation
+
+The generated theme is validated immediately with
+[`@zeropress/theme-validator`](https://www.npmjs.com/package/@zeropress/theme-validator).
+
+The package test suite also builds every bundled starter with
+[`@zeropress/build`](https://www.npmjs.com/package/@zeropress/build) to verify
+that each template and fixture works together.
 
 ---
 
 ## Requirements
 
 - Node.js >= 18.18.0
-- ESM only
+- ESM-only package
 
 ---
 
 ## Related
 
+- [@zeropress/build](https://www.npmjs.com/package/@zeropress/build)
 - [@zeropress/theme](https://www.npmjs.com/package/@zeropress/theme)
-- [ZeroPress Theme Runtime v0.3](https://zeropress.dev/spec/theme-runtime-v0.3.html)
+- [ZeroPress Theme Runtime v0.5](https://zeropress.dev/spec/theme-runtime-v0.5.html)
+- [ZeroPress Preview Data v0.5](https://zeropress.dev/spec/preview-data-v0.5.html)
 
 ---
 

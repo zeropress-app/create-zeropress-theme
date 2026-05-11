@@ -1,0 +1,52 @@
+<div class="shell post-shell">
+  <a class="back-link smallcaps" href="/">← Back to issue</a>
+  <div class="post-grid">
+    <article class="article">
+      <header class="article__header">
+        <div class="article__meta smallcaps muted">
+          {{#for category in post.categories}}<a href="{{category.url}}" class="hl">{{category.name}}</a>{{#if loop.last}}{{#else}}<span>·</span>{{/if}}{{/for}}
+          <span>·</span><time datetime="{{post.published_at_iso}}">{{post.published_at}}</time>
+          <span>·</span><span>{{post.reading_time}}</span>
+          {{#if post.author.display_name}}<span>·</span><span>By {{post.author.display_name}}</span>{{/if}}
+        </div>
+        {{#if post.excerpt}}<p class="lede serif-lg">{{post.excerpt}}</p>{{/if}}
+      </header>
+
+      {{#if post.featured_image}}<figure class="article__hero"><img src="{{post.featured_image}}" alt=""></figure>{{/if}}
+
+      <div class="article__body prose drop-cap-first">{{post.html}}</div>
+
+      {{#if post.tags}}
+        <section class="filed-under">
+          <span class="eyebrow">Filed under</span>
+          <div class="taxonomy-list">
+            {{#for tag in post.tags}}<a href="{{tag.url}}" class="chip">#{{tag.name}}</a>{{/for}}
+          </div>
+        </section>
+      {{/if}}
+
+      {{#if post.prev}}
+        <nav class="post-nav" aria-label="Adjacent">
+          <a class="post-nav__link" href="{{post.prev.url}}"><span class="smallcaps muted">← Previous</span><strong>{{post.prev.title}}</strong></a>
+          {{#if post.next}}<a class="post-nav__link end" href="{{post.next.url}}"><span class="smallcaps muted">Next →</span><strong>{{post.next.title}}</strong></a>{{/if}}
+        </nav>
+      {{#else_if post.next}}
+        <nav class="post-nav" aria-label="Adjacent">
+          <span></span>
+          <a class="post-nav__link end" href="{{post.next.url}}"><span class="smallcaps muted">Next →</span><strong>{{post.next.title}}</strong></a>
+        </nav>
+      {{/if}}
+    </article>
+
+    <aside class="article__aside">
+      {{#if post.toc}}
+        <div class="toc-sticky">
+          <p class="eyebrow">On this page</p>
+          <ol class="toc">
+            {{#for item in post.toc}}<li class="toc-l{{item.level}}"><a href="{{item.href}}">{{item.title}}</a></li>{{/for}}
+          </ol>
+        </div>
+      {{/if}}
+    </aside>
+  </div>
+</div>

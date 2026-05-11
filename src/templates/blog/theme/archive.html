@@ -1,0 +1,41 @@
+<section class="narrow-intro">
+  <p class="eyebrow">Archive</p>
+  <h1>Everything, by date</h1>
+  <p class="lede">All published writing in one place — grouped by month, oldest sections collapsed by year.</p>
+</section>
+<section class="content-grid content-grid--balanced">
+  <div class="posts-area">
+    <div class="archive-list">
+      {{#for group in archive.groups}}
+        <section class="archive-group">
+          <h2>{{group.label}}</h2>
+          <ul class="archive-group__list">
+            {{#for post in group.items}}
+              {{partial:post-list-item variant="archive" show_excerpt=false}}
+            {{/for}}
+          </ul>
+        </section>
+      {{/for}}
+    </div>
+    {{#if pagination.has_multiple_pages}}
+      <div class="pagination-wrap">
+        <nav class="pagination" aria-label="Pagination">
+          {{#if pagination.has_prev}}<a href="{{pagination.prev_url}}" class="prev">← Previous</a>{{#else}}<span class="prev disabled">← Previous</span>{{/if}}
+          <span class="pages">
+            {{#for page in pagination.window}}
+              {{#if_eq page.kind "gap"}}
+                <span class="page-gap" aria-hidden="true">…</span>
+              {{#else_if_eq page.kind "page"}}
+                <a href="{{page.url}}" class="page-link {{#if page.current}}current{{/if}}">{{page.number}}</a>
+              {{/if_eq}}
+            {{/for}}
+          </span>
+          {{#if pagination.has_next}}<a href="{{pagination.next_url}}" class="next">Next →</a>{{#else}}<span class="next disabled">Next →</span>{{/if}}
+        </nav>
+      </div>
+    {{/if}}
+  </div>
+  <aside class="sidebar-stack">
+    {{partial:sidebar-widgets}}
+  </aside>
+</section>
