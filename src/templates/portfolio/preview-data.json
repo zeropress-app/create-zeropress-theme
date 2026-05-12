@@ -6,7 +6,7 @@
   "site": {
     "title": "Elias Thorne",
     "description": "Product designer and researcher. Quiet, capable interfaces for specialists.",
-    "url": "https://eliasthorne.test",
+    "url": "",
     "mediaBaseUrl": "",
     "locale": "en-US",
     "postsPerPage": 10,
@@ -20,6 +20,7 @@
       "paginate": true
     },
     "footer": {
+      "copyright_text": "Elias Thorne",
       "attribution": {
         "enabled": true
       }
@@ -45,7 +46,7 @@
         "public_id": 3001,
         "title": "The False Promise of 'Frictionless'",
         "slug": "false-promise-of-frictionless",
-        "content": "# The False Promise of 'Frictionless'\n\n_In high-stakes environments, friction is a feature, not a bug. Removing it entirely often delegates the cognitive load from the interface to the user's anxiety._\n\n## On materials\n\nWe treat pixels as if they cost nothing. They cost attention, which is the only currency in interface design. Every glyph, every rule, every margin is a withdrawal from the reader's account. The discipline is to make each withdrawal earn its keep.\n\n> The detail is not the detail. The detail makes the design. — Charles Eames\n\nWhat follows is a working set of principles I've returned to across the last decade of building tools for specialists. None are original. All are hard-won.\n",
+        "content": "_In high-stakes environments, friction is a feature, not a bug. Removing it entirely often delegates the cognitive load from the interface to the user's anxiety._\n\n## On materials\n\nWe treat pixels as if they cost nothing. They cost attention, which is the only currency in interface design. Every glyph, every rule, every margin is a withdrawal from the reader's account. The discipline is to make each withdrawal earn its keep.\n\n| Interface choice | Useful friction |\n| --- | --- |\n| Confirmation step | Slows irreversible action |\n| Review screen | Keeps context visible |\n| Persistent note | Carries context across handoff |\n\n> [!NOTE]\n> Productive friction should explain itself at the moment it appears.\n\n### Working checklist\n\n- [x] Preserve the operator's current context\n- [x] Make irreversible steps explicit\n- [ ] Remove ceremonies that only protect the system\n\n#### A small flow sketch\n\n```mermaid\nflowchart LR\n  Draft[Draft action] --> Review[Review consequences]\n  Review --> Commit[Commit]\n```\n\n> The detail is not the detail. The detail makes the design. — Charles Eames\n\nWhat follows is a working set of principles I've returned to across the last decade of building tools for specialists. None are original. All are hard-won.\n",
         "document_type": "markdown",
         "excerpt": "In high-stakes environments, friction is a feature, not a bug. Removing it entirely often delegates the cognitive load from the interface to the user's anxiety.",
         "published_at_iso": "2024-10-12T09:00:00Z",
@@ -65,7 +66,7 @@
         "public_id": 3002,
         "title": "On Marginalia: Designing for the Edges",
         "slug": "designing-for-the-edges",
-        "content": "# On Marginalia: Designing for the Edges\n\n_When we build enterprise software, the most important work often happens in the notes fields, the workarounds, and the sticky notes on the monitor. How do we design for the margins?_\n\nThe most reliable insights came from the moments when operators reached for paper, opened a second window, or muttered under their breath. Those are the seams in the existing interface, and they pointed precisely where the redesign needed to begin.\n",
+        "content": "_When we build enterprise software, the most important work often happens in the notes fields, the workarounds, and the sticky notes on the monitor. How do we design for the margins?_\n\nThe most reliable insights came from the moments when operators reached for paper, opened a second window, or muttered under their breath. Those are the seams in the existing interface, and they pointed precisely where the redesign needed to begin.\n",
         "document_type": "markdown",
         "excerpt": "When we build enterprise software, the most important work often happens in the notes fields, the workarounds, and the sticky notes on the monitor.",
         "published_at_iso": "2024-09-04T09:00:00Z",
@@ -85,8 +86,8 @@
         "public_id": 3003,
         "title": "Syntax over Semantics in Component Libraries",
         "slug": "syntax-over-semantics",
-        "content": "# Syntax over Semantics in Component Libraries\n\n_A critical look at why rigid semantic naming conventions in design systems inevitably collapse under the weight of product reality._\n\nNaming is the second-hardest problem in software, and design systems make it harder by insisting that one name must serve every product surface. The same component is a card here, a tile there, a panel in the third place. Pretending otherwise is a small act of dishonesty that compounds over a release cycle.\n",
-        "document_type": "markdown",
+        "content": "<p><em>A critical look at why rigid semantic naming conventions in design systems inevitably collapse under the weight of product reality.</em></p>\n<h2>When names leak implementation</h2>\n<p>Naming is the second-hardest problem in software, and design systems make it harder by insisting that one name must serve every product surface. The same component is a card here, a tile there, a panel in the third place.</p>\n<p>Pretending otherwise is a small act of dishonesty that compounds over a release cycle.</p>\n",
+        "document_type": "html",
         "excerpt": "A critical look at why rigid semantic naming conventions in design systems inevitably collapse under the weight of product reality.",
         "published_at_iso": "2024-07-22T09:00:00Z",
         "updated_at_iso": "2024-07-22T09:00:00Z",
@@ -105,8 +106,8 @@
         "public_id": 3004,
         "title": "The Architecture of Silence in UI",
         "slug": "the-architecture-of-silence",
-        "content": "# The Architecture of Silence in UI\n\n_What we choose not to render is as important as what we do. A study of negative space, deliberate omission, and the typography of restraint._\n\nA well-set paragraph delivers more comprehension per square inch than a kanban board ever will, because it exploits a system the reader has spent decades training: the act of reading prose.\n",
-        "document_type": "markdown",
+        "content": "What we choose not to render is as important as what we do. A study of negative space, deliberate omission, and the typography of restraint.\n\nA well-set paragraph delivers more comprehension per square inch than a kanban board ever will, because it exploits a system the reader has spent decades training: the act of reading prose.",
+        "document_type": "plaintext",
         "excerpt": "What we choose not to render is as important as what we do. A study of negative space, deliberate omission, and the typography of restraint.",
         "published_at_iso": "2024-03-18T09:00:00Z",
         "updated_at_iso": "2024-03-18T09:00:00Z",
@@ -136,7 +137,7 @@
         "slug": "typography",
         "path": "typography",
         "content": "Typography page is rendered by the theme.",
-        "document_type": "markdown",
+        "document_type": "plaintext",
         "excerpt": "A measured voice, set in Crimson Pro and IBM Plex Mono.",
         "status": "published"
       },
@@ -159,8 +160,8 @@
         "title": "Vanguard Protocol",
         "slug": "vanguard-protocol",
         "path": "work/vanguard-protocol",
-        "content": "## The brief\n\nRedesigning the reconciliation engine for decentralized ledgers. The challenge was making cryptographic finality legible to institutional compliance officers without abstracting away the underlying risk mechanics.\n\n## Approach\n\nThe research surfaced a recurring tension: compliance teams wanted certainty, while engineering wanted to expose probabilistic guarantees as they actually are. We reframed the question as a typographic one — what does honest uncertainty look like, in a number and in a chart, when the reader is a senior auditor?\n\n## Outcome\n\nThe new reconciliation surface separated finality state from operational state, and made the wait visible rather than hiding it behind spinners. Auditor onboarding time dropped from six weeks to nine days.\n",
-        "document_type": "markdown",
+        "content": "<h2>The brief</h2>\n<p>Redesigning the reconciliation engine for decentralized ledgers. The challenge was making cryptographic finality legible to institutional compliance officers without abstracting away the underlying risk mechanics.</p>\n<h2>Approach</h2>\n<p>The research surfaced a recurring tension: compliance teams wanted certainty, while engineering wanted to expose probabilistic guarantees as they actually are. We reframed the question as a typographic one: what does honest uncertainty look like, in a number and in a chart, when the reader is a senior auditor?</p>\n<h2>Outcome</h2>\n<p>The new reconciliation surface separated finality state from operational state, and made the wait visible rather than hiding it behind spinners. Auditor onboarding time dropped from six weeks to nine days.</p>\n",
+        "document_type": "html",
         "excerpt": "Redesigning the reconciliation engine for decentralized ledgers. The challenge was making cryptographic finality legible to institutional compliance officers without abstracting away the underlying risk mechanics.",
         "featured_image": "/assets/img/case-2.jpg",
         "status": "published",

@@ -1,0 +1,19 @@
+{{#if pagination.enabled}}
+  {{#if pagination.has_multiple_pages}}
+    <div class="pagination-wrap">
+      <nav class="pagination" aria-label="Pagination">
+        {{#if pagination.has_prev}}<a href="{{pagination.prev_url}}">← Previous</a>{{#else}}<span class="disabled">← Previous</span>{{/if}}
+        <span class="pages">
+          {{#for page in pagination.window}}
+            {{#if_eq page.kind "gap"}}
+              <span class="page-gap" aria-hidden="true">…</span>
+            {{#else_if_eq page.kind "page"}}
+              <a href="{{page.url}}" class="page-link {{#if page.current}}current{{/if}}">{{page.number}}</a>
+            {{/if_eq}}
+          {{/for}}
+        </span>
+        {{#if pagination.has_next}}<a href="{{pagination.next_url}}">Next →</a>{{#else}}<span class="disabled">Next →</span>{{/if}}
+      </nav>
+    </div>
+  {{/if}}
+{{/if}}

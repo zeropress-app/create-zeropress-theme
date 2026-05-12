@@ -10,10 +10,6 @@
   function currentTheme() {
     return root.getAttribute("data-theme") || "light";
   }
-  try {
-    var saved = localStorage.getItem(THEME_KEY);
-    if (saved) setTheme(saved);
-  } catch (e) {}
 
   document.addEventListener("click", function (e) {
     var btn = e.target.closest && e.target.closest("[data-theme-toggle]");
@@ -54,39 +50,5 @@
     };
     document.addEventListener("scroll", update, { passive: true });
     update();
-  }
-
-  // Demo newsletter feedback
-  document.querySelectorAll("[data-newsletter-form]").forEach(function (form) {
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      var status = form.parentElement && form.parentElement.querySelector("[data-newsletter-status]");
-      if (status) {
-        status.textContent = "Thanks. This demo subscription form is not connected yet.";
-        status.hidden = false;
-      }
-      form.reset();
-    });
-  });
-
-  // TOC autobuild from headings if container present
-  var tocHost = document.querySelector("[data-zp-toc]");
-  if (tocHost) {
-    var headings = document.querySelectorAll(".article__body h2, .article__body h3");
-    if (headings.length) {
-      var ol = document.createElement("ol");
-      headings.forEach(function (h) {
-        if (!h.id) h.id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-        var li = document.createElement("li");
-        li.className = "toc-l" + h.tagName.charAt(1);
-        var a = document.createElement("a");
-        a.href = "#" + h.id;
-        a.textContent = h.textContent;
-        li.appendChild(a);
-        ol.appendChild(li);
-      });
-      tocHost.appendChild(ol);
-      tocHost.hidden = false;
-    }
   }
 })();

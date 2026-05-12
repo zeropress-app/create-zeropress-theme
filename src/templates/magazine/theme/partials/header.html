@@ -1,8 +1,8 @@
 <header class="topbar">
   <div class="topbar__row">
-    <div class="topbar__date smallcaps">{{site.title}} — Issue Nº 04</div>
+    <div class="topbar__date smallcaps">{{#if site.meta.issue_label}}{{site.meta.issue_label}}{{#else}}{{site.title}}{{/if}}</div>
     <div class="topbar__brand">
-      <a href="/"><span class="brand-mark">Æ</span><span class="brand-word">ther — Quarterly</span></a>
+      <a href="/"><span class="brand-mark">{{#if site.meta.brand_mark}}{{site.meta.brand_mark}}{{#else}}Æ{{/if}}</span><span class="brand-word">{{#if site.meta.brand_word}}{{site.meta.brand_word}}{{#else}}{{site.title}}{{/if}}</span></a>
     </div>
     <div class="topbar__actions">
       <button type="button" class="topbar__btn" data-theme-toggle aria-label="Toggle color theme">

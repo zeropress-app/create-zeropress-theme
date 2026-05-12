@@ -51,7 +51,7 @@
       {{#if widget.title}}<h2>{{widget.title}}</h2>{{/if}}
       <div class="taxonomy-list taxonomy-list--stack widget-link-list">
         {{#for item in widget.items}}
-          <a href="{{item.url}}" target="{{item.target}}">{{item.label}}</a>
+          <a href="{{item.url}}" target="{{item.target}}" rel="noreferrer noopener">{{item.label}}</a>
         {{/for}}
       </div>
     </section>
@@ -59,18 +59,16 @@
     <section class="content-card sidebar-card widget-card widget-card--search">
       <p class="section-kicker">Widget</p>
       {{#if widget.title}}<h2>{{widget.title}}</h2>{{/if}}
-      <div class="widget-search" data-search-root>
+      <div class="widget-search">
         {{#if widget.title}}
           <label class="sr-only" for="{{widget.dom_id}}">{{widget.title}}</label>
         {{#else}}
           <label class="sr-only" for="{{widget.dom_id}}">Search</label>
         {{/if}}
-        <form class="search-theme-wrapper" data-search-form>
-          <input id="{{widget.dom_id}}" class="search-input" data-theme-search type="search" placeholder="{{widget.placeholder}}" autocomplete="off" enterkeyhint="search">
-          <button class="widget-search-button" type="submit">{{widget.button_label}}</button>
-        </form>
-        <div class="search-results" data-search-results hidden></div>
-        <p class="search-feedback search-feedback--sidebar" data-search-feedback aria-live="polite"></p>
+        <div class="search-theme-wrapper">
+          <input id="{{widget.dom_id}}" class="search-input" type="search" placeholder="{{widget.placeholder}}" autocomplete="off" enterkeyhint="search" disabled>
+          <button class="widget-search-button" type="button">{{widget.button_label}}</button>
+        </div>
       </div>
     </section>
   {{#else_if_eq widget.type "profile"}}

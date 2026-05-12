@@ -1,12 +1,16 @@
 {{#if route.is_front_page}}
   <div class="shell page-shell">
-    <article class="article"><div class="article__body prose">{{page.html}}</div></article>
+    <article class="article">
+      {{#if_eq page.document_type "plaintext"}}<header class="article__header"><h1 class="serif-xxl">{{page.title}}</h1></header>{{/if_eq}}
+      <div class="article__body prose">{{page.html}}</div>
+    </article>
   </div>
 {{#else}}
   <div class="shell page-shell">
     <article class="article">
       <header class="article__header">
         <p class="eyebrow">Page</p>
+        {{#if_eq page.document_type "plaintext"}}<h1 class="serif-xxl">{{page.title}}</h1>{{/if_eq}}
       </header>
       <div class="article__body prose">{{page.html}}</div>
     </article>

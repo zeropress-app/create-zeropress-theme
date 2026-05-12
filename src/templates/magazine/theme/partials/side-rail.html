@@ -1,5 +1,5 @@
 <aside class="side-rail" aria-label="Section navigation">
-  <a class="side-rail__mark" href="#cover">Æ</a>
+  <a class="side-rail__mark" href="#cover">{{#if site.meta.brand_mark}}{{site.meta.brand_mark}}{{#else}}Æ{{/if}}</a>
   <nav class="side-rail__nav">
     <ul data-side-rail>
       <li><a href="#cover" data-rail="cover"><span class="num">01</span><span class="bar"></span><span class="lbl">Cover</span></a></li>
@@ -9,5 +9,5 @@
       <li><a href="#subscribe" data-rail="subscribe"><span class="num">05</span><span class="bar"></span><span class="lbl">Masthead</span></a></li>
     </ul>
   </nav>
-  <div class="side-rail__issue">Issue Nº 04</div>
+  <div class="side-rail__issue">{{#if site.meta.issue_label}}{{site.meta.issue_label}}{{#else}}{{site.title}}{{/if}}</div>
 </aside>

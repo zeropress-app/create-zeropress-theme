@@ -1,11 +1,11 @@
 {
-  "name": "ZeroPress Build Pages Docs",
+  "name": "ZeroPress Docs Starter",
   "namespace": "zeropress",
   "slug": "zeropress-docs",
   "version": "0.5.0",
   "license": "MIT",
   "runtime": "0.5",
-  "description": "Bundled documentation theme for @zeropress/build-pages",
+  "description": "General-purpose ZeroPress documentation starter with no-JS navigation, system dark mode, and Markdown-friendly prose styling.",
   "features": {
     "comments": false,
     "newsletter": false,

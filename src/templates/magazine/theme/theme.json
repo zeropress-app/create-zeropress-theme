@@ -9,7 +9,7 @@
   "description": "Editorial magazine theme. Numbered side rail, sectioned landing (cover, features, essay, gallery, masthead), and a long-form post layout with reading progress and drop caps.",
   "features": {
     "comments": false,
-    "newsletter": true,
+    "newsletter": false,
     "postIndex": true
   },
   "menuSlots": {
@@ -26,6 +26,164 @@
     "sidebar": {
       "title": "Sidebar widgets",
       "description": "Right-rail widget stack on category, tag, and archive routes"
+    }
+  },
+  "siteMeta": {
+    "issue_label": {
+      "title": "Issue Label",
+      "description": "Short label shown in the masthead and cover.",
+      "type": "string",
+      "default": "Issue 04 — The Quiet Issue"
+    },
+    "issue_season": {
+      "title": "Issue Season",
+      "description": "Season or date label shown near the cover title.",
+      "type": "string",
+      "default": "Spring / 2026"
+    },
+    "brand_mark": {
+      "title": "Brand Mark",
+      "description": "Short mark shown before the wordmark.",
+      "type": "string",
+      "default": "Æ"
+    },
+    "brand_word": {
+      "title": "Brand Word",
+      "description": "Wordmark text shown in the header.",
+      "type": "string",
+      "default": "ther — Quarterly"
+    },
+    "cover_headline_prefix": {
+      "title": "Cover Headline Prefix",
+      "description": "Text before the emphasized cover word.",
+      "type": "string",
+      "default": "On the art of"
+    },
+    "cover_headline_emphasis": {
+      "title": "Cover Headline Emphasis",
+      "description": "Emphasized cover headline word or phrase.",
+      "type": "string",
+      "default": "stillness"
+    },
+    "cover_headline_suffix": {
+      "title": "Cover Headline Suffix",
+      "description": "Text after the emphasized cover word.",
+      "type": "string",
+      "default": "and the rooms it builds."
+    },
+    "cover_photo_credit": {
+      "title": "Cover Photo Credit",
+      "description": "Small credit line shown on the cover image.",
+      "type": "string",
+      "default": "Photograph — M. Lavigne"
+    },
+    "features_label": {
+      "title": "Features Label",
+      "description": "Eyebrow label for the feature grid.",
+      "type": "string",
+      "default": "Section II — Features"
+    },
+    "features_heading": {
+      "title": "Features Heading",
+      "description": "Heading for the feature grid.",
+      "type": "string",
+      "default": "Three pieces, read slowly."
+    },
+    "features_link_label": {
+      "title": "Features Link Label",
+      "description": "Archive link label near the feature grid.",
+      "type": "string",
+      "default": "All Features →"
+    },
+    "essay_label": {
+      "title": "Essay Label",
+      "description": "Eyebrow label for the essay section.",
+      "type": "string",
+      "default": "Section III — Essay"
+    },
+    "essay_page_marker": {
+      "title": "Essay Page Marker",
+      "description": "Decorative page marker for the essay section.",
+      "type": "string",
+      "default": "Pp. 42"
+    },
+    "gallery_label": {
+      "title": "Gallery Label",
+      "description": "Eyebrow label for the gallery section.",
+      "type": "string",
+      "default": "Section IV — Portfolio"
+    },
+    "gallery_heading": {
+      "title": "Gallery Heading",
+      "description": "Heading for the gallery section.",
+      "type": "string",
+      "default": "Four plates from the field."
+    },
+    "gallery_credit": {
+      "title": "Gallery Credit",
+      "description": "Small credit line near the gallery heading.",
+      "type": "string",
+      "default": "Photographs — Various"
+    },
+    "subscribe_label": {
+      "title": "Subscribe Label",
+      "description": "Eyebrow label for the subscription section.",
+      "type": "string",
+      "default": "Section V — Subscribe"
+    },
+    "subscribe_heading": {
+      "title": "Subscribe Heading",
+      "description": "Heading for the subscription section.",
+      "type": "string",
+      "default": "Four issues a year, delivered by post."
+    },
+    "subscribe_note": {
+      "title": "Subscribe Note",
+      "description": "Short subscription helper copy.",
+      "type": "string",
+      "default": "Printed on uncoated stock, hand-stitched, and sent the long way round."
+    },
+    "subscribe_price": {
+      "title": "Subscribe Price",
+      "description": "Small subscription note shown below the demo signup field.",
+      "type": "string",
+      "default": "From €72 / year. Cancel anytime."
+    },
+    "colophon_editor": {
+      "title": "Colophon Editor",
+      "description": "Editor line in the colophon section.",
+      "type": "string",
+      "default": "M. Lavigne"
+    },
+    "colophon_art_director": {
+      "title": "Colophon Art Director",
+      "description": "Art director line in the colophon section.",
+      "type": "string",
+      "default": "S. Beaumont"
+    },
+    "colophon_photography": {
+      "title": "Colophon Photography",
+      "description": "Photography line in the colophon section.",
+      "type": "string",
+      "default": "I. Marot"
+    },
+    "colophon_type": {
+      "title": "Colophon Type",
+      "description": "Type system line in the colophon section.",
+      "type": "string",
+      "default": "Fraunces & Inter"
+    },
+    "colophon_printer": {
+      "title": "Colophon Printer",
+      "description": "Printer line in the colophon section.",
+      "type": "string",
+      "default": "Atelier Reliure, Lyon"
+    },
+    "colophon_established": {
+      "title": "Colophon Established",
+      "description": "Established line in the colophon section.",
+      "type": "string",
+      "default": "MMXXII"
     }
   }
 }

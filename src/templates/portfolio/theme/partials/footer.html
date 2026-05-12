@@ -1,6 +1,6 @@
 <footer class="site-footer">
-  <div class="site-footer__year">
-    <span class="mono-eyebrow">© 2026</span>
+  <div class="site-footer__brand">
+    <span class="mono-eyebrow">{{#if site.footer.copyright_text}}{{site.footer.copyright_text}}{{#else}}{{site.title}}{{/if}}</span>
   </div>
   <div class="site-footer__cols">
     {{#if menus.footer.items}}
@@ -21,7 +21,6 @@
     {{/if}}
   </div>
   <div class="site-footer__attribution mono-eyebrow muted">
-    {{#if site.footer.copyright_text}}<span>{{site.footer.copyright_text}}</span>{{/if}}
-    {{#if site.footer.attribution.enabled}}<span>· Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a></span>{{/if}}
+    {{#if site.footer.attribution.enabled}}<span>Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a></span>{{/if}}
   </div>
 </footer>

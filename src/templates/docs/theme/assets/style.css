@@ -322,7 +322,9 @@ h1 {
 }
 
 .prose h1 {
-  display: none;
+  margin-top: 2.5rem;
+  color: var(--ink);
+  font-size: clamp(2rem, 4vw, 2.5rem);
 }
 
 .prose h2 {
@@ -336,6 +338,12 @@ h1 {
 .prose h3 {
   margin-top: 1.75rem;
   color: var(--ink);
+}
+
+.prose h4 {
+  margin: 1.5rem 0 0.5rem;
+  color: var(--ink);
+  font-size: 1.05rem;
 }
 
 .prose p,
@@ -372,6 +380,19 @@ h1 {
   padding: 0;
 }
 
+.prose kbd {
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 0.05rem 0.35rem;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.85em;
+  text-align: center;
+}
+
 .prose table {
   display: block;
   width: 100%;
@@ -401,6 +422,38 @@ h1 {
   border-left: 4px solid var(--accent);
   background: var(--accent-soft);
   color: var(--ink);
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.prose figure {
+  margin: 1.75rem 0;
+}
+
+.prose figcaption {
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.prose .html-demo {
+  display: grid;
+  gap: 1rem;
+}
+
+.prose .html-demo h2 {
+  margin-top: 0;
+}
+
+.prose .html-demo__panel {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
 .prose .contains-task-list {

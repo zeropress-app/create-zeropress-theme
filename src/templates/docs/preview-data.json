@@ -5,8 +5,8 @@
   "generated_at": "2026-05-10T00:00:00Z",
   "site": {
     "title": "ZeroPress Docs Starter",
-    "description": "A compact documentation starter built with ZeroPress.",
-    "url": "https://example.com",
+    "description": "A compact documentation starter for writing clear technical pages with ZeroPress.",
+    "url": "",
     "mediaBaseUrl": "",
     "locale": "en-US",
     "postsPerPage": 10,
@@ -34,17 +34,33 @@
       {
         "title": "Getting Started",
         "slug": "getting-started",
-        "content": "## Install\n\nCreate your first documentation page and keep content in preview-data or generated Markdown sources.\n\n## Build\n\nRun `zeropress-build` with this theme and preview-data fixture to produce static HTML.\n",
+        "content": "## Install\n\nCreate your first documentation page and keep content in preview-data, generated Markdown sources, or your own authoring pipeline.\n\n```bash\nnpm create zeropress-theme -- --template docs --theme-slug docs-starter\nnpm install\nnpm run build\n```\n\n## Build\n\nRun `zeropress-build` with this theme and preview-data fixture to produce static HTML.\n\n> [!TIP]\n> Keep your source content small at first. Add menus, collections, and custom HTML only after the first build is working.\n\n## Publish\n\nThe generated output is static HTML, CSS, JavaScript, and public assets. It can be served by any static host.\n",
         "document_type": "markdown",
         "excerpt": "Create and build a small ZeroPress documentation site.",
         "status": "published"
       },
       {
+        "title": "Markdown Compatibility",
+        "slug": "markdown-compatibility",
+        "content": "## Overview\n\nThis page shows the Markdown features a documentation theme should make readable. The page title is rendered by the template, so the body begins at `h2`.\n\n## Tables\n\n| Feature | Rendered by build-core | Theme responsibility |\n|---|---:|---|\n| Heading `id` | Yes | Style scroll targets |\n| TOC data | Yes | Place and style navigation |\n| Alerts | Yes | Style `zp-alert` blocks |\n| Mermaid fences | Preserved as code | Optional progressive enhancement |\n\n## Task Lists\n\n- [x] Render disabled checkboxes\n- [x] Keep list text aligned\n- [ ] Decide whether to add interactive project tracking elsewhere\n\n## Alerts\n\n> [!NOTE]\n> Notes are useful for extra context that should not interrupt the main flow.\n\n> [!IMPORTANT]\n> Important callouts should be visually distinct, but still readable in dark mode.\n\n> [!WARNING]\n> Warning blocks are content, not UI chrome. They need spacing that works inside prose.\n\n## Code Blocks\n\n```js\nexport function createPage(title) {\n  return {\n    title,\n    status: 'published',\n  };\n}\n```\n\n## Mermaid Fences\n\nZeroPress preserves Mermaid as a fenced code block. A theme or site can add client-side rendering later.\n\n```mermaid\nflowchart LR\n  Markdown --> BuildCore\n  BuildCore --> HTML\n  HTML --> Theme\n```\n\n## Inline Elements\n\nUse `inline code`, **strong emphasis**, _emphasis_, ~~strikethrough~~, and keyboard hints like <kbd>Ctrl</kbd> + <kbd>K</kbd> when they help the reader scan.\n\n## Nested Structure\n\n### A third-level section\n\nUse h3 for local grouping.\n\n#### A fourth-level section\n\nUse h4 sparingly. It appears in the TOC, so it should represent a useful navigation target.\n\n## Blockquotes\n\n> Documentation should be calm enough to read twice and structured enough to scan once.\n",
+        "document_type": "markdown",
+        "excerpt": "A compact page that exercises tables, task lists, alerts, code fences, and TOC rendering.",
+        "status": "published"
+      },
+      {
         "title": "Theme Runtime",
         "slug": "theme-runtime",
-        "content": "## Templates\n\nZeroPress themes use `layout.html`, route templates, partials, and theme-owned assets.\n\n## Render Context\n\nTemplates receive route data, menus, taxonomies, collections, and site metadata from the build step.\n",
+        "content": "## Templates\n\nZeroPress themes use `layout.html`, route templates, partials, and theme-owned assets.\n\n## Render Context\n\nTemplates receive route data, menus, taxonomies, collections, and site metadata from the build step.\n\n### Common Context\n\nCommon values include `site`, `menus`, `widgets`, `taxonomies`, and `collections`.\n\n### Route Context\n\nPage routes expose `page`; post routes expose `post`; taxonomy routes expose `taxonomy`.\n",
         "document_type": "markdown",
         "excerpt": "A short overview of the ZeroPress theme runtime.",
+        "status": "published"
+      },
+      {
+        "title": "HTML Content Example",
+        "slug": "html-content-example",
+        "content": "<section class=\"html-demo\">\n  <p class=\"eyebrow\">Trusted HTML</p>\n  <h2>HTML documents are rendered as provided</h2>\n  <p>This page uses <code>document_type: \"html\"</code>. ZeroPress treats this body as trusted content and places it inside the docs template.</p>\n  <div class=\"html-demo__panel\">\n    <strong>Use this for migrated pages, embedded demos, or hand-authored static sections.</strong>\n    <p>For general documentation, Markdown remains the preferred authoring format.</p>\n  </div>\n</section>",
+        "document_type": "html",
+        "excerpt": "A small trusted HTML page rendered inside the docs template.",
         "status": "published"
       }
     ],
@@ -70,8 +86,22 @@
           "children": []
         },
         {
+          "title": "Markdown Compatibility",
+          "url": "/markdown-compatibility/",
+          "type": "page",
+          "target": "_self",
+          "children": []
+        },
+        {
           "title": "Theme Runtime",
           "url": "/theme-runtime/",
+          "type": "page",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "HTML Example",
+          "url": "/html-content-example/",
           "type": "page",
           "target": "_self",
           "children": []

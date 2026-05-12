@@ -6,7 +6,7 @@
   "version": "0.5.0",
   "license": "MIT",
   "runtime": "0.5",
-  "description": "Editorial portfolio + blog theme. Numbered section labels, paper-and-ink palette with terracotta accent, Crimson Pro + IBM Plex Mono. Curated case studies on a quiet landing, with a long-form writing index and a mock contact form.",
+  "description": "Editorial portfolio + blog theme. Numbered section labels, paper-and-ink palette with terracotta accent, Crimson Pro + IBM Plex Mono. Curated case studies on a quiet landing, with a long-form writing index and a contact form shell.",
   "features": {
     "comments": false,
     "newsletter": false,
@@ -31,26 +31,32 @@
   "siteMeta": {
     "author_name": {
       "title": "Author name",
+      "description": "Displayed in the header brand area.",
       "type": "string"
     },
     "author_email": {
       "title": "Author email",
+      "description": "Displayed below the author name.",
       "type": "string"
     },
     "hero_headline": {
       "title": "Hero headline",
+      "description": "Main home page headline.",
       "type": "string"
     },
     "hero_lede": {
       "title": "Hero lede",
+      "description": "Introductory sentence before the emphasized phrase.",
       "type": "string"
     },
     "hero_lede_emphasis": {
       "title": "Hero lede emphasis",
+      "description": "Final emphasized phrase in the home page lede.",
       "type": "string"
     },
     "colophon": {
       "title": "Colophon line",
+      "description": "Short footer note about the portfolio.",
       "type": "string"
     }
   },

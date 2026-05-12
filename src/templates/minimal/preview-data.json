@@ -1,19 +1,25 @@
 {
   "$schema": "https://zeropress.dev/schemas/preview-data.v0.5.schema.json",
   "version": "0.5",
-  "generator": "margin-minimal-react-mock",
+  "generator": "create-zeropress-theme",
   "generated_at": "2026-05-11T10:00:00Z",
   "site": {
     "title": "Margin",
     "description": "A small journal of essays and notes — written slowly, published when finished.",
-    "url": "https://margin.test",
-    "mediaBaseUrl": "https://media.margin.test",
+    "url": "",
+    "mediaBaseUrl": "",
     "locale": "en-US",
     "postsPerPage": 5,
     "dateFormat": "MMMM DD, YYYY",
     "timeFormat": "HH:mm",
     "timezone": "UTC",
-    "disallowComments": false
+    "disallowComments": false,
+    "footer": {
+      "copyright_text": "Margin. Written slowly.",
+      "attribution": {
+        "enabled": true
+      }
+    }
   },
   "content": {
     "authors": [
@@ -28,7 +34,7 @@
         "public_id": 2001,
         "title": "Typography",
         "slug": "typography",
-        "content": "# Typography\n\n_A field guide to the type scale, rhythm, and small details that make reading on the web feel effortless._\n\nTypography is the quiet architecture of reading. When it works, you don't notice it — you just keep going.\n\nThis post is a small showcase of the typographic elements available on this blog: headings, paragraphs, lists, quotes, code, and the spaces between them.\n\n## Headings establish hierarchy\n\nA page without hierarchy is a page without a map. Headings tell the eye where to land, and where it can safely skip ahead. The serif used here is Fraunces — warm, confident, and a little bit theatrical.\n\n### A smaller heading, for sub-sections\n\nThree levels of heading is usually enough. Anything deeper and you're probably writing an outline, not an essay.\n\n## Body text is where you live\n\nMost of a reader's time is spent here, in the body. Long measure, generous line-height, and a touch of contrast against the background. Inter handles the small sizes; the prose stays readable from a phone to a desktop.\n\nInline elements should feel native to the paragraph: a link is underlined with a soft border, emphasis is restrained, and code inside a sentence — like `useState` — has its own quiet styling.\n\n> Typography is what language looks like.\n>\n> — Ellen Lupton\n\n## Lists organize, but sparingly\n\nThree things make a list useful:\n\n- Items that are genuinely parallel.\n- Short phrases, not full paragraphs.\n- A reason to be a list at all.\n\nOrdered lists earn their numbers when sequence matters:\n\n1. Write the draft.\n2. Cut a third of it.\n3. Read it out loud.\n4. Cut a third again.\n\n## Code, when it's needed\n\nEven a writing-focused blog occasionally needs a snippet. Monospace, a soft surface, and just enough padding to breathe:\n\n```ts\nfunction greet(name: string) {\n  return `Hello, ${name}.`;\n}\n\ngreet(\"reader\");\n```\n\n---\n\n## Rhythm is everything\n\nSpacing is typography too. The vertical rhythm between paragraphs, the air around a heading, the pause of a horizontal rule — these are the punctuation of the page.\n\nGet those right, and the words almost read themselves.\n",
+        "content": "_A field guide to the type scale, rhythm, and small details that make reading on the web feel effortless._\n\nTypography is the quiet architecture of reading. When it works, you don't notice it — you just keep going.\n\nThis post is a compact Markdown compatibility sample for the minimal starter.\n\n## Headings establish hierarchy\n\nA page without hierarchy is a page without a map. Headings tell the eye where to land, and where it can safely skip ahead.\n\n### A smaller heading, for sub-sections\n\nThree levels of heading is usually enough. Anything deeper and you're probably writing an outline, not an essay.\n\n## Inline rhythm\n\nInline elements should feel native to the paragraph: a link to [ZeroPress](https://zeropress.dev/), emphasis with *italics*, strong emphasis with **bold text**, inline code like `useState`, and a short correction with ~~deleted text~~.\n\n> Typography is what language looks like.\n>\n> — Ellen Lupton\n\n## Lists and tasks\n\nThree things make a list useful:\n\n- Items that are genuinely parallel.\n- Short phrases, not full paragraphs.\n- A reason to be a list at all.\n\nA small checklist renders as disabled task inputs:\n\n- [x] Draft the piece.\n- [x] Revise the rhythm.\n- [ ] Publish when it is ready.\n\nOrdered lists earn their numbers when sequence matters:\n\n1. Write the draft.\n2. Cut a third of it.\n3. Read it out loud.\n4. Cut a third again.\n\n## Tables\n\n| Element | Use |\n| --- | --- |\n| H2 | Major sections |\n| H3 | Supporting sections |\n| Paragraph | Long-form reading |\n| Code | Technical notes |\n\n## Alerts\n\n> [!NOTE]\n> Notes carry neutral context that helps the reader keep moving.\n\n> [!TIP]\n> Tips suggest a practical next step.\n\n> [!IMPORTANT]\n> Important blocks point at details that should not be missed.\n\n> [!WARNING]\n> Warnings call out risk before the reader acts.\n\n> [!CAUTION]\n> Cautions are for the sharp edges of a workflow.\n\n## Code fences\n\nEven a writing-focused blog occasionally needs a snippet:\n\n```ts\nfunction greet(name: string) {\n  return `Hello, ${name}.`;\n}\n\ngreet(\"reader\");\n```\n\nMermaid remains a code block for theme-owned progressive enhancement:\n\n```mermaid\nflowchart LR\n  markdown[Markdown] --> render[ZeroPress render]\n  render --> html[Static HTML]\n```\n\n---\n\n## Rhythm is everything\n\nSpacing is typography too. The vertical rhythm between paragraphs, the air around a heading, the pause of a horizontal rule — these are the punctuation of the page.\n\nGet those right, and the words almost read themselves.\n",
         "document_type": "markdown",
         "excerpt": "A field guide to the type scale, rhythm, and small details that make reading on the web feel effortless.",
         "published_at_iso": "2026-04-18T09:00:00Z",
@@ -49,7 +55,7 @@
         "public_id": 2002,
         "title": "On writing less",
         "slug": "on-writing-less",
-        "content": "# On writing less\n\n_The shortest essays often take the longest to write. A note on restraint, revision, and the quiet power of leaving things out._\n\nThere is a particular kind of pleasure in deleting a sentence you spent an hour writing. It feels wasteful at first — then, almost immediately, like relief.\n\nMost of what we write is scaffolding. It exists so the rest of the building can stand. Once the walls hold, the scaffolding has to come down, or the thing you built will never be seen.\n\nThe hardest paragraphs to cut are the ones that are merely good. Bad writing announces itself; good writing hides. It earns its place by being competent, and competence is enough to survive most edits.\n\nBut a piece of writing is not the sum of its competent parts. It is the shape they make together. And shape, almost always, comes from absence.\n",
+        "content": "_The shortest essays often take the longest to write. A note on restraint, revision, and the quiet power of leaving things out._\n\nThere is a particular kind of pleasure in deleting a sentence you spent an hour writing. It feels wasteful at first — then, almost immediately, like relief.\n\nMost of what we write is scaffolding. It exists so the rest of the building can stand. Once the walls hold, the scaffolding has to come down, or the thing you built will never be seen.\n\nThe hardest paragraphs to cut are the ones that are merely good. Bad writing announces itself; good writing hides. It earns its place by being competent, and competence is enough to survive most edits.\n\nBut a piece of writing is not the sum of its competent parts. It is the shape they make together. And shape, almost always, comes from absence.\n",
         "document_type": "markdown",
         "excerpt": "The shortest essays often take the longest to write. A note on restraint, revision, and the quiet power of leaving things out.",
         "published_at_iso": "2026-04-12T09:00:00Z",
@@ -70,7 +76,7 @@
         "public_id": 2003,
         "title": "A quiet morning in Kyoto",
         "slug": "a-quiet-morning-in-kyoto",
-        "content": "# A quiet morning in Kyoto\n\n_Notes from a week of walking, looking, and drinking too much coffee in a city that rewards slowness._\n\nI arrived in Kyoto on a Tuesday and didn't speak to anyone for almost two days. Not by design — just by the friction of a new place, where every small interaction requires a little more attention than you have to spare.\n\nThe mornings were the best part. I'd walk along the Kamo river before the cyclists arrived, when the light was still grey and the herons stood in the shallows like they were waiting for something specific.\n\nCities reveal themselves at this hour. Without traffic, without crowds, you can hear a place breathe.\n",
+        "content": "_Notes from a week of walking, looking, and drinking too much coffee in a city that rewards slowness._\n\nI arrived in Kyoto on a Tuesday and didn't speak to anyone for almost two days. Not by design — just by the friction of a new place, where every small interaction requires a little more attention than you have to spare.\n\nThe mornings were the best part. I'd walk along the Kamo river before the cyclists arrived, when the light was still grey and the herons stood in the shallows like they were waiting for something specific.\n\nCities reveal themselves at this hour. Without traffic, without crowds, you can hear a place breathe.\n",
         "document_type": "markdown",
         "excerpt": "Notes from a week of walking, looking, and drinking too much coffee in a city that rewards slowness.",
         "published_at_iso": "2026-03-28T09:00:00Z",
@@ -91,8 +97,8 @@
         "public_id": 2004,
         "title": "Tools I actually use",
         "slug": "tools-i-actually-use",
-        "content": "# Tools I actually use\n\n_After years of trying every new app, I keep coming back to the same handful. Here's the short list._\n\nEvery January I try a new productivity system. Every February I'm back to a plain text file and a paper notebook.\n\nThe tools that survive aren't the most powerful. They're the ones I forget I'm using.\n",
-        "document_type": "markdown",
+        "content": "<p><em>After years of trying every new app, I keep coming back to the same handful. Here's the short list.</em></p>\n<p>This post uses <strong>document_type: html</strong>. ZeroPress sanitizes the trusted body shape before it reaches the theme.</p>\n<h2>Plain HTML can still be structured</h2>\n<p>Use headings, paragraphs, links, lists, and tables when a generator already has HTML content.</p>\n<ul>\n  <li>A plain text file for notes.</li>\n  <li>A paper notebook for sketches.</li>\n  <li>A calendar that does not try to become a philosophy.</li>\n</ul>\n<table>\n  <thead><tr><th>Tool</th><th>Reason</th></tr></thead>\n  <tbody><tr><td>Notebook</td><td>Low friction</td></tr><tr><td>Text file</td><td>Portable</td></tr></tbody>\n</table>",
+        "document_type": "html",
         "excerpt": "After years of trying every new app, I keep coming back to the same handful. Here's the short list.",
         "published_at_iso": "2026-03-14T09:00:00Z",
         "updated_at_iso": "2026-03-14T10:00:00Z",
@@ -112,7 +118,7 @@
         "public_id": 2005,
         "title": "What the garden taught me",
         "slug": "what-the-garden-taught-me",
-        "content": "# What the garden taught me\n\n_A first season of growing vegetables, and the small lessons that arrived along with the tomatoes._\n\nI grew six tomato plants last summer. Three thrived, two were average, one died for reasons I never figured out.\n\nThe garden does not care about my schedule. It does not care that I forgot to water on Thursday, or that I was traveling for the weekend. It responds to what I do, not what I intend.\n",
+        "content": "_A first season of growing vegetables, and the small lessons that arrived along with the tomatoes._\n\nI grew six tomato plants last summer. Three thrived, two were average, one died for reasons I never figured out.\n\nThe garden does not care about my schedule. It does not care that I forgot to water on Thursday, or that I was traveling for the weekend. It responds to what I do, not what I intend.\n",
         "document_type": "markdown",
         "excerpt": "A first season of growing vegetables, and the small lessons that arrived along with the tomatoes.",
         "published_at_iso": "2026-02-22T09:00:00Z",
@@ -133,8 +139,8 @@
         "public_id": 2006,
         "title": "The case for boring software",
         "slug": "the-case-for-boring-software",
-        "content": "# The case for boring software\n\n_Novelty is overrated. Most of the time, the right tool is the one that has been quietly working for ten years._\n\nBoring software is software you don't have to think about. It does the thing, it does it the same way it did yesterday, and it will do it the same way tomorrow.\n\nThis is, in fact, the highest praise.\n",
-        "document_type": "markdown",
+        "content": "Novelty is overrated. Most of the time, the right tool is the one that has been quietly working for ten years.\n\nThis post uses document_type: plaintext. ZeroPress escapes the content and turns separated paragraphs into simple paragraph elements.\n\nBoring software is software you don't have to think about. It does the thing, it does it the same way it did yesterday, and it will do it the same way tomorrow.",
+        "document_type": "plaintext",
         "excerpt": "Novelty is overrated. Most of the time, the right tool is the one that has been quietly working for ten years.",
         "published_at_iso": "2026-02-05T09:00:00Z",
         "updated_at_iso": "2026-02-05T10:00:00Z",
@@ -155,7 +161,7 @@
       {
         "title": "About",
         "slug": "about",
-        "content": "# About Margin\n\nMargin is a small journal of essays and notes — written slowly, published when finished.\n\n## Why this site\n\nThere is enough fast writing in the world. This is the slow kind: short pieces, revised more times than they probably deserved, kept around because they still felt true on the third read.\n\n## How it's made\n\nDrafted by hand, transcribed on quiet mornings, set in Fraunces and Inter. No tracking, no popups, no urgency.",
+        "content": "Margin is a small journal of essays and notes — written slowly, published when finished.\n\n## Why this site\n\nThere is enough fast writing in the world. This is the slow kind: short pieces, revised more times than they probably deserved, kept around because they still felt true on the third read.\n\n## How it's made\n\nDrafted by hand, transcribed on quiet mornings, set in Fraunces and Inter. No tracking, no popups, no urgency.",
         "document_type": "markdown",
         "excerpt": "About the Margin journal.",
         "status": "published"
@@ -163,9 +169,17 @@
       {
         "title": "Writing",
         "slug": "writing",
-        "content": "# Writing\n\nA running index of essays and notes lives on the [home page](/). For older pieces, see the [archive](/archive/).",
-        "document_type": "markdown",
+        "content": "A running index of essays and notes lives on the home page.\n\nFor older pieces, see the archive.",
+        "document_type": "plaintext",
         "excerpt": "An index of essays and notes.",
+        "status": "published"
+      },
+      {
+        "title": "HTML Sample",
+        "slug": "html-sample",
+        "content": "<p>This page uses <strong>document_type: html</strong> to show how a generated HTML page can still share the same page template.</p>\n<h2>When to use HTML pages</h2>\n<p>HTML pages are useful when another trusted tool has already produced structured markup.</p>",
+        "document_type": "html",
+        "excerpt": "A small page rendered from HTML content.",
         "status": "published"
       }
     ],
@@ -294,67 +308,11 @@
           "children": []
         },
         {
-          "title": "RSS",
-          "url": "/feed.xml",
+          "title": "HTML Sample",
+          "url": "/html-sample/",
           "type": "custom",
           "target": "_self",
           "children": []
-        },
-        {
-          "title": "Sitemap",
-          "url": "/sitemap.xml",
-          "type": "custom",
-          "target": "_self",
-          "children": []
-        }
-      ]
-    }
-  },
-  "widgets": {
-    "sidebar": {
-      "name": "Sidebar",
-      "items": [
-        {
-          "type": "profile",
-          "title": "About",
-          "settings": {
-            "display_name": "Margin",
-            "affiliation": "A small journal",
-            "bio_short": "Essays and notes, written slowly. New pieces arrive when they're finished, not before.",
-            "avatar": "/originals/2026/05/margin-avatar.jpg"
-          }
-        },
-        {
-          "type": "recent-posts",
-          "title": "Recent",
-          "settings": {
-            "limit": 5,
-            "show_date": true
-          }
-        },
-        {
-          "type": "tags",
-          "title": "Topics",
-          "settings": {
-            "limit": 12,
-            "show_count": true
-          }
-        },
-        {
-          "type": "categories",
-          "title": "Categories",
-          "settings": {
-            "show_count": true,
-            "hierarchical": false
-          }
-        },
-        {
-          "type": "search",
-          "title": "Search",
-          "settings": {
-            "placeholder": "Search the journal",
-            "button_label": "Search"
-          }
         }
       ]
     }

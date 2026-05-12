@@ -5,21 +5,26 @@
   "site": {
     "title": "Margins & Marginalia",
     "description": "Essays, notes, and small observations on writing, design, and slow living.",
-    "url": "https://marginsandmarginalia.test",
-    "mediaBaseUrl": "https://media.marginsandmarginalia.test",
+    "url": "",
+    "mediaBaseUrl": "",
     "locale": "en-US",
     "postsPerPage": 5,
     "dateFormat": "MMMM DD, YYYY",
     "timeFormat": "HH:mm",
     "timezone": "UTC",
-    "disallowComments": false
+    "disallowComments": false,
+    "footer": {
+      "copyright_text": "Margins & Marginalia",
+      "attribution": {
+        "enabled": true
+      }
+    }
   },
   "content": {
     "authors": [
       {
         "id": "11111111-1111-4111-8111-111111111111",
-        "display_name": "Eliza Marsh",
-        "avatar": "/originals/2026/04/eliza-marsh.jpg"
+        "display_name": "Eliza Marsh"
       }
     ],
     "posts": [
@@ -27,7 +32,7 @@
         "public_id": 1001,
         "title": "Color and tokens: a reference for the palette",
         "slug": "color-and-tokens",
-        "content": "# Color and tokens: a reference for the palette\n\n_A working catalog of the semantic color tokens used across this journal — background, foreground, primary, accent, muted, and the rules in between. Use it as a reference when designing new pages or components._\n\n## A small palette, used well\n\n_Color on this site is doing one of three jobs: holding the page, carrying the words, or pointing at something worth pointing at. Everything else is restraint._\n\nEach color is stored as an HSL triplet on a CSS variable, and surfaced through a Tailwind token like `bg-background` or `text-accent`. Components never reach for raw hex — they ask the system for a role, and the system answers in the current theme.\n\n## Surfaces\n\nThe surfaces are the quiet half of the system — the paper the writing sits on. They change with the theme, but their relationship to one another stays constant.\n\n| Name | Token | HSL | Role |\n|---|---|---|---|\n| Background | `--background` | `40 33% 97%` | The page itself |\n| Foreground | `--foreground` | `25 20% 15%` | Body text and primary marks |\n| Card | `--card` | `0 0% 100%` | Lifted surfaces, post bodies |\n| Muted | `--muted` | `35 20% 94%` | Inline code, chips, soft fills |\n| Secondary | `--secondary` | `35 25% 92%` | Tag pills, quiet buttons |\n\n## Ink and accent\n\nPrimary is the ink — the dark warm tone that carries headings and emphasis. Accent is the only color allowed to raise its voice; it is reserved for links, active states, and the occasional rule.\n\n| Name | Token | HSL | Role |\n|---|---|---|---|\n| Primary | `--primary` | `25 35% 25%` | Headings, strong type, ink marks |\n| Accent | `--accent` | `15 65% 50%` | Links, focus rings, callouts |\n| Destructive | `--destructive` | `0 70% 50%` | Errors and irreversible actions |\n\n## Lines and highlights\n\nBorders, rules, and highlights are the punctuation of the layout. They are almost never pure black — they are tinted to belong to the surface they sit on.\n\n| Name | Token | HSL | Role |\n|---|---|---|---|\n| Border | `--border` | `30 15% 88%` | Inputs, cards, soft divisions |\n| Rule | `--rule` | `25 15% 80%` | Editorial rules between sections |\n| Highlight | `--highlight` | `45 80% 88%` | Marker pen, gentle emphasis |\n| Ring | `--ring` | `15 65% 50%` | Focus outlines |\n\n## Using the tokens\n\nWhen building a new component, reach for a role rather than a color. `bg-card` will follow the theme; `bg-white` will not. The same goes for text — `text-muted-foreground` will read correctly in both light and dark, while a hard-coded gray will betray you the first time the theme changes.\n\n```tsx\n// Good — semantic, theme-aware\n<aside className=\"bg-card text-card-foreground border border-rule\">\n  <p className=\"text-muted-foreground\">A quiet note.</p>\n</aside>\n\n// Avoid — hard-coded, theme-blind\n<aside className=\"bg-white text-black border border-gray-200\">\n  <p className=\"text-gray-500\">A quiet note.</p>\n</aside>\n```\n\n---\n\nIf a design needs a color that isn't here, the answer is almost never to add a one-off. It is to ask whether the role already exists under another name.\n",
+        "content": "## A small palette, used well\n\n_Color on this site is doing one of three jobs: holding the page, carrying the words, or pointing at something worth pointing at. Everything else is restraint._\n\nEach color is stored as an HSL triplet on a CSS variable, and surfaced through a Tailwind token like `bg-background` or `text-accent`. Components never reach for raw hex — they ask the system for a role, and the system answers in the current theme.\n\n## Surfaces\n\nThe surfaces are the quiet half of the system — the paper the writing sits on. They change with the theme, but their relationship to one another stays constant.\n\n| Name | Token | HSL | Role |\n|---|---|---|---|\n| Background | `--background` | `40 33% 97%` | The page itself |\n| Foreground | `--foreground` | `25 20% 15%` | Body text and primary marks |\n| Card | `--card` | `0 0% 100%` | Lifted surfaces, post bodies |\n| Muted | `--muted` | `35 20% 94%` | Inline code, chips, soft fills |\n| Secondary | `--secondary` | `35 25% 92%` | Tag pills, quiet buttons |\n\n## Ink and accent\n\nPrimary is the ink — the dark warm tone that carries headings and emphasis. Accent is the only color allowed to raise its voice; it is reserved for links, active states, and the occasional rule.\n\n| Name | Token | HSL | Role |\n|---|---|---|---|\n| Primary | `--primary` | `25 35% 25%` | Headings, strong type, ink marks |\n| Accent | `--accent` | `15 65% 50%` | Links, focus rings, callouts |\n| Destructive | `--destructive` | `0 70% 50%` | Errors and irreversible actions |\n\n## Lines and highlights\n\nBorders, rules, and highlights are the punctuation of the layout. They are almost never pure black — they are tinted to belong to the surface they sit on.\n\n| Name | Token | HSL | Role |\n|---|---|---|---|\n| Border | `--border` | `30 15% 88%` | Inputs, cards, soft divisions |\n| Rule | `--rule` | `25 15% 80%` | Editorial rules between sections |\n| Highlight | `--highlight` | `45 80% 88%` | Marker pen, gentle emphasis |\n| Ring | `--ring` | `15 65% 50%` | Focus outlines |\n\n## Using the tokens\n\nWhen building a new component, reach for a role rather than a color. `bg-card` will follow the theme; `bg-white` will not. The same goes for text — `text-muted-foreground` will read correctly in both light and dark, while a hard-coded gray will betray you the first time the theme changes.\n\n```tsx\n// Good — semantic, theme-aware\n<aside className=\"bg-card text-card-foreground border border-rule\">\n  <p className=\"text-muted-foreground\">A quiet note.</p>\n</aside>\n\n// Avoid — hard-coded, theme-blind\n<aside className=\"bg-white text-black border border-gray-200\">\n  <p className=\"text-gray-500\">A quiet note.</p>\n</aside>\n```\n\n---\n\nIf a design needs a color that isn't here, the answer is almost never to add a one-off. It is to ask whether the role already exists under another name.\n",
         "document_type": "markdown",
         "excerpt": "A working catalog of the semantic color tokens used across this journal — background, foreground, primary, accent, muted, and the rules in between. Use it as a reference when designing new pages or components.",
         "published_at_iso": "2026-04-18T09:00:00Z",
@@ -48,7 +53,7 @@
         "public_id": 1002,
         "title": "Typography: a field guide to the page",
         "slug": "typography",
-        "content": "# Typography: a field guide to the page\n\n_A working showcase of the type system used across this journal — display serifs, body text, blockquotes, lists, code, and the small print. Use it as a reference when writing new posts._\n\n## The type scale\n\n_Every page on this site is built from a small set of sizes. Restraint is the point — six sizes feel like a system; sixteen feel like a font menu._\n\n- **5xl** — Display — article titles\n- **3xl** — Section — post cards\n- **2xl** — Subsection — H2\n- **xl** — Minor — H3\n- **lg** — Body — long-form reading\n- **sm** — Meta — bylines and notes\n- **xs** — Eyebrow — labels and tags\n\n## Body copy\n\nBody text is set in Fraunces at 1.125rem with generous leading. The serif is doing two jobs at once: it slows the reader down, and it makes a long page of text feel like a place rather than a feed.\n\nItalics are reserved for emphasis and titles — never for whole paragraphs, which start to feel breathless. Bold is rarer still, used only when a word genuinely needs to be a handle the eye can grab.\n\nWhen a sentence wants to take a breath, it does so with an em dash — like this — rather than parentheses, which always feel slightly apologetic.\n\n## Headings and hierarchy\n\nHeadings step down in size and weight, never in color. The accent color is reserved for links and small typographic flourishes, so a heading never has to compete with a callout.\n\n### A third-level heading, for finer divisions\n\nUse H3 sparingly. If a post needs more than two levels of hierarchy, it probably wants to be two posts.\n\n## Pull quotes and blockquotes\n\n> The most important thing about a typographic system is that it gets out of the way of the words. The reader should never notice the type — only the thinking it carries.\n>\n> — Robert Bringhurst, paraphrased\n\nBlockquotes are flagged with a thin accent rule on the left and set in italics. They are for borrowed sentences, not for emphasis on your own.\n\n## Lists\n\nUnordered lists are for things without rank — ingredients, principles, things you noticed on a walk.\n\n- A sentence worth keeping\n- A book to return to in autumn\n- The name of a color you don't yet know\n- One small kindness, unrecorded\n\nOrdered lists are for steps, arguments, or anything where the order is part of the meaning.\n\n1. Read the sentence aloud.\n2. Remove the first three words and read it again.\n3. If it still works, leave it that way.\n\n## Inline elements\n\nInline code, like `const reader = patient`, is set in a monospaced face at slightly smaller size, with a faint background tint to distinguish it from prose without shouting.\n\nLinks are colored in the accent and underlined on hover, never by default — an underlined paragraph is a paragraph that has stopped trusting itself.\n\n<kbd>⌘</kbd> + <kbd>K</kbd> — Open the search palette\n\n## Code blocks\n\nWhen code does need to appear, it gets its own block — monospaced, gently tinted, and never decorated beyond what is useful.\n\n```ts\n// A reader is a function that returns attention.\nexport const read = (text: string) => {\n  return text\n    .split(/\\s+/)\n    .filter(Boolean)\n    .map((word) => word.toLowerCase());\n};\n```\n\n## Rules and small print\n\nHorizontal rules separate movements within a piece, not paragraphs. Use them the way a composer uses a double bar line.\n\n---\n\nCaptions, footnotes, and bylines live in the small-print scale — never below 0.8rem, never in pure black. They are quiet on purpose.\n",
+        "content": "## The type scale\n\n_Every page on this site is built from a small set of sizes. Restraint is the point — six sizes feel like a system; sixteen feel like a font menu._\n\n- **5xl** — Display — article titles\n- **3xl** — Section — post cards\n- **2xl** — Subsection — H2\n- **xl** — Minor — H3\n- **lg** — Body — long-form reading\n- **sm** — Meta — bylines and notes\n- **xs** — Eyebrow — labels and tags\n\n## Body copy\n\nBody text is set in Fraunces at 1.125rem with generous leading. The serif is doing two jobs at once: it slows the reader down, and it makes a long page of text feel like a place rather than a feed.\n\nItalics are reserved for emphasis and titles — never for whole paragraphs, which start to feel breathless. Bold is rarer still, used only when a word genuinely needs to be a handle the eye can grab.\n\nWhen a sentence wants to take a breath, it does so with an em dash — like this — rather than parentheses, which always feel slightly apologetic.\n\n## Headings and hierarchy\n\nHeadings step down in size and weight, never in color. The accent color is reserved for links and small typographic flourishes, so a heading never has to compete with a callout.\n\n### A third-level heading, for finer divisions\n\nUse H3 sparingly. If a post needs more than two levels of hierarchy, it probably wants to be two posts.\n\n## Pull quotes and blockquotes\n\n> The most important thing about a typographic system is that it gets out of the way of the words. The reader should never notice the type — only the thinking it carries.\n>\n> — Robert Bringhurst, paraphrased\n\nBlockquotes are flagged with a thin accent rule on the left and set in italics. They are for borrowed sentences, not for emphasis on your own.\n\n## Lists\n\nUnordered lists are for things without rank — ingredients, principles, things you noticed on a walk.\n\n- A sentence worth keeping\n- A book to return to in autumn\n- The name of a color you don't yet know\n- One small kindness, unrecorded\n\nOrdered lists are for steps, arguments, or anything where the order is part of the meaning.\n\n1. Read the sentence aloud.\n2. Remove the first three words and read it again.\n3. If it still works, leave it that way.\n\n## Inline elements\n\nInline code, like `const reader = patient`, is set in a monospaced face at slightly smaller size, with a faint background tint to distinguish it from prose without shouting.\n\nLinks are colored in the accent and underlined on hover, never by default — an underlined paragraph is a paragraph that has stopped trusting itself.\n\n<kbd>⌘</kbd> + <kbd>K</kbd> — Open the search palette\n\n## Code blocks\n\nWhen code does need to appear, it gets its own block — monospaced, gently tinted, and never decorated beyond what is useful.\n\n```ts\n// A reader is a function that returns attention.\nexport const read = (text: string) => {\n  return text\n    .split(/\\s+/)\n    .filter(Boolean)\n    .map((word) => word.toLowerCase());\n};\n```\n\n## Rules and small print\n\nHorizontal rules separate movements within a piece, not paragraphs. Use them the way a composer uses a double bar line.\n\n---\n\nCaptions, footnotes, and bylines live in the small-print scale — never below 0.8rem, never in pure black. They are quiet on purpose.\n\n\n## Checklists and callouts\n\n- [x] Keep headings structural\n- [ ] Review the final rhythm aloud\n\n> [!NOTE]\n> ZeroPress renders GitHub-style alerts as accessible callout blocks.\n\n> [!WARNING]\n> Use callouts sparingly so the page still reads like an essay.\n\n```mermaid\nflowchart LR\n  Draft --> Edit --> Publish\n```\n",
         "document_type": "markdown",
         "excerpt": "A working showcase of the type system used across this journal — display serifs, body text, blockquotes, lists, code, and the small print. Use it as a reference when writing new posts.",
         "published_at_iso": "2026-04-18T09:00:00Z",
@@ -69,7 +74,7 @@
         "public_id": 1003,
         "title": "On keeping a commonplace book in a year of too much information",
         "slug": "commonplace-book",
-        "content": "# On keeping a commonplace book in a year of too much information\n\n_There is something steadying about copying a sentence by hand — not for posterity, but because the act itself slows the mind enough to let the words settle. I've kept a commonplace book for nine years now, and it has quietly become the most honest record of who I've been._\n\n## Beginnings\n\nI started my first commonplace book in the summer after a bad year, when reading was the only thing that still felt useful. The notebook was cheap and the pen was borrowed, but the act of copying — slow, deliberate, faintly ceremonial — gave me something to do with my hands while the rest of me caught up.\n\nWhat I didn't understand then was that I was building a small machine for paying attention. Each entry was a vote for what I wanted to keep.\n\n## What goes in\n\nSentences, mostly. Sometimes whole paragraphs if they earn the room. Occasionally a fragment of overheard conversation, a recipe, a friend's offhand remark that turned out to be wiser than they meant it.\n\nThe rule is simple: if I want to remember it in five years, it goes in. If I'm copying it because it sounds clever, I put the pen down.\n\n## What stays out\n\nNews. Most of it, anyway. The commonplace book is not a feed. It is the opposite of a feed — a place where things are slowed down enough to be looked at twice.\n\n## After nine years\n\nI have eleven volumes now, lined up on a shelf I built badly. They are the most honest autobiography I will ever write, because I didn't know I was writing one.\n",
+        "content": "## Beginnings\n\nI started my first commonplace book in the summer after a bad year, when reading was the only thing that still felt useful. The notebook was cheap and the pen was borrowed, but the act of copying — slow, deliberate, faintly ceremonial — gave me something to do with my hands while the rest of me caught up.\n\nWhat I didn't understand then was that I was building a small machine for paying attention. Each entry was a vote for what I wanted to keep.\n\n## What goes in\n\nSentences, mostly. Sometimes whole paragraphs if they earn the room. Occasionally a fragment of overheard conversation, a recipe, a friend's offhand remark that turned out to be wiser than they meant it.\n\nThe rule is simple: if I want to remember it in five years, it goes in. If I'm copying it because it sounds clever, I put the pen down.\n\n## What stays out\n\nNews. Most of it, anyway. The commonplace book is not a feed. It is the opposite of a feed — a place where things are slowed down enough to be looked at twice.\n\n## After nine years\n\nI have eleven volumes now, lined up on a shelf I built badly. They are the most honest autobiography I will ever write, because I didn't know I was writing one.\n",
         "document_type": "markdown",
         "excerpt": "There is something steadying about copying a sentence by hand — not for posterity, but because the act itself slows the mind enough to let the words settle. I've kept a commonplace book for nine years now, and it has quietly become the most honest record of who I've been.",
         "published_at_iso": "2026-04-14T09:00:00Z",
@@ -90,7 +95,7 @@
         "public_id": 1004,
         "title": "Notes from a quiet week",
         "slug": "notes-quiet-week",
-        "content": "# Notes from a quiet week\n\n_Tulips opened overnight. I finished the Le Guin and started the Berger. The kettle whistled three times before I noticed. Some weeks the small things are enough — in fact, they are often the whole point._\n\n## Monday\n\nRain all morning. Reread the opening of The Dispossessed and remembered why I love it: the wall, the function of the wall, the fact that it depends which side you are looking from.\n\n## Wednesday\n\nTulips opened overnight. I had forgotten I planted them. A small, unearned gift.\n\n## Friday\n\nStarted Berger's Ways of Seeing again. The kettle whistled three times before I noticed. Sometimes that is what a week is for.\n",
+        "content": "## Monday\n\nRain all morning. Reread the opening of The Dispossessed and remembered why I love it: the wall, the function of the wall, the fact that it depends which side you are looking from.\n\n## Wednesday\n\nTulips opened overnight. I had forgotten I planted them. A small, unearned gift.\n\n## Friday\n\nStarted Berger's Ways of Seeing again. The kettle whistled three times before I noticed. Sometimes that is what a week is for.\n",
         "document_type": "markdown",
         "excerpt": "Tulips opened overnight. I finished the Le Guin and started the Berger. The kettle whistled three times before I noticed. Some weeks the small things are enough — in fact, they are often the whole point.",
         "published_at_iso": "2026-04-04T09:00:00Z",
@@ -110,7 +115,7 @@
         "public_id": 1005,
         "title": "The case for shorter sentences",
         "slug": "shorter-sentences",
-        "content": "# The case for shorter sentences\n\n_I used to admire the long sentence — the kind that uncoils across half a page, gathering modifiers and qualifications like burrs on a coat. I still do, sometimes. But increasingly I find myself trusting the short one more._\n\n## The long sentence\n\nThere is a particular kind of pleasure in a sentence that takes its time. Henry James knew it. Marilynne Robinson knows it. The reader is held inside the thought, suspended, until the verb finally arrives like a key turning in a lock.\n\n## The short one\n\nBut the short sentence does something different. It asks you to look at one thing. Then the next. It refuses to hide behind its own music.\n\nI have come to believe that most prose is improved by cutting it in half and seeing what survives.\n\n## A rule of thumb\n\nWhen in doubt, end the sentence. You can always start another one. The period is free.\n",
+        "content": "## The long sentence\n\nThere is a particular kind of pleasure in a sentence that takes its time. Henry James knew it. Marilynne Robinson knows it. The reader is held inside the thought, suspended, until the verb finally arrives like a key turning in a lock.\n\n## The short one\n\nBut the short sentence does something different. It asks you to look at one thing. Then the next. It refuses to hide behind its own music.\n\nI have come to believe that most prose is improved by cutting it in half and seeing what survives.\n\n## A rule of thumb\n\nWhen in doubt, end the sentence. You can always start another one. The period is free.\n",
         "document_type": "markdown",
         "excerpt": "I used to admire the long sentence — the kind that uncoils across half a page, gathering modifiers and qualifications like burrs on a coat. I still do, sometimes. But increasingly I find myself trusting the short one more.",
         "published_at_iso": "2026-03-28T09:00:00Z",
@@ -131,7 +136,7 @@
         "public_id": 1006,
         "title": "Reading Calvino in springtime",
         "slug": "calvino-springtime",
-        "content": "# Reading Calvino in springtime\n\n_Invisible Cities is a book I return to every few years, usually when something in my life has gone strange or quiet. This spring it found me in the latter mood, and Calvino, as always, was patient company._\n\n## The cities\n\nEach city in Calvino's book is a small argument about memory, or desire, or the way a place is really the version of itself you carry away from it.\n\n## Marco and Kublai\n\nWhat I had forgotten — or perhaps never noticed — is how much of the book is silence between the two men. The cities are described, and then the description is allowed to settle, and the silence does most of the work.\n\n## Why spring\n\nSpring is a Calvino season. Everything is provisional. The cities, like the trees, are rebuilding themselves out of what they remember of last year.\n",
+        "content": "## The cities\n\nEach city in Calvino's book is a small argument about memory, or desire, or the way a place is really the version of itself you carry away from it.\n\n## Marco and Kublai\n\nWhat I had forgotten — or perhaps never noticed — is how much of the book is silence between the two men. The cities are described, and then the description is allowed to settle, and the silence does most of the work.\n\n## Why spring\n\nSpring is a Calvino season. Everything is provisional. The cities, like the trees, are rebuilding themselves out of what they remember of last year.\n",
         "document_type": "markdown",
         "excerpt": "Invisible Cities is a book I return to every few years, usually when something in my life has gone strange or quiet. This spring it found me in the latter mood, and Calvino, as always, was patient company.",
         "published_at_iso": "2026-03-19T09:00:00Z",
@@ -152,7 +157,7 @@
         "public_id": 1007,
         "title": "On the margins of the page",
         "slug": "margins-of-the-page",
-        "content": "# On the margins of the page\n\n_White space is not the absence of design — it is the design. A wide margin is an invitation to think, and a narrow one is a small act of impatience._\n\n## The frame\n\nA page without margins is a page that doesn't trust the reader. The white edge is where the eye rests, where a thumb can hold the book without covering a word.\n\n## Marginalia\n\nThe best readers I know write in the margins. Not annotations for posterity — just small marks that say: I was here, and this mattered.\n",
+        "content": "## The frame\n\nA page without margins is a page that doesn't trust the reader. The white edge is where the eye rests, where a thumb can hold the book without covering a word.\n\n## Marginalia\n\nThe best readers I know write in the margins. Not annotations for posterity — just small marks that say: I was here, and this mattered.\n",
         "document_type": "markdown",
         "excerpt": "White space is not the absence of design — it is the design. A wide margin is an invitation to think, and a narrow one is a small act of impatience.",
         "published_at_iso": "2026-03-12T09:00:00Z",
@@ -173,7 +178,7 @@
         "public_id": 1008,
         "title": "Rereading as a practice",
         "slug": "rereading-as-practice",
-        "content": "# Rereading as a practice\n\n_The first reading is for the plot. The second is for the sentences. The third is for the silences between them. Some books only become themselves on the third pass._\n\n## The first pass\n\nThe first reading is greedy. You want to know what happens. You skim the descriptions and chase the dialogue, and at the end you close the book feeling like you've eaten too quickly.\n\n## The second pass\n\nThe second reading is calmer. The plot is no longer a question, so the sentences can finally be heard. This is where most of the real reading happens.\n",
+        "content": "## The first pass\n\nThe first reading is greedy. You want to know what happens. You skim the descriptions and chase the dialogue, and at the end you close the book feeling like you've eaten too quickly.\n\n## The second pass\n\nThe second reading is calmer. The plot is no longer a question, so the sentences can finally be heard. This is where most of the real reading happens.\n",
         "document_type": "markdown",
         "excerpt": "The first reading is for the plot. The second is for the sentences. The third is for the silences between them. Some books only become themselves on the third pass.",
         "published_at_iso": "2026-03-02T09:00:00Z",
@@ -194,7 +199,7 @@
         "public_id": 1009,
         "title": "Winter stationery",
         "slug": "winter-stationery",
-        "content": "# Winter stationery\n\n_A new notebook in February is a small rebellion against the long grey middle of the year. The paper is cream, the lines are faint, and the first page is, as always, the hardest._\n\n## The notebook\n\nA5, soft cover, 120gsm cream paper. The kind of notebook that doesn't argue with a fountain pen. I bought two — one to use and one to keep in the drawer for when the first runs out.\n\n## The first page\n\nI used to leave the first page blank, as if waiting for it to earn its place. Now I just write the date and a single sentence. The notebook becomes a notebook the moment something is written in it.\n",
+        "content": "## The notebook\n\nA5, soft cover, 120gsm cream paper. The kind of notebook that doesn't argue with a fountain pen. I bought two — one to use and one to keep in the drawer for when the first runs out.\n\n## The first page\n\nI used to leave the first page blank, as if waiting for it to earn its place. Now I just write the date and a single sentence. The notebook becomes a notebook the moment something is written in it.\n",
         "document_type": "markdown",
         "excerpt": "A new notebook in February is a small rebellion against the long grey middle of the year. The paper is cream, the lines are faint, and the first page is, as always, the hardest.",
         "published_at_iso": "2026-02-21T09:00:00Z",
@@ -215,7 +220,7 @@
         "public_id": 1010,
         "title": "Long walks, no phone",
         "slug": "long-walks-no-phone",
-        "content": "# Long walks, no phone\n\n_I have started leaving my phone at home on Sunday afternoons. The world rearranges itself almost immediately. The trees are still trees, but I notice them again._\n\n## The experiment\n\nIt started as a dare to myself. Two hours, no pocket buzz, no quick check. The first half hour was uncomfortable in a way I wasn't expecting — not boredom exactly, but a kind of restlessness in the hands.\n\n## What came back\n\nAttention, mostly. The slow kind. The kind that notices that the bricks on the corner house are three different shades of red, and that the man at the bus stop has been reading the same book for three weeks.\n",
+        "content": "## The experiment\n\nIt started as a dare to myself. Two hours, no pocket buzz, no quick check. The first half hour was uncomfortable in a way I wasn't expecting — not boredom exactly, but a kind of restlessness in the hands.\n\n## What came back\n\nAttention, mostly. The slow kind. The kind that notices that the bricks on the corner house are three different shades of red, and that the man at the bus stop has been reading the same book for three weeks.\n",
         "document_type": "markdown",
         "excerpt": "I have started leaving my phone at home on Sunday afternoons. The world rearranges itself almost immediately. The trees are still trees, but I notice them again.",
         "published_at_iso": "2026-02-08T09:00:00Z",
@@ -236,7 +241,7 @@
         "public_id": 1011,
         "title": "Sentences overheard in January",
         "slug": "sentences-overheard",
-        "content": "# Sentences overheard in January\n\n_A small collection of fragments caught on trains, in cafés, and once at a bus stop in the rain. None of them are mine. All of them are kept._\n\n## On the train\n\n\"He's the kind of person who alphabetises his regrets.\" Two women, opposite seat, somewhere between Reading and Didcot.\n\n## In the café\n\n\"I think I only like January because nobody expects anything of it.\" Man at the next table, to no one in particular.\n",
+        "content": "## On the train\n\n\"He's the kind of person who alphabetises his regrets.\" Two women, opposite seat, somewhere between Reading and Didcot.\n\n## In the café\n\n\"I think I only like January because nobody expects anything of it.\" Man at the next table, to no one in particular.\n",
         "document_type": "markdown",
         "excerpt": "A small collection of fragments caught on trains, in cafés, and once at a bus stop in the rain. None of them are mine. All of them are kept.",
         "published_at_iso": "2026-01-24T09:00:00Z",
@@ -256,7 +261,7 @@
         "public_id": 1012,
         "title": "Small tools, large effects",
         "slug": "small-tools-large-effects",
-        "content": "# Small tools, large effects\n\n_A good pen, a sharp knife, a quiet room. The tools that change a practice are rarely the expensive ones — they are the ones that get out of the way._\n\n## The pen\n\nI used the same pen for four years before I noticed I was writing more. Not because the pen was magic, but because it had stopped being a decision. Every time you don't have to choose, you have a little more attention to spend on the work.\n\n## The room\n\nA quiet room is the most underrated tool I own. It costs nothing and improves everything.\n",
+        "content": "## The pen\n\nI used the same pen for four years before I noticed I was writing more. Not because the pen was magic, but because it had stopped being a decision. Every time you don't have to choose, you have a little more attention to spend on the work.\n\n## The room\n\nA quiet room is the most underrated tool I own. It costs nothing and improves everything.\n",
         "document_type": "markdown",
         "excerpt": "A good pen, a sharp knife, a quiet room. The tools that change a practice are rarely the expensive ones — they are the ones that get out of the way.",
         "published_at_iso": "2026-01-11T09:00:00Z",
@@ -277,7 +282,7 @@
         "public_id": 1013,
         "title": "Borges in December",
         "slug": "borges-in-december",
-        "content": "# Borges in December\n\n_Borges is a winter writer. The labyrinths feel warmer when there's frost on the window, and the libraries feel infinite in the way only a long dark evening can._\n\n## The library of Babel\n\nI reread The Library of Babel every December. It is, I think, a story about hope disguised as a story about despair — the books exist, even if you will never find the one you're looking for.\n\n## The garden of forking paths\n\nEvery choice is a small Borges story. You take one path and the others quietly continue without you.\n",
+        "content": "## The library of Babel\n\nI reread The Library of Babel every December. It is, I think, a story about hope disguised as a story about despair — the books exist, even if you will never find the one you're looking for.\n\n## The garden of forking paths\n\nEvery choice is a small Borges story. You take one path and the others quietly continue without you.\n",
         "document_type": "markdown",
         "excerpt": "Borges is a winter writer. The labyrinths feel warmer when there's frost on the window, and the libraries feel infinite in the way only a long dark evening can.",
         "published_at_iso": "2025-12-19T09:00:00Z",
@@ -298,7 +303,7 @@
         "public_id": 1014,
         "title": "Writing by hand, still",
         "slug": "writing-by-hand",
-        "content": "# Writing by hand, still\n\n_I draft everything by hand first. Not for any romantic reason — it's just that the keyboard is too fast for the part of me that does the actual thinking._\n\n## The pace\n\nHandwriting is roughly a quarter the speed of typing. That gap is where the editing happens — the sentence has time to revise itself before it reaches the page.\n\n## The transcribe\n\nTyping up a handwritten draft is a second pass disguised as data entry. Half the work of revision happens without you noticing.\n",
+        "content": "## The pace\n\nHandwriting is roughly a quarter the speed of typing. That gap is where the editing happens — the sentence has time to revise itself before it reaches the page.\n\n## The transcribe\n\nTyping up a handwritten draft is a second pass disguised as data entry. Half the work of revision happens without you noticing.\n",
         "document_type": "markdown",
         "excerpt": "I draft everything by hand first. Not for any romantic reason — it's just that the keyboard is too fast for the part of me that does the actual thinking.",
         "published_at_iso": "2025-12-03T09:00:00Z",
@@ -320,7 +325,7 @@
       {
         "title": "About",
         "slug": "about",
-        "content": "# About Margins & Marginalia\n\nHi, I'm Eliza Marsh. I write here twice a week about the small craft of paying attention — essays on writing, notes on reading, and the occasional observation about slow living.\n\n## Why this journal\n\nThis site is a commonplace book in public — a place to keep the sentences that have stayed with me, and to think slowly in a year that mostly rewards speed.\n\n## How it's made\n\nWritten by hand, drafted in cheap notebooks, transcribed on a quiet morning. Published when the sentence feels finished.",
+        "content": "Hi, I'm Eliza Marsh. I write here twice a week about the small craft of paying attention — essays on writing, notes on reading, and the occasional observation about slow living.\n\n## Why this journal\n\nThis site is a commonplace book in public — a place to keep the sentences that have stayed with me, and to think slowly in a year that mostly rewards speed.\n\n## How it's made\n\nWritten by hand, drafted in cheap notebooks, transcribed on a quiet morning. Published when the sentence feels finished.",
         "document_type": "markdown",
         "excerpt": "About Eliza Marsh and the Margins & Marginalia journal.",
         "status": "published"
@@ -328,7 +333,7 @@
       {
         "title": "Contact",
         "slug": "contact",
-        "content": "# Get in touch\n\nThe slowest way to reach me is also the most reliable: the Sunday letter. Reply to any issue and it lands in my inbox.\n\nFor everything else, write to **eliza@marginsandmarginalia.test**.",
+        "content": "The slowest way to reach me is also the most reliable: the Sunday letter. Reply to any issue and it lands in my inbox.\n\nFor everything else, write to **eliza@example.com**.",
         "document_type": "markdown",
         "excerpt": "How to reach Eliza Marsh.",
         "status": "published"
@@ -420,28 +425,28 @@
       "items": [
         {
           "title": "Essays",
-          "url": "/tag/essays/",
+          "url": "/tags/essays/",
           "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Notes",
-          "url": "/tag/notes/",
+          "url": "/tags/notes/",
           "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Reading",
-          "url": "/tag/reading/",
+          "url": "/tags/reading/",
           "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Books",
-          "url": "/tag/books/",
+          "url": "/tags/books/",
           "type": "custom",
           "target": "_self",
           "children": []
@@ -449,13 +454,6 @@
         {
           "title": "Archive",
           "url": "/archive/",
-          "type": "custom",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Categories",
-          "url": "/categories/",
           "type": "custom",
           "target": "_self",
           "children": []
@@ -499,27 +497,6 @@
           "type": "custom",
           "target": "_self",
           "children": []
-        },
-        {
-          "title": "Categories",
-          "url": "/categories/",
-          "type": "custom",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Feed",
-          "url": "/feed.xml",
-          "type": "custom",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Sitemap",
-          "url": "/sitemap.xml",
-          "type": "custom",
-          "target": "_self",
-          "children": []
         }
       ]
     }
@@ -534,8 +511,7 @@
           "settings": {
             "display_name": "Eliza Marsh",
             "affiliation": "Margins & Marginalia",
-            "bio_short": "Hi, I'm Eliza. I write here twice a week about the small craft of paying attention. New essays land Sunday mornings.",
-            "avatar": "/originals/2026/04/eliza-marsh.jpg"
+            "bio_short": "Hi, I'm Eliza. I write here twice a week about the small craft of paying attention. New essays land Sunday mornings."
           }
         },
         {

@@ -6,14 +6,49 @@
   "site": {
     "title": "Æther Quarterly",
     "description": "An editorial quarterly on stillness, craft, and the slow attention of looking twice.",
-    "url": "https://aetherquarterly.test",
-    "mediaBaseUrl": "https://aetherquarterly.test",
+    "url": "",
+    "mediaBaseUrl": "",
     "locale": "en-US",
     "postsPerPage": 6,
     "dateFormat": "MMMM DD, YYYY",
     "timeFormat": "HH:mm",
     "timezone": "UTC",
-    "disallowComments": true
+    "disallowComments": true,
+    "footer": {
+      "copyright_text": "Æther Quarterly. Printed slowly.",
+      "attribution": {
+        "enabled": true
+      }
+    },
+    "meta": {
+      "issue_label": "Issue 04 — The Quiet Issue",
+      "issue_number": "04",
+      "issue_season": "Spring / 2026",
+      "brand_mark": "Æ",
+      "brand_word": "ther — Quarterly",
+      "cover_headline_prefix": "On the art of",
+      "cover_headline_emphasis": "stillness",
+      "cover_headline_suffix": "and the rooms it builds.",
+      "cover_photo_credit": "Photograph — M. Lavigne",
+      "features_label": "Section II — Features",
+      "features_heading": "Three pieces, read slowly.",
+      "features_link_label": "All Features →",
+      "essay_label": "Section III — Essay",
+      "essay_page_marker": "Pp. 42",
+      "gallery_label": "Section IV — Portfolio",
+      "gallery_heading": "Four plates from the field.",
+      "gallery_credit": "Photographs — Various",
+      "subscribe_label": "Section V — Subscribe",
+      "subscribe_heading": "Four issues a year, delivered by post.",
+      "subscribe_note": "Printed on uncoated stock, hand-stitched, and sent the long way round.",
+      "subscribe_price": "From €72 / year. Cancel anytime.",
+      "colophon_editor": "M. Lavigne",
+      "colophon_art_director": "S. Beaumont",
+      "colophon_photography": "I. Marot",
+      "colophon_type": "Fraunces & Inter",
+      "colophon_printer": "Atelier Reliure, Lyon",
+      "colophon_established": "MMXXII"
+    }
   },
   "content": {
     "authors": [
@@ -161,7 +196,7 @@
         "public_id": 2006,
         "title": "The slow renaissance of paper",
         "slug": "slow-renaissance-of-paper",
-        "content": "# The slow renaissance of paper\n\n_Why a generation raised on screens is returning, quietly, to the page._\n\nThe mill at Fabriano has been making paper since 1264. The current director, the eleventh in his family to hold the post, tells me that the last five years have been the busiest of his career.\n\n## Younger buyers\n\nThe buyers are younger than they used to be. They want notebooks, mostly. Plain, unruled, in modest sizes. They want, he thinks, something that will not interrupt them.\n\n## A patience that is almost embarrassing\n\nThere is a quietness to paper that no screen has yet replicated. It does not notify. It does not update. It waits, with a patience that is almost embarrassing, for you to return to it.\n\nI bought a small notebook on the way out. I have been writing in it slowly, ever since.\n",
+        "content": "# The slow renaissance of paper\n\n_Why a generation raised on screens is returning, quietly, to the page._\n\nThe mill at Fabriano has been making paper since 1264. The current director, the eleventh in his family to hold the post, tells me that the last five years have been the busiest of his career.\n\n## The editorial desk test\n\nA magazine theme should make rich Markdown feel intentional. This article includes the common shapes an editor might use: tables, task lists, alerts, code fences, and a small diagram block that remains readable without enhancement.\n\n| Stock | Weight | Use |\n| --- | ---: | --- |\n| Cotton rag | 120gsm | Essays |\n| Recycled cream | 90gsm | Dispatches |\n| Coated plate | 160gsm | Photo inserts |\n\n### Production checklist\n\n- [x] Choose paper stock.\n- [x] Set the running order.\n- [ ] Send final proofs to the printer.\n\n> [!NOTE]\n> ZeroPress renders GitHub-style alerts as semantic aside elements, so magazine themes can style editorial notes without client JavaScript.\n\n> [!TIP]\n> Keep tables calm. The reader should see the comparison before they notice the grid.\n\n## A small diagram\n\n```mermaid\nflowchart LR\n  Notes[Field notes] --> Edit[Editorial desk]\n  Edit --> Proof[Proof copy]\n  Proof --> Print[Printed issue]\n```\n\n## A patience that is almost embarrassing\n\nThere is a quietness to paper that no screen has yet replicated. It does not notify. It does not update. It waits, with a patience that is almost embarrassing, for you to return to it.\n\nI bought a small notebook on the way out. I have been writing in it slowly, ever since.\n",
         "document_type": "markdown",
         "excerpt": "Why a generation raised on screens is returning, quietly, to the page.",
         "published_at_iso": "2026-02-03T09:00:00Z",
@@ -183,8 +218,8 @@
         "public_id": 2007,
         "title": "An interview with Hiro Yamazaki",
         "slug": "interview-hiro-yamazaki",
-        "content": "# An interview with Hiro Yamazaki\n\n_On forty years of arranging, and the long apprenticeship of attention._\n\nWe meet for the second time in a small tea house behind his studio. He has agreed to a longer conversation, on the condition that we do not record it. I take notes by hand, slowly, and he waits for me to finish each sentence before beginning the next.\n\n## The long apprenticeship\n\n'The first ten years,' he says, 'I was learning to see the flower. The next ten, to see the vase. The ten after that, to see the room. I am still learning to see the room.'\n\nHe is sceptical of the word mastery. 'In my craft there is no mastery. There is only a longer and longer apprenticeship.'\n\n## Forty-eight minutes\n\nWhen the tea is finished he stands, bows slightly, and returns to his studio. The interview, such as it was, has lasted forty-eight minutes. I will think about it for years.\n",
-        "document_type": "markdown",
+        "content": "<h1>An interview with Hiro Yamazaki</h1>\n<p><em>On forty years of arranging, and the long apprenticeship of attention.</em></p>\n<p>We meet for the second time in a small tea house behind his studio. He has agreed to a longer conversation, on the condition that we do not record it. I take notes by hand, slowly, and he waits for me to finish each sentence before beginning the next.</p>\n<h2>The long apprenticeship</h2>\n<p>'The first ten years,' he says, 'I was learning to see the flower. The next ten, to see the vase. The ten after that, to see the room. I am still learning to see the room.'</p>\n<blockquote><p>In my craft there is no mastery. There is only a longer and longer apprenticeship.</p></blockquote>\n<h2>Forty-eight minutes</h2>\n<p>When the tea is finished he stands, bows slightly, and returns to his studio. The interview, such as it was, has lasted forty-eight minutes. I will think about it for years.</p>",
+        "document_type": "html",
         "excerpt": "On forty years of arranging, and the long apprenticeship of attention.",
         "published_at_iso": "2026-01-24T09:00:00Z",
         "updated_at_iso": "2026-01-24T09:00:00Z",
@@ -205,8 +240,8 @@
         "public_id": 2008,
         "title": "The uniform of the quiet life",
         "slug": "uniform-of-the-quiet-life",
-        "content": "# The uniform of the quiet life\n\n_On dressing to be forgotten, and the small freedoms of a small wardrobe._\n\nFor the past three years I have worn, more or less, the same five things. Two pairs of trousers, three shirts, one coat for winter, one for the rest of the year. The list is short enough to memorise.\n\n## Not by conviction\n\nI did not arrive at this by conviction. I arrived at it by exhaustion — by the small, daily fatigue of choosing, and the realisation that the choices were rarely worth the energy they took.\n\n## A kind of quiet\n\nWhat I have found, in the years since, is that a small wardrobe is a kind of quiet. It is one fewer voice in the morning. It is one fewer decision before the work begins.\n\nI do not recommend it as a discipline. I recommend it only as a relief.\n",
-        "document_type": "markdown",
+        "content": "On dressing to be forgotten, and the small freedoms of a small wardrobe.\n\nFor the past three years I have worn, more or less, the same five things. Two pairs of trousers, three shirts, one coat for winter, one for the rest of the year. The list is short enough to memorise.\n\nI did not arrive at this by conviction. I arrived at it by exhaustion — by the small, daily fatigue of choosing, and the realisation that the choices were rarely worth the energy they took.\n\nWhat I have found, in the years since, is that a small wardrobe is a kind of quiet. It is one fewer voice in the morning. It is one fewer decision before the work begins.\n\nI do not recommend it as a discipline. I recommend it only as a relief.",
+        "document_type": "plaintext",
         "excerpt": "On dressing to be forgotten, and the small freedoms of a small wardrobe.",
         "published_at_iso": "2026-01-15T09:00:00Z",
         "updated_at_iso": "2026-01-15T09:00:00Z",
@@ -235,16 +270,16 @@
       {
         "title": "Subscribe",
         "slug": "subscribe",
-        "content": "# Subscribe\n\nFour issues a year, delivered by post.\n\nFrom **€72 / year**. Cancel anytime.\n\nWrite to **subscribe@aetherquarterly.test** with your address, and we will do the rest.\n",
-        "document_type": "markdown",
+        "content": "Four issues a year, delivered by post.\n\nFrom €72 / year. Cancel anytime.\n\nThis plaintext page demonstrates how ZeroPress renders simple line-separated content without Markdown syntax.",
+        "document_type": "plaintext",
         "excerpt": "Four issues a year, delivered by post.",
         "status": "published"
       },
       {
         "title": "Colophon",
         "slug": "colophon",
-        "content": "# Colophon\n\n- **Type** — Fraunces & Inter\n- **Printer** — Atelier Reliure, Lyon\n- **Paper** — 120gsm uncoated cream\n- **Established** — MMXXII\n",
-        "document_type": "markdown",
+        "content": "<h1>Colophon</h1>\n<p>This page demonstrates <strong>document_type: html</strong> inside the magazine page template.</p>\n<dl>\n  <div><dt>Type</dt><dd>Fraunces &amp; Inter</dd></div>\n  <div><dt>Printer</dt><dd>Atelier Reliure, Lyon</dd></div>\n  <div><dt>Paper</dt><dd>120gsm uncoated cream</dd></div>\n  <div><dt>Established</dt><dd>MMXXII</dd></div>\n</dl>",
+        "document_type": "html",
         "excerpt": "How the magazine is made.",
         "status": "published"
       }

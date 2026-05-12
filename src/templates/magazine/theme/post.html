@@ -9,6 +9,7 @@
           <span>·</span><span>{{post.reading_time}}</span>
           {{#if post.author.display_name}}<span>·</span><span>By {{post.author.display_name}}</span>{{/if}}
         </div>
+        {{#if_eq post.document_type "plaintext"}}<h1 class="serif-xxl">{{post.title}}</h1>{{/if_eq}}
         {{#if post.excerpt}}<p class="lede serif-lg">{{post.excerpt}}</p>{{/if}}
       </header>
 
@@ -38,15 +39,15 @@
       {{/if}}
     </article>
 
-    <aside class="article__aside">
-      {{#if post.toc}}
+    {{#if post.toc}}
+      <aside class="article__aside">
         <div class="toc-sticky">
           <p class="eyebrow">On this page</p>
           <ol class="toc">
             {{#for item in post.toc}}<li class="toc-l{{item.level}}"><a href="{{item.href}}">{{item.title}}</a></li>{{/for}}
           </ol>
         </div>
-      {{/if}}
-    </aside>
+      </aside>
+    {{/if}}
   </div>
 </div>

@@ -6,6 +6,16 @@
         <p>{{post.published_at}}</p>
         {{#if post.reading_time}}<p>{{post.reading_time}}</p>{{/if}}
       </div>
+      {{#if post.toc}}
+        <nav class="post-toc" aria-label="On this page">
+          <p class="mono-eyebrow muted">On this page</p>
+          <ol>
+            {{#for item in post.toc}}
+              <li class="post-toc__item post-toc__item--l{{item.level}}"><a href="{{item.href}}">{{item.title}}</a></li>
+            {{/for}}
+          </ol>
+        </nav>
+      {{/if}}
     </aside>
     <div class="grid__main post__main">
       <header class="post__header">

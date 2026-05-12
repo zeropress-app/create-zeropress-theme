@@ -5,9 +5,7 @@
       <h2 class="contact-block__title">Send a note. I read everything.</h2>
       <p class="contact-block__lede">Project inquiries, considered questions, or quiet hellos — all welcome.</p>
 
-      <form class="contact-form" data-contact-form
-            {{#if site.meta.author_email}}data-recipient="{{site.meta.author_email}}"{{/if}}
-            novalidate>
+      <form class="contact-form" data-contact-form novalidate>
         <div class="contact-form__field">
           <label for="contact-name" class="mono-eyebrow muted">Name</label>
           <input id="contact-name" name="name" type="text" maxlength="100" required>

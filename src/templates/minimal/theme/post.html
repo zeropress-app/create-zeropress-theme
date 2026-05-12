@@ -26,7 +26,7 @@
       <div class="article-content">{{post.html}}</div>
 
       <footer class="article-footer">
-        <p>Thanks for reading. Browse <a href="/archive/">the archive</a> or follow a tag below.</p>
+        <p>Thanks for reading. Browse <a href="/archive/">the archive</a>, follow a tag below, or <a href="#content">return to the top</a>.</p>
       </footer>
 
       {{#if post.tags}}
@@ -68,17 +68,17 @@
       {{/if}}
     </article>
 
-    <aside class="toc-aside" aria-label="Table of contents">
-      <div class="toc-sticky">
-        <p>On this page</p>
-        <ol data-toc-list>
-          {{#if post.toc}}
+    {{#if post.toc}}
+      <aside class="toc-aside" aria-label="Table of contents">
+        <div class="toc-sticky">
+          <p>On this page</p>
+          <ol>
             {{#for item in post.toc}}
               <li class="toc-level-{{item.level}}"><a href="{{item.href}}">{{item.title}}</a></li>
             {{/for}}
-          {{/if}}
-        </ol>
-      </div>
-    </aside>
+          </ol>
+        </div>
+      </aside>
+    {{/if}}
   </div>
 </div>

@@ -1,6 +1,3 @@
-const THEME_KEY = "zp-minimal-theme";
-const USER_THEME_KEY = "zp-minimal-theme-user-set";
-
 const MOCK_COMMENTS = {
   "1002": [
     { id: "c1", name: "Maya Chen", body: "This type scale feels calm without becoming bland.", createdAt: "2026-04-18T12:00:00Z", likes: 8, replies: [
@@ -20,33 +17,6 @@ const MOCK_COMMENTS = {
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
-
-function preferredTheme() {
-  const saved = localStorage.getItem(THEME_KEY);
-  if (saved === "light" || saved === "dark") return saved;
-  return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function setTheme(theme) {
-  document.documentElement.dataset.theme = theme;
-  localStorage.setItem(THEME_KEY, theme);
-  const icon = $("[data-theme-toggle-icon]");
-  if (icon) icon.textContent = theme === "dark" ? "☼" : "☾";
-  const toggle = $("[data-theme-toggle]");
-  if (toggle) toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
-}
-
-function initTheme() {
-  setTheme(preferredTheme());
-  const toggle = $("[data-theme-toggle]");
-  toggle?.addEventListener("click", () => {
-    localStorage.setItem(USER_THEME_KEY, "1");
-    setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
-  });
-  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
-    if (!localStorage.getItem(USER_THEME_KEY)) setTheme(event.matches ? "dark" : "light");
-  });
-}
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
@@ -269,28 +239,5 @@ function initComments() {
   });
 }
 
-function initTOC() {
-  const list = $('[data-toc-list]');
-  const content = $('.article-content');
-  if (!list || !content || list.children.length) return;
-  const headings = $$('h2[id], h3[id]', content);
-  if (!headings.length) {
-    const aside = $('.toc-aside');
-    if (aside) aside.hidden = true;
-    return;
-  }
-  headings.forEach((heading) => {
-    const li = document.createElement('li');
-    li.className = `toc-level-${heading.tagName === 'H3' ? '3' : '2'}`;
-    const a = document.createElement('a');
-    a.href = `#${heading.id}`;
-    a.textContent = heading.textContent || '';
-    li.append(a);
-    list.append(li);
-  });
-}
-
-initTheme();
 initFilters();
 initComments();
-initTOC();

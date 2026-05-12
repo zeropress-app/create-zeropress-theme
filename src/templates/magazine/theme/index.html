@@ -4,12 +4,12 @@
   <!-- Cover -->
   <section id="cover" class="cover">
     <div class="cover__head">
-      <span class="eyebrow">Issue 04 — The Quiet Issue</span>
-      <span class="smallcaps muted">Spring / 2026</span>
+      <span class="eyebrow">{{#if site.meta.issue_label}}{{site.meta.issue_label}}{{#else}}{{site.title}}{{/if}}</span>
+      <span class="smallcaps muted">{{#if site.meta.issue_season}}{{site.meta.issue_season}}{{#else}}Current Issue{{/if}}</span>
     </div>
     <div class="cover__grid">
       <div class="cover__copy">
-        <h1 class="display">On the art of <em>stillness</em>, and the rooms it builds.</h1>
+        <h1 class="display">{{#if site.meta.cover_headline_prefix}}{{site.meta.cover_headline_prefix}}{{#else}}On the art of{{/if}} <em>{{#if site.meta.cover_headline_emphasis}}{{site.meta.cover_headline_emphasis}}{{#else}}stillness{{/if}}</em>, {{#if site.meta.cover_headline_suffix}}{{site.meta.cover_headline_suffix}}{{#else}}and the rooms it builds.{{/if}}</h1>
         <div class="cover__sub">
           {{#for post in posts.items}}{{#if loop.first}}
             <div class="cover__story">
@@ -27,7 +27,7 @@
       </div>
       <figure class="cover__figure">
         <img src="/assets/img/cover.jpg" alt="Cover photograph" loading="eager">
-        <figcaption class="smallcaps">Photograph — M. Lavigne</figcaption>
+        <figcaption class="smallcaps">{{#if site.meta.cover_photo_credit}}{{site.meta.cover_photo_credit}}{{#else}}Cover photograph{{/if}}</figcaption>
       </figure>
     </div>
   </section>
@@ -36,10 +36,10 @@
   <section id="features" class="features">
     <header class="section-head">
       <div>
-        <div class="eyebrow">Section II — Features</div>
-        <h2 class="serif-xl">Three pieces, read slowly.</h2>
+        <div class="eyebrow">{{#if site.meta.features_label}}{{site.meta.features_label}}{{#else}}Features{{/if}}</div>
+        <h2 class="serif-xl">{{#if site.meta.features_heading}}{{site.meta.features_heading}}{{#else}}Latest stories{{/if}}</h2>
       </div>
-      <a class="link-rule smallcaps" href="/archive/">All Features →</a>
+      <a class="link-rule smallcaps" href="/archive/">{{#if site.meta.features_link_label}}{{site.meta.features_link_label}}{{#else}}All Features →{{/if}}</a>
     </header>
     <div class="features__grid" data-limit-3>
       {{#for post in posts.items}}
@@ -65,8 +65,8 @@
   <section id="essay" class="essay">
     <div class="essay__grid">
       <aside class="essay__rail">
-        <div class="eyebrow">Section III — Essay</div>
-        <div class="serif-display italic">Pp. 42</div>
+        <div class="eyebrow">{{#if site.meta.essay_label}}{{site.meta.essay_label}}{{#else}}Essay{{/if}}</div>
+        <div class="serif-display italic">{{#if site.meta.essay_page_marker}}{{site.meta.essay_page_marker}}{{#else}}Pp. 42{{/if}}</div>
         <div class="essay__pick-list">
         {{#for post in posts.items}}
           <div class="smallcaps muted essay__meta essay__pick">
@@ -94,10 +94,10 @@
   <section id="gallery" class="gallery">
     <header class="section-head">
       <div>
-        <div class="eyebrow">Section IV — Portfolio</div>
-        <h2 class="serif-xl">Four plates from the field.</h2>
+        <div class="eyebrow">{{#if site.meta.gallery_label}}{{site.meta.gallery_label}}{{#else}}Portfolio{{/if}}</div>
+        <h2 class="serif-xl">{{#if site.meta.gallery_heading}}{{site.meta.gallery_heading}}{{#else}}Plates from the field.{{/if}}</h2>
       </div>
-      <span class="smallcaps muted">Photographs — Various</span>
+      <span class="smallcaps muted">{{#if site.meta.gallery_credit}}{{site.meta.gallery_credit}}{{#else}}Photographs{{/if}}</span>
     </header>
     <div class="gallery__grid" data-limit-4>
       {{#for post in posts.items}}
@@ -113,26 +113,25 @@
   <section id="subscribe" class="masthead">
     <div class="masthead__grid">
       <div class="masthead__cta">
-        <div class="eyebrow">Section V — Subscribe</div>
-        <h2 class="serif-xxl">Four issues <em>a year</em>, delivered by post.</h2>
-        <p class="serif-lg">Printed on uncoated stock, hand-stitched, and sent the long way round.</p>
-        <form class="subscribe-form" data-newsletter-form>
+        <div class="eyebrow">{{#if site.meta.subscribe_label}}{{site.meta.subscribe_label}}{{#else}}Subscribe{{/if}}</div>
+        <h2 class="serif-xxl">{{#if site.meta.subscribe_heading}}{{site.meta.subscribe_heading}}{{#else}}Four issues a year, delivered by post.{{/if}}</h2>
+        <p class="serif-lg">{{#if site.meta.subscribe_note}}{{site.meta.subscribe_note}}{{#else}}Printed on uncoated stock, hand-stitched, and sent the long way round.{{/if}}</p>
+        <div class="subscribe-form" aria-label="Subscription demo form">
           <label class="sr-only" for="magazine-newsletter-email">Email address</label>
-          <input id="magazine-newsletter-email" type="email" placeholder="your@address.com" required>
-          <button type="submit" class="smallcaps">Subscribe →</button>
-        </form>
-        <p class="subscribe-form__status smallcaps muted" data-newsletter-status hidden aria-live="polite"></p>
-        <p class="smallcaps muted">From €72 / year. Cancel anytime.</p>
+          <input id="magazine-newsletter-email" type="email" placeholder="your@address.com" disabled>
+          <button type="button" class="smallcaps" disabled>Subscribe →</button>
+        </div>
+        <p class="smallcaps muted">{{#if site.meta.subscribe_price}}{{site.meta.subscribe_price}}{{#else}}Subscription details coming soon.{{/if}}</p>
       </div>
       <div class="masthead__colophon">
         <div class="eyebrow">Colophon</div>
         <dl>
-          <div><dt class="smallcaps muted">Editor-in-Chief</dt><dd>M. Lavigne</dd></div>
-          <div><dt class="smallcaps muted">Art Director</dt><dd>S. Beaumont</dd></div>
-          <div><dt class="smallcaps muted">Photography</dt><dd>I. Marot</dd></div>
-          <div><dt class="smallcaps muted">Type</dt><dd>Fraunces &amp; Inter</dd></div>
-          <div><dt class="smallcaps muted">Printer</dt><dd>Atelier Reliure, Lyon</dd></div>
-          <div><dt class="smallcaps muted">Established</dt><dd>MMXXII</dd></div>
+          <div><dt class="smallcaps muted">Editor-in-Chief</dt><dd>{{#if site.meta.colophon_editor}}{{site.meta.colophon_editor}}{{#else}}Editorial Team{{/if}}</dd></div>
+          <div><dt class="smallcaps muted">Art Director</dt><dd>{{#if site.meta.colophon_art_director}}{{site.meta.colophon_art_director}}{{#else}}Design Team{{/if}}</dd></div>
+          <div><dt class="smallcaps muted">Photography</dt><dd>{{#if site.meta.colophon_photography}}{{site.meta.colophon_photography}}{{#else}}Staff{{/if}}</dd></div>
+          <div><dt class="smallcaps muted">Type</dt><dd>{{#if site.meta.colophon_type}}{{site.meta.colophon_type}}{{#else}}Editorial serif &amp; sans{{/if}}</dd></div>
+          <div><dt class="smallcaps muted">Printer</dt><dd>{{#if site.meta.colophon_printer}}{{site.meta.colophon_printer}}{{#else}}Local press{{/if}}</dd></div>
+          <div><dt class="smallcaps muted">Established</dt><dd>{{#if site.meta.colophon_established}}{{site.meta.colophon_established}}{{#else}}MMXXVI{{/if}}</dd></div>
         </dl>
       </div>
     </div>

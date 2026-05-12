@@ -9,7 +9,7 @@
   "description": "Warm editorial blog theme with Fraunces serif headings and Inter body text. Designed for essays, notes, and slow reading.",
   "features": {
     "comments": true,
-    "newsletter": true
+    "newsletter": false
   },
   "menuSlots": {
     "primary": {
